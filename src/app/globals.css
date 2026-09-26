@@ -145,12 +145,15 @@ a { text-decoration: none; }
   position: absolute; z-index: 4; width: 89px; height: 89px; display: grid; place-items: center;
   border-radius: 28px; background: #fff; font-size: 44px;
   box-shadow: 0 9px 0 rgba(83,45,139,.15), 0 17px 25px rgba(78,34,129,.23);
+  transform: translate3d(0, 0, 0) rotate(var(--rotation));
+  backface-visibility: hidden;
+  will-change: transform;
   animation: float 4s ease-in-out infinite;
 }
-.floating-icon--cat { left: 3%; top: 15%; transform: rotate(-12deg); animation-delay: -.7s; }
-.floating-icon--music { right: 6%; top: 6%; transform: rotate(10deg); animation-delay: -2s; }
-.floating-icon--book { left: 4%; bottom: 13%; transform: rotate(10deg); animation-delay: -1.5s; }
-.floating-icon--star { right: 3%; bottom: 16%; transform: rotate(-10deg); animation-delay: -2.7s; }
+.floating-icon--cat { --rotation: -12deg; left: 3%; top: 15%; animation-delay: -.7s; }
+.floating-icon--music { --rotation: 10deg; right: 6%; top: 6%; animation-delay: -2s; }
+.floating-icon--book { --rotation: 10deg; left: 4%; bottom: 13%; animation-delay: -1.5s; }
+.floating-icon--star { --rotation: -10deg; right: 3%; bottom: 16%; animation-delay: -2.7s; }
 .speech-bubble {
   position: absolute; z-index: 4; right: 0; top: 39%; padding: 11px 19px;
   border-radius: 19px 19px 19px 3px; background: #fff; color: #794cdd;
@@ -167,7 +170,10 @@ a { text-decoration: none; }
 .hero-spark--two { right: 3%; bottom: 11%; font-size: 34px; }
 .hero-wave { position: absolute; z-index: 3; left: 0; right: 0; bottom: -1px; height: 90px; }
 .hero-wave svg { width: 100%; height: 100%; display: block; }
-@keyframes float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -15px; } }
+@keyframes float {
+  0%, 100% { transform: translate3d(0, 0, 0) rotate(var(--rotation)); }
+  50% { transform: translate3d(0, -15px, 0) rotate(var(--rotation)); }
+}
 
 .features-section { width: min(100% - 100px, 1430px); margin: 0 auto; padding: 72px 0 100px; }
 .section-heading { text-align: center; }
@@ -239,7 +245,6 @@ a { text-decoration: none; }
   .brand-text small { font-size: 11px; }
   .header-tools { gap: 5px; }
   .tool-button { width: 39px; height: 39px; }
-  .header-tools > .tool-button:nth-child(2), .header-tools > .tool-button:nth-child(3) { display: none; }
   .main-nav { top: 67px; left: 12px; right: 12px; grid-template-columns: repeat(2, 1fr); }
   .nav-link { justify-content: flex-start; font-size: 14px; padding: 0 15px; }
   .hero { min-height: 0; }
