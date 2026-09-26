@@ -90,7 +90,7 @@ a { text-decoration: none; }
 .hero-inner {
   width: min(100% - 112px, 1510px); min-height: 630px; margin: auto;
   display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
-  align-items: center; gap: 40px; padding: 42px 0 82px; position: relative; z-index: 2;
+  align-items: center; gap: 40px; padding: 0 0 82px; position: relative; z-index: 2;
 }
 .hero-copy { position: relative; z-index: 2; padding-bottom: 8px; }
 .hero-badge {
