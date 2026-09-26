@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, Volume2, X } from "lucide-react";
 import { siteContent } from "@/content/site";
-import { getVoicePreference, setVoicePreference, speakVietnamese } from "@/lib/speech";
+import { getVietnameseVoices, getVoicePreference, setVoicePreference, speakVietnamese } from "@/lib/speech";
 import { TeacherAvatar } from "./TeacherAvatar";
 
 const icons = { home: "🏠", book: "📚", pencil: "✏️", trophy: "🏆", mail: "💌" };
@@ -16,12 +16,12 @@ export function Header() {
   const [voiceOpen, setVoiceOpen] = useState(false);
   const [voiceChoice, setVoiceChoice] = useState("vietnamese");
   const [voices, setVoices] = useState<SpeechSynthesisVoice[]>([]);
-  const [notice, setNotice] = useState("");
+  const [voiceError, setVoiceError] = useState("");
 
   useEffect(() => {
     setVoiceChoice(getVoicePreference());
-    if (!("speechSynthesis" in window)) return;
-    const update = () => setVoices(window.speechSynthesis.getVoices().filter((voice) => voice.lang.toLowerCase().startsWith("vi")));
+    if (!window.speechSynthesis) return;
+    const update = () => setVoices(getVietnameseVoices());
     update();
     window.speechSynthesis.addEventListener("voiceschanged", update);
     return () => window.speechSynthesis.removeEventListener("voiceschanged", update);
@@ -66,8 +66,6 @@ export function Header() {
           </button>
         </div>
       </div>
-      {notice && <div className="notice" role="status">{notice}</div>}
-
       {voiceOpen && (
         <div className="modal-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setVoiceOpen(false); }}>
           <div className="voice-modal" role="dialog" aria-modal="true" aria-labelledby="voice-title">
@@ -79,11 +77,7 @@ export function Header() {
             <div className="voice-modal-body">
               <label className="voice-option">
                 <input type="radio" name="voice" checked={voiceChoice === "vietnamese"} onChange={() => chooseVoice("vietnamese")} />
-                <span><strong>🌐 Giọng tiếng Việt trên máy</strong><small>Tự chọn giọng tiếng Việt có sẵn trong trình duyệt.</small></span>
-              </label>
-              <label className="voice-option">
-                <input type="radio" name="voice" checked={voiceChoice === "default"} onChange={() => chooseVoice("default")} />
-                <span><strong>✨ Giọng mặc định</strong><small>Dùng giọng do trình duyệt chọn.</small></span>
+                <span><strong>🌐 Tự chọn giọng tiếng Việt</strong><small>Ưu tiên giọng Google hoặc giọng nữ nếu thiết bị có.</small></span>
               </label>
               {voices.map((voice) => (
                 <label className="voice-option" key={voice.name}>
@@ -91,10 +85,12 @@ export function Header() {
                   <span><strong>🔊 {voice.name}</strong><small>{voice.lang} · giọng có sẵn trên thiết bị</small></span>
                 </label>
               ))}
-              <button className="pill-button voice-test" type="button" onClick={() => {
-                if (!speakVietnamese("Chào em, cô là Cô Tú. Chúng mình cùng học tiếng Việt nhé!")) setNotice("Trình duyệt này chưa hỗ trợ đọc văn bản.");
+              <button className="pill-button voice-test" type="button" onClick={async () => {
+                setVoiceError("");
+                const result = await speakVietnamese("Chào em, cô là Cô Tú. Chúng mình cùng học tiếng Việt nhé!", setVoiceError);
+                if (result) setVoiceError(result);
               }}>🔊 Nghe thử</button>
-              <p className="voice-note">Giọng đọc phụ thuộc vào trình duyệt và giọng đã cài trên máy.</p>
+              <p className="voice-note" role="status">{voiceError || (voices.length ? "Chỉ hiển thị các giọng tiếng Việt có sẵn trên thiết bị." : "Đang tìm giọng tiếng Việt trên thiết bị. Nếu không có, hãy cài giọng tiếng Việt để nghe bài học.")}</p>
             </div>
           </div>
         </div>

@@ -4,6 +4,10 @@ import { useState } from "react";
 import { speakVietnamese } from "@/lib/speech";
 
 export function SpeakButton({ text, label }: { text: string; label: string }) {
-  const [unsupported, setUnsupported] = useState(false);
-  return <span className="speak-control"><button className="speak-button" type="button" onClick={() => setUnsupported(!speakVietnamese(text))}>{label}</button>{unsupported && <span className="speech-error" role="status">Trình duyệt này chưa hỗ trợ đọc văn bản.</span>}</span>;
+  const [error, setError] = useState("");
+  return <span className="speak-control"><button className="speak-button" type="button" onClick={async () => {
+    setError("");
+    const result = await speakVietnamese(text, setError);
+    if (result) setError(result);
+  }}>{label}</button>{error && <span className="speech-error" role="status">{error}</span>}</span>;
 }
