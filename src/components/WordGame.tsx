@@ -12,6 +12,7 @@ export function WordGame() {
   const [selected, setSelected] = useState<number[]>([]);
   const [score, setScore] = useState(0);
   const [done, setDone] = useState(false);
+  const [results, setResults] = useState<("good" | "skip")[]>([]);
   const item = wordExercises[round];
   const word = selected.map((index) => item.letters[index]).join("");
   const full = selected.length === item.letters.length;
@@ -31,6 +32,7 @@ export function WordGame() {
   function next() {
     const nextScore = score + (correct ? 1 : 0);
     setScore(nextScore);
+    setResults([...results, correct ? "good" : "skip"]);
     if (round === wordExercises.length - 1) {
       setDone(true);
       saveProgress({ exerciseBest: Math.max(readProgress().exerciseBest, nextScore) });
@@ -44,6 +46,7 @@ export function WordGame() {
     setRound(0);
     setSelected([]);
     setScore(0);
+    setResults([]);
     setDone(false);
   }
 
@@ -66,7 +69,22 @@ export function WordGame() {
         <div><span className="activity-tag">Luyện tập · Từ vựng & chính tả</span><h2 id="word-game-title">Ghép chữ thành từ</h2></div>
       </div>
       <p className="activity-description">Nhìn hình, xếp các chữ cái lộn xộn thành từ đúng nha! Mỗi lượt một từ.</p>
-      <div className="game-meta"><span>Từ <strong>{round + 1}/{wordExercises.length}</strong></span><span>⭐ {score}</span></div>
+      <div className="game-meta">
+        <span className="game-meta-round">Từ <strong>{round + 1}/{wordExercises.length}</strong></span>
+        <ol className="word-steps" aria-label="Tiến trình 10 từ">
+          {wordExercises.map((_, index) => {
+            const result = results[index];
+            const state = result ?? (index === round ? "current" : "todo");
+            const label = result === "good" ? "đã ghép đúng" : result === "skip" ? "đã bỏ qua" : index === round ? "đang làm" : "chưa làm";
+            return (
+              <li key={index} className={`word-step word-step--${state}`} aria-current={index === round ? "step" : undefined}>
+                <span aria-hidden="true">{result === "good" ? "✓" : index + 1}</span><span className="sr-only">Từ {index + 1}: {label}</span>
+              </li>
+            );
+          })}
+        </ol>
+        <span className="game-meta-score">⭐ {score}</span>
+      </div>
       <div className="game-emoji" aria-label={item.hint}>{item.emoji}</div>
       <p className="game-hint">{item.hint} <SpeakButton text={item.hint} label="🔊" /></p>
       <div className="word-slots" aria-label="Từ đang ghép">
