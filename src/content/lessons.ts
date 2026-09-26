@@ -1,3 +1,6 @@
+export const lessonGrades = [1, 2, 3, 4, 5] as const;
+export type LessonGrade = (typeof lessonGrades)[number];
+
 export type Lesson = {
   slug: string;
   number: number;
@@ -6,6 +9,8 @@ export type Lesson = {
   icon: string;
   tone: "blue" | "purple" | "pink" | "orange" | "green" | "yellow";
   category: string;
+  /** Lớp 1–5 mà bài dành cho. Bỏ trống thì bài chỉ hiện ở tab "Tất cả" của trang Bài học. */
+  grade?: LessonGrade;
   intro: string;
   points: { title: string; body: string; example: string }[];
   check: { question: string; options: string[]; answer: number; explanation: string };

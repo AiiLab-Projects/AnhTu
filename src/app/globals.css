@@ -579,3 +579,99 @@ body:has(.exercise-page) .site-footer { display: none; }
 .voice-log p { margin: 10px 0 0; color: #71809b; }
 .voice-log-actions { display: flex; gap: 8px; margin-top: 10px; }
 .voice-log-actions button { padding: 6px 12px; border: 2px solid #e1dafa; border-radius: 999px; color: #6a45d0; background: #fff; font-size: 12px; font-weight: 1000; }
+
+/* Bài học: tab theo lớp (#8) */
+.grade-tab-list {
+  display: flex; gap: 10px; margin: 0 -4px 30px; padding: 4px 4px 12px;
+  overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; -webkit-overflow-scrolling: touch;
+}
+.grade-tab {
+  flex: 0 0 auto; display: inline-flex; align-items: center; gap: 8px;
+  min-height: 50px; padding: 9px 12px 9px 17px; border: 3px solid transparent; border-radius: 999px;
+  color: var(--lesson-color); background: rgba(255,255,255,.9);
+  font: 800 19px/1 var(--font-baloo), sans-serif; white-space: nowrap; cursor: pointer;
+  box-shadow: 0 5px 0 rgba(69,35,111,.17);
+  transition: transform .25s ease, background-color .25s ease, color .25s ease;
+}
+.grade-tab:hover { transform: translateY(-3px); background: #fff; }
+.grade-tab:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+.grade-tab--active, .grade-tab--active:hover { color: #fff; background: var(--lesson-color); border-color: #fff; transform: translateY(-3px); }
+.grade-tab-count {
+  min-width: 28px; padding: 5px 7px; border-radius: 999px; text-align: center;
+  color: var(--lesson-color); background: var(--lesson-soft); font: 1000 13px/1 var(--font-nunito), sans-serif;
+}
+.grade-tab--active .grade-tab-count { color: var(--lesson-color); background: #fff; }
+.grade-tab.lesson-card--yellow { color: #a57700; }
+.grade-tab--active.lesson-card--yellow { color: var(--ink); }
+.grade-panel { animation: grade-panel-in .35s ease both; }
+.grade-panel:focus-visible { outline: 3px dashed rgba(255,255,255,.8); outline-offset: 8px; border-radius: 16px; }
+.grade-panel > .lesson-group-nav { margin-bottom: 26px; }
+.grade-panel > .lesson-group:first-of-type { margin-top: 0; }
+@keyframes grade-panel-in { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.grade-empty {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; max-width: 760px; margin: 0 auto;
+  padding: 44px 32px; border-radius: 24px; border-top: 8px solid var(--lesson-color); text-align: center;
+  background: var(--card); box-shadow: rgba(30,27,75,.28) 0 10px 0, rgba(0,0,0,.18) 0 20px 50px;
+}
+.grade-empty-icon {
+  width: 96px; height: 96px; display: grid; place-items: center; border-radius: 50%; font-size: 48px;
+  background: var(--lesson-soft); border: 3px dashed color-mix(in srgb, var(--lesson-color) 55%, white);
+}
+.grade-empty h2 { margin: 6px 0 0; color: var(--ink); font: 800 30px/1.2 var(--font-baloo), sans-serif; }
+.grade-empty p { margin: 0 0 8px; color: #6d698d; font-size: 17px; font-weight: 750; }
+
+/* Chi tiết bài học: thẻ ý chính nhiều màu (#8) */
+.lesson-detail-card--vivid { position: relative; overflow: hidden; border-top: 10px solid var(--lesson-color); }
+.lesson-detail-card--vivid::before {
+  content: ""; position: absolute; inset: 0 0 auto; height: 260px; pointer-events: none;
+  background: linear-gradient(180deg, var(--lesson-soft), #fff);
+}
+.lesson-detail-card--vivid > * { position: relative; }
+.lesson-detail-card--vivid .lesson-detail-head .page-eyebrow { color: var(--lesson-color); background: #fff; border: 2px solid var(--lesson-soft); }
+.lesson-listen-main .speak-button {
+  display: inline-flex; align-items: center; gap: 8px; min-height: 52px; padding: 12px 24px; border: 0; border-radius: 999px;
+  color: #fff; background: linear-gradient(110deg, #8540f2, #d944aa); font-size: 17px;
+  box-shadow: 0 6px 0 rgba(68,35,143,.23), 0 10px 19px rgba(79,41,130,.12); transition: transform .25s ease;
+}
+.lesson-listen-main .speak-button:hover { background: linear-gradient(110deg, #8540f2, #d944aa); transform: translateY(-3px); }
+.lesson-detail-card--vivid .lesson-point {
+  display: flex; flex-direction: column; padding: 22px; border: 3px solid var(--lesson-soft); border-top: 7px solid var(--lesson-color);
+  background: linear-gradient(180deg, var(--lesson-soft), #fff 65%); transition: transform .25s ease, box-shadow .25s ease;
+}
+.lesson-detail-card--vivid .lesson-point:hover { transform: translateY(-5px); box-shadow: 0 12px 24px color-mix(in srgb, var(--lesson-color) 22%, transparent); }
+.lesson-detail-card--vivid .lesson-point-number {
+  width: 50px; height: 50px; display: grid; place-items: center; border-radius: 16px; color: #fff; background: var(--lesson-color);
+  font-size: 23px; box-shadow: 0 5px 0 color-mix(in srgb, var(--lesson-color) 55%, #2b235a); transform: rotate(-6deg);
+}
+.lesson-detail-card--vivid .lesson-point h2 { margin-top: 14px; color: var(--ink); }
+.lesson-detail-card--vivid .lesson-point > p { margin-bottom: 16px; }
+.lesson-detail-card--vivid .lesson-example {
+  margin-top: auto; padding: 16px 16px 15px; border: 3px dashed color-mix(in srgb, var(--lesson-color) 50%, white); border-radius: 18px;
+  color: color-mix(in srgb, var(--lesson-color) 70%, #2b235a); background: #fff; font: 800 23px/1.3 var(--font-baloo), sans-serif;
+}
+.lesson-example-label {
+  display: table; margin-bottom: 6px; padding: 4px 10px; border-radius: 999px; color: var(--lesson-color); background: var(--lesson-soft);
+  font: 1000 12px/1.2 var(--font-nunito), sans-serif; letter-spacing: .03em; text-transform: uppercase;
+}
+.lesson-detail-card--vivid .lesson-point .speak-button {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 9px 18px; border: 0; border-radius: 999px;
+  color: #fff; background: var(--lesson-color); font-size: 15px; box-shadow: 0 4px 0 color-mix(in srgb, var(--lesson-color) 55%, #2b235a);
+  transition: transform .2s ease;
+}
+.lesson-detail-card--vivid .lesson-point .speak-button:hover { background: var(--lesson-color); transform: translateY(-2px); }
+
+@media (max-width: 760px) {
+  .grade-tab-list { margin: 0 -24px 22px; padding: 4px 24px 12px; scroll-padding-inline: 24px; }
+  .grade-tab { min-height: 46px; padding: 8px 10px 8px 14px; font-size: 17px; }
+  .grade-empty { padding: 32px 20px; }.grade-empty h2 { font-size: 25px; }.grade-empty p { font-size: 15px; }
+  .lesson-detail-card--vivid::before { height: 320px; }
+  .lesson-listen-main .speak-button { width: 100%; justify-content: center; }
+  .lesson-detail-card--vivid .lesson-point { padding: 19px; }
+  .lesson-detail-card--vivid .lesson-example { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .grade-panel { animation: none; }
+  .grade-tab:hover, .grade-tab--active, .grade-tab--active:hover,
+  .lesson-detail-card--vivid .lesson-point:hover, .lesson-listen-main .speak-button:hover,
+  .lesson-detail-card--vivid .lesson-point .speak-button:hover { transform: none; }
+}
