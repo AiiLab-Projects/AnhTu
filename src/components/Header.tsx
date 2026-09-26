@@ -8,7 +8,7 @@ import { siteContent } from "@/content/site";
 import { clearVoiceLog, formatVoiceLog, getVietnameseVoices, getVoiceLog, getVoicePreference, recordedVoices, setVoicePreference, speakVietnamese, subscribeVoiceLog, type VoiceLogEntry } from "@/lib/speech";
 import { TeacherAvatar } from "./TeacherAvatar";
 
-const icons = { home: "🏠", book: "📚", pencil: "✏️", trophy: "🏆", mail: "💌" };
+const icons = { home: "🏠", book: "📚", pencil: "✏️", trophy: "🏆", star: "🌟", mail: "💌" };
 
 export function Header() {
   const pathname = usePathname();

@@ -6,6 +6,7 @@ export const siteContent = {
     { label: "Bài học", href: "/bai-hoc", icon: "book" },
     { label: "Bài tập", href: "/bai-tap", icon: "pencil" },
     { label: "Kiểm tra", href: "/kiem-tra", icon: "trophy" },
+    { label: "Tiến độ", href: "/tien-do", icon: "star" },
     { label: "Liên hệ", href: "/lien-he", icon: "mail" },
   ],
   hero: {
