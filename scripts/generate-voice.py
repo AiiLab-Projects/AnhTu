@@ -6,6 +6,7 @@ this script from the repository root. The downloaded ONNX model belongs in
 """
 
 import json
+import os
 import wave
 from pathlib import Path
 
@@ -20,7 +21,10 @@ MODEL = BUILD / "vi_VN-vais1000-medium.onnx"
 def main() -> None:
     lines = json.loads((BUILD / "voice-lines.json").read_text(encoding="utf-8"))
     OUTPUT.mkdir(parents=True, exist_ok=True)
-    voice = PiperVoice.load(MODEL)
+    # espeak-ng on macOS rejects data paths longer than ~160 characters; point
+    # PIPER_ESPEAK_DATA at a short symlink to piper/espeak-ng-data in that case.
+    espeak = os.environ.get("PIPER_ESPEAK_DATA")
+    voice = PiperVoice.load(MODEL, espeak_data_dir=espeak) if espeak else PiperVoice.load(MODEL)
     for index, line in enumerate(lines, start=1):
         target = OUTPUT / f"{line['id']}.wav"
         if target.exists() and target.stat().st_size > 44:

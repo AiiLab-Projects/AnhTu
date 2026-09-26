@@ -1,5 +1,14 @@
 [
   {
+    "id": "hn-ngochuyen",
+    "label": "Ngọc Huyền · miền Bắc",
+    "description": "Giọng nữ Hà Nội, tự nhiên — giọng mặc định. Tạo bằng Vbee.",
+    "dir": "/audio/vi/hn-ngochuyen",
+    "ext": "mp3",
+    "engine": "vbee",
+    "model": "hn_female_ngochuyen_full_48k-fhg"
+  },
+  {
     "id": "piper-vais1000",
     "label": "Cô Tú · giọng gốc",
     "description": "Giọng nữ đọc chậm, rõ. Tạo bằng Piper (vais1000).",
@@ -7,15 +16,6 @@
     "ext": "wav",
     "engine": "piper",
     "model": "vi_VN-vais1000-medium"
-  },
-  {
-    "id": "hn-ngochuyen",
-    "label": "Ngọc Huyền · miền Bắc",
-    "description": "Giọng nữ Hà Nội, tự nhiên. Tạo bằng Vbee.",
-    "dir": "/audio/vi/hn-ngochuyen",
-    "ext": "mp3",
-    "engine": "vbee",
-    "model": "hn_female_ngochuyen_full_48k-fhg"
   },
   {
     "id": "hue-huonggiang",
