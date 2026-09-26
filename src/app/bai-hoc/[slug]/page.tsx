@@ -1,9 +1,13 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { lessons } from "@/content/lessons";
+import { lessons, type Lesson } from "@/content/lessons";
 import { LessonCheck } from "@/components/LessonCheck";
 import { SpeakButton } from "@/components/SpeakButton";
+
+// Mỗi thẻ ý chính lấy một màu, bắt đầu từ màu của bài rồi xoay vòng bảng tone.
+const tones: Lesson["tone"][] = ["blue", "purple", "pink", "orange", "green", "yellow"];
+const pointTone = (tone: Lesson["tone"], index: number) => tones[(tones.indexOf(tone) + index) % tones.length];
 
 export function generateStaticParams() { return lessons.map((lesson) => ({ slug: lesson.slug })); }
 
@@ -23,19 +27,19 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     <main className="inner-page">
       <div className="page-container lesson-detail-container">
         <nav className="breadcrumb" aria-label="Đường dẫn"><Link href="/bai-hoc">← Tất cả bài học</Link><span>/</span><span>Bài {lesson.number}</span></nav>
-        <article className="lesson-detail-card">
+        <article className={`lesson-detail-card lesson-detail-card--vivid lesson-card--${lesson.tone}`}>
           <div className="lesson-detail-head">
             <span className={`lesson-card-icon lesson-card--${lesson.tone}`} aria-hidden="true">{lesson.icon}</span>
             <div><span className="page-eyebrow">Bài {lesson.number} · {lesson.category}</span><h1>{lesson.title}</h1><p>{lesson.intro}</p></div>
           </div>
-          <SpeakButton text={`${lesson.title}. ${lesson.intro}`} label="🔊 Nghe Cô Tú đọc" />
+          <div className="lesson-listen-main"><SpeakButton text={`${lesson.title}. ${lesson.intro}`} label="🔊 Nghe Cô Tú đọc" /></div>
           <div className="lesson-point-grid">
             {lesson.points.map((point, index) => (
-              <section className="lesson-point" key={point.title}>
+              <section className={`lesson-point lesson-card--${pointTone(lesson.tone, index)}`} key={point.title}>
                 <span className="lesson-point-number">0{index + 1}</span>
                 <h2>{point.title}</h2>
                 <p>{point.body}</p>
-                <div className="lesson-example">{point.example}</div>
+                <div className="lesson-example"><span className="lesson-example-label">✨ Ví dụ</span>{point.example}</div>
                 <SpeakButton text={point.example} label="🔊 Nghe ví dụ" />
               </section>
             ))}
