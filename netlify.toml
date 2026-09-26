@@ -1,0 +1,9 @@
+# Site xuất tĩnh (next.config.ts: output "export") nên Netlify chỉ cần phục vụ thư mục out/.
+[build]
+  command = "pnpm run build"
+  publish = "out"
+
+[build.environment]
+  NODE_VERSION = "22"
+  # Không dùng Next.js Runtime: nó chờ bản build có server (.next) chứ không phải out/.
+  NETLIFY_NEXT_PLUGIN_SKIP = "true"
