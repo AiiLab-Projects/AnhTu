@@ -27,6 +27,15 @@ Phân loại trước khi làm:
 | Mơ hồ | "Đề xuất cải tiến giao diện" | chụp 6 trang (bước 2), sửa các lỗi **nhìn thấy được** và rủi ro thấp, rồi comment danh sách đề xuất lớn hơn vào issue để duyệt |
 | Có quyết định của người dùng | chọn nguồn giọng, chi phí, giấy phép, đổi nội dung bài | hỏi trước (AskUserQuestion), kèm mẫu nếu được |
 
+### Nhiều issue cùng lúc
+
+Khi có ≥2 issue độc lập và người dùng muốn chạy song song: mỗi issue một `Agent` với
+`isolation: "worktree"`, prompt tự đứng được (nguyên văn issue, file được/không được đụng, lệnh
+nghiệm thu, trailer commit), và dặn **dừng sau khi mở PR** — người điều phối review, xem ảnh, merge.
+Các issue cùng sửa `globals.css` thì dặn mỗi agent gom CSS vào một khối có comment `(#n)` ở cuối file;
+mỗi lần merge xong một PR, `SendMessage` cho agent còn lại để `git rebase origin/main` trước khi push.
+Cổng 4173 lúc đó thường bị chiếm, nên agent tự serve `out/` ở cổng khác.
+
 ## 1. Nhánh
 
 ```sh
@@ -90,6 +99,9 @@ Tự review bằng `gh pr diff <pr>` trước khi merge, theo danh sách:
 - Không thêm thứ cần server (API route, server action) — site là `output: "export"`.
 - `localStorage` chỉ dùng trong client component, bọc try/catch hoặc guard `typeof window`.
 - Chữ trên giao diện xưng "Cô" – "em", đúng chính tả, đúng dấu.
+
+PR có hơn 300 file (ví dụ thêm cả bộ mp3) thì `gh pr diff` báo HTTP 406: review bằng
+`git diff origin/main -- <file code>` ở máy.
 
 Ghi kết quả review thành comment (`gh pr comment`). Tài khoản mở PR cũng là tài khoản merge, nên
 GitHub không cho `--approve`. Sau đó:
