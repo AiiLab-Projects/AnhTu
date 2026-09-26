@@ -77,7 +77,7 @@ export function Header() {
             <div className="voice-modal-body">
               <label className="voice-option">
                 <input type="radio" name="voice" checked={voiceChoice === "vietnamese"} onChange={() => chooseVoice("vietnamese")} />
-                <span><strong>🌐 Tự chọn giọng tiếng Việt</strong><small>Ưu tiên giọng Google hoặc giọng nữ nếu thiết bị có.</small></span>
+                <span><strong>🎙️ Giọng nữ tiếng Việt</strong><small>Bản ghi âm có sẵn trên web, nghe được dù thiết bị chưa có giọng tiếng Việt.</small></span>
               </label>
               {voices.map((voice) => (
                 <label className="voice-option" key={voice.name}>
@@ -90,7 +90,8 @@ export function Header() {
                 const result = await speakVietnamese("Chào em, cô là Cô Tú. Chúng mình cùng học tiếng Việt nhé!", setVoiceError);
                 if (result) setVoiceError(result);
               }}>🔊 Nghe thử</button>
-              <p className="voice-note" role="status">{voiceError || (voices.length ? "Chỉ hiển thị các giọng tiếng Việt có sẵn trên thiết bị." : "Đang tìm giọng tiếng Việt trên thiết bị. Nếu không có, hãy cài giọng tiếng Việt để nghe bài học.")}</p>
+              <p className="voice-note" role="status">{voiceError || (voices.length ? "Em có thể chọn bản ghi âm hoặc giọng tiếng Việt có sẵn trên thiết bị." : "Bản ghi âm tiếng Việt đã có sẵn cho bài học, bài tập và câu hỏi.")}</p>
+              <p className="voice-credit"><a href="/audio/vi/CREDITS.txt" target="_blank" rel="noreferrer">Nguồn giọng đọc</a></p>
             </div>
           </div>
         </div>

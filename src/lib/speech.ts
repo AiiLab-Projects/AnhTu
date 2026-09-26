@@ -1,7 +1,10 @@
+import voiceClips from "./voice-clips.json";
+
 const VOICE_KEY = "co-tu-voice";
-const NO_VIETNAMESE_VOICE = "Thiết bị chưa có giọng đọc tiếng Việt. Hãy bật giọng tiếng Việt trong trình duyệt hoặc hệ điều hành rồi thử lại.";
+const NO_VIETNAMESE_VOICE = "Nội dung này chưa có bản ghi âm và thiết bị chưa có giọng tiếng Việt.";
 
 let speechRequest = 0;
+let activeAudio: HTMLAudioElement | null = null;
 
 export function getVoicePreference() {
   if (typeof window === "undefined") return "vietnamese";
@@ -51,19 +54,47 @@ function waitForVietnameseVoices(synth: SpeechSynthesis): Promise<SpeechSynthesi
 }
 
 export async function speakVietnamese(text: string, onError?: (message: string) => void): Promise<string | null> {
-  if (typeof window === "undefined" || !window.speechSynthesis) {
-    return "Trình duyệt này chưa hỗ trợ đọc văn bản.";
-  }
+  if (typeof window === "undefined") return null;
 
   const synth = window.speechSynthesis;
   const request = ++speechRequest;
-  synth.cancel();
+  synth?.cancel();
+  if (activeAudio) {
+    activeAudio.pause();
+    activeAudio.currentTime = 0;
+    activeAudio = null;
+  }
+  const preference = getVoicePreference();
+  const clip = (voiceClips as Record<string, string>)[text];
+  if (clip && (preference === "vietnamese" || !synth)) {
+    const audio = new Audio(clip);
+    activeAudio = audio;
+    audio.onended = () => { if (activeAudio === audio) activeAudio = null; };
+    audio.onerror = () => {
+      if (request === speechRequest) onError?.("Không tải được bản ghi âm. Vui lòng thử lại.");
+    };
+    try {
+      await audio.play();
+    } catch {
+      if (activeAudio === audio) activeAudio = null;
+      if (request === speechRequest) return "Không phát được bản ghi âm. Vui lòng thử lại.";
+    }
+    return null;
+  }
+  if (!synth) return NO_VIETNAMESE_VOICE;
+
   const available = getVietnameseVoices();
   const voices = available.length ? available : await waitForVietnameseVoices(synth);
   if (request !== speechRequest) return null;
-  if (!voices.length) return NO_VIETNAMESE_VOICE;
+  if (!voices.length) {
+    if (clip) {
+      const audio = new Audio(clip);
+      activeAudio = audio;
+      try { await audio.play(); return null; } catch { return "Không phát được bản ghi âm. Vui lòng thử lại."; }
+    }
+    return NO_VIETNAMESE_VOICE;
+  }
 
-  const preference = getVoicePreference();
   const selected = voices.find((voice) => voice.name === preference) ?? voices[0];
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.voice = selected;

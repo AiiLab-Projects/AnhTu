@@ -1,0 +1,14 @@
+Vietnamese voice recordings for Cô Tú
+
+Generated with Piper's vi_VN-vais1000-medium voice:
+https://huggingface.co/rhasspy/piper-voices/tree/main/vi/vi_VN/vais1000/medium
+Model repository license: MIT.
+
+The voice was trained on the VAIS-1000 Vietnamese Speech Synthesis Corpus:
+https://ieee-dataport.org/documents/vais-1000-vietnamese-speech-synthesis-corpus
+Dataset license: Creative Commons Attribution 4.0 International (CC BY 4.0):
+https://creativecommons.org/licenses/by/4.0/
+
+These recordings were generated from the Cô Tú site's lesson and exercise text.
+The audio clips are adaptations produced for this website, not recordings by
+Nguyễn Anh Tú. The model and dataset creators do not endorse this website.

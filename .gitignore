@@ -3,4 +3,5 @@ node_modules
 .next-local
 out
 .sites-runtime
+.audio-build
 *.tsbuildinfo
