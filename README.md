@@ -1,21 +1,19 @@
 # Cô Tú — Anime Kids
 
-Landing page Next.js 15, React, TypeScript và Tailwind CSS.
+Website Next.js 15, React, TypeScript và Tailwind CSS gồm: Trang chủ, Bài học, Bài tập, Kiểm tra, Liên hệ và Lớp học.
 
-## Chạy trên máy
+## Mở website local bằng một cú nhấp
 
-```bash
-npm install
-npm run dev
-```
+Nhấp đúp vào `C:\anhTu\Mo-website-Co-Tu.cmd`. Trình duyệt tự mở ở `http://localhost:3000`. Sau khi chỉnh sửa và lưu tệp, nhấn F5 để xem bản mới. Đóng cửa sổ chạy website để dừng.
 
-Mở `http://localhost:3000`.
+## Chỉnh sửa nội dung
 
-## Chỉnh sửa nhanh
-
-- Nội dung, menu, thống kê và thẻ giới thiệu: `src/content/site.ts`
-- Màu sắc, hiệu ứng và bố cục: `src/app/globals.css` và `tailwind.config.ts`
+- Tên Cô Tú, menu, chữ ở trang chủ và thông tin liên hệ: `src/content/site.ts`
+- Nội dung sáu bài học: `src/content/lessons.ts`
+- Câu hỏi kiểm tra và từ ghép chữ: `src/content/questions.ts`
+- Màu sắc, bố cục và hiệu ứng: `src/app/globals.css`
 - Minh họa Cô Tú dạng SVG: `src/components/TeacherAvatar.tsx`
-- Các phần giao diện: `src/components/`
 
-Nút học và kiểm tra hiện dẫn đến phần giới thiệu tương ứng trên landing page. Trang chưa có bài học hoặc đề kiểm tra tương tác.
+Thông tin liên hệ đang để trống theo yêu cầu. Khi có email thật, điền vào `src/content/site.ts`; mẫu lời nhắn sẽ mở ứng dụng email để phụ huynh tự gửi.
+
+Kết quả học tập được lưu trên trình duyệt của thiết bị hiện tại. Giọng đọc dùng tính năng có sẵn của trình duyệt và phụ thuộc vào các giọng tiếng Việt đã cài trên máy.

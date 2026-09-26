@@ -1,23 +1,14 @@
-type FeatureCardProps = {
-  id: string;
-  icon: string;
-  title: string;
-  description: string;
-  color: string;
-};
+import Link from "next/link";
 
-export function FeatureCard({
-  id,
-  icon,
-  title,
-  description,
-  color,
-}: FeatureCardProps) {
+type FeatureCardProps = { id: string; href: string; icon: string; title: string; description: string; color: string };
+
+export function FeatureCard({ id, href, icon, title, description, color }: FeatureCardProps) {
   return (
-    <article className={`feature-card feature-card--${color}`} id={id}>
+    <Link className={`feature-card feature-card--${color}`} href={href} id={id}>
       <div className="feature-icon" aria-hidden="true">{icon}</div>
       <h3>{title}</h3>
       <p>{description}</p>
-    </article>
+      <span className="feature-more">Khám phá →</span>
+    </Link>
   );
 }

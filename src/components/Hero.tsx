@@ -22,11 +22,11 @@ export function Hero() {
             {hero.description}
           </p>
           <div className="hero-actions">
-            <a href="#bai-hoc" className="hero-button hero-button--primary">
+            <a href="/bai-hoc" className="hero-button hero-button--primary">
               <BookOpen aria-hidden="true" size={29} strokeWidth={2.6} />
               {hero.primaryButton}
             </a>
-            <a href="#kiem-tra" className="hero-button hero-button--secondary">
+            <a href="/kiem-tra" className="hero-button hero-button--secondary">
               <Trophy aria-hidden="true" size={29} strokeWidth={2.6} />
               {hero.secondaryButton}
             </a>
@@ -55,3 +55,4 @@ export function Hero() {
     </section>
   );
 }
+
