@@ -133,8 +133,8 @@ h1, h2 { text-wrap: balance; }
   transition: transform .2s ease, box-shadow .2s ease;
   animation: slide-right .5s ease both;
 }
-.hero-button:hover { transform: translateY(-3px); box-shadow: 0 9px 0 rgba(30,27,75,.22); }
-.hero-button:active { transform: translateY(4px); box-shadow: 0 2px 0 rgba(30,27,75,.25); }
+.hero-button:hover { transform: translateY(-3px) scale(1.045); box-shadow: 0 9px 0 rgba(30,27,75,.22); }
+.hero-button:active { transform: translateY(4px) scale(.99); box-shadow: 0 2px 0 rgba(30,27,75,.25); }
 .hero-button-icon { display: inline-block; font-size: 22px; line-height: 1; }
 .hero-button--primary { color: var(--purple); background: #fff; animation-delay: .2s; }
 .hero-button--secondary { color: var(--ink); background: #fff; animation-delay: .35s; }
