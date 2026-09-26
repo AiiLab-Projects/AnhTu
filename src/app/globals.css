@@ -96,22 +96,18 @@ a { text-decoration: none; }
 .hero-badge {
   position: relative; isolation: isolate;
   width: fit-content; display: flex; align-items: center; gap: 9px;
-  padding: 8px 16px; border-radius: 999px;
-  color: #7c42e4;
-  font-size: 14px; font-weight: 900;
-  transform-origin: center;
-  animation: badge-breathe 6s ease-in-out infinite;
+  padding: 6px 14px; border-radius: 999px;
+  background: rgba(255,255,255,.9); color: #7c3aed;
+  box-shadow: 0 4px 0 rgba(30,27,75,.18);
+  font-size: 13px; font-weight: 700;
+  transform-origin: left center;
+  animation: badge-pulse 2.5s ease-in-out infinite;
   will-change: transform;
 }
 .hero-badge svg { color: #ffdf5b; fill: #ffdf5b; }
-.hero-badge::before {
-  content: ""; position: absolute; inset: 0; z-index: -1;
-  border: 1px solid rgba(255,255,255,.32); border-radius: inherit;
-  background: #fff; box-shadow: 0 4px 0 rgba(75,34,136,.16);
-}
-@keyframes badge-breathe {
+@keyframes badge-pulse {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.045); }
+  50% { transform: scale(1.18); }
 }
 .heading-wrap { position: relative; }
 .hero h1 {
