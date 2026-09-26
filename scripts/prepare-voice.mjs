@@ -14,12 +14,12 @@ function loadContent(path) {
   return exports;
 }
 
-const { lessons } = loadContent("src/content/lessons.ts");
+const { lessons, lessonIntroSpeech } = loadContent("src/content/lessons.ts");
 const { quizQuestions, wordExercises } = loadContent("src/content/questions.ts");
 const texts = new Set(["Chào em, cô là Cô Tú. Chúng mình cùng học tiếng Việt nhé!"]);
 
 for (const lesson of lessons) {
-  texts.add(`${lesson.title}. ${lesson.intro}`);
+  texts.add(lessonIntroSpeech(lesson));
   for (const point of lesson.points) texts.add(point.example);
 }
 for (const question of quizQuestions) {

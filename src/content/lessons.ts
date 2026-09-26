@@ -392,3 +392,8 @@ export const lessons: Lesson[] = [
     check: { question: "Khi viết xong đoạn văn, em nên làm gì?", options: ["Đọc lại và sửa lỗi", "Bỏ dấu chấm", "Viết liền không ngắt câu"], answer: 0, explanation: "Đọc lại giúp em phát hiện và sửa lỗi." },
   },
 ];
+
+/** Chuỗi Cô Tú đọc ở đầu bài; chỉ thêm dấu chấm khi tiêu đề chưa có dấu kết câu. */
+export function lessonIntroSpeech(lesson: Pick<Lesson, "title" | "intro">) {
+  return `${lesson.title}${/[.?!]$/.test(lesson.title) ? "" : "."} ${lesson.intro}`;
+}

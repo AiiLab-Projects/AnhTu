@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { lessons, type Lesson } from "@/content/lessons";
+import { lessonIntroSpeech, lessons, type Lesson } from "@/content/lessons";
 import { LessonCheck } from "@/components/LessonCheck";
 import { SpeakButton } from "@/components/SpeakButton";
 
@@ -32,7 +32,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             <span className={`lesson-card-icon lesson-card--${lesson.tone}`} aria-hidden="true">{lesson.icon}</span>
             <div><span className="page-eyebrow">Bài {lesson.number} · {lesson.category}</span><h1>{lesson.title}</h1><p>{lesson.intro}</p></div>
           </div>
-          <div className="lesson-listen-main"><SpeakButton text={`${lesson.title}. ${lesson.intro}`} label="🔊 Nghe Cô Tú đọc" /></div>
+          <div className="lesson-listen-main"><SpeakButton text={lessonIntroSpeech(lesson)} label="🔊 Nghe Cô Tú đọc" /></div>
           <div className="lesson-point-grid">
             {lesson.points.map((point, index) => (
               <section className={`lesson-point lesson-card--${pointTone(lesson.tone, index)}`} key={point.title}>
