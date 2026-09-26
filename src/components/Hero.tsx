@@ -1,4 +1,4 @@
-import { BookOpen, Trophy, Sparkles } from "lucide-react";
+import { Sparkles } from "lucide-react";
 import { siteContent } from "@/content/site";
 import { Stats } from "./Stats";
 import { TeacherAvatar } from "./TeacherAvatar";
@@ -15,7 +15,7 @@ export function Hero() {
           <div className="hero-badge"><Sparkles size={19} strokeWidth={2.8} /> {hero.badge}</div>
           <div className="heading-wrap">
             <span className="balloon" aria-hidden="true">🎈</span>
-            <h1>Học <span>Tiếng Việt</span><br />vui như đi chơi!</h1>
+            <h1>Học <span>Tiếng Việt</span><br />cùng Cô Tú!</h1>
           </div>
           <p className="hero-description">
             <strong>{hero.greeting}</strong><br />
@@ -23,11 +23,11 @@ export function Hero() {
           </p>
           <div className="hero-actions">
             <a href="/bai-hoc" className="hero-button hero-button--primary">
-              <BookOpen aria-hidden="true" size={29} strokeWidth={2.6} />
+              <span className="hero-button-icon" aria-hidden="true">📚</span>
               {hero.primaryButton}
             </a>
             <a href="/kiem-tra" className="hero-button hero-button--secondary">
-              <Trophy aria-hidden="true" size={29} strokeWidth={2.6} />
+              <span className="hero-button-icon" aria-hidden="true">🏆</span>
               {hero.secondaryButton}
             </a>
           </div>

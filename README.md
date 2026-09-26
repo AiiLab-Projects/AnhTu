@@ -2,6 +2,8 @@
 
 Website Next.js 15, React, TypeScript và Tailwind CSS gồm: Trang chủ, Bài học, Bài tập, Kiểm tra, Liên hệ và Lớp học.
 
+Bài kiểm tra chọn 20 câu mỗi lượt từ ngân hàng 60 câu chia theo 3 mức sao. Trả lời đúng tăng 1 sao (tối đa 3), trả lời sai quay về 1 sao; câu tiếp theo được chọn theo mức sao hiện tại và không lặp trong cùng lượt.
+
 ## Mở website local bằng một cú nhấp
 
 Nhấp đúp vào `C:\anhTu\Mo-website-Co-Tu.cmd`. Trình duyệt tự mở ở `http://localhost:3000`. Sau khi chỉnh sửa và lưu tệp, nhấn F5 để xem bản mới. Đóng cửa sổ chạy website để dừng.
