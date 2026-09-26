@@ -85,7 +85,9 @@ PYTHONPATH=<piper> python3 scripts/generate-voice.py
 - Import qua alias `@/…` (= `src/…`).
 - Style: viết class ngữ nghĩa trong `globals.css` theo kiểu đang có (`lesson-card--${tone}`,
   `page-container`, `inner-page`…); màu thương hiệu có trong `tailwind.config.ts`
-  (`purple`, `pink`, `orange`, `yellow`, `ink`). Font: Baloo 2 (tiêu đề) + Nunito.
+  (`purple`, `pink`, `orange`, `yellow`, `cyan`, `lime`, `ink`) và biến CSS trên `:root` của
+  `globals.css` (`--page-gradient`, `--shadow-card`, `--page-width`…). Font: Baloo 2 (tiêu đề) +
+  Be Vietnam Pro (chữ thường).
 - Hiệu ứng chuyển động phải có nhánh `prefers-reduced-motion` (đã có sẵn khối trong `globals.css`).
 - Xuất tĩnh: không dùng API route, server action, `next/image` tối ưu, hay thứ gì cần server.
   Trang động phải có `generateStaticParams`.

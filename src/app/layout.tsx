@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Baloo_2, Nunito } from "next/font/google";
+import { Baloo_2, Be_Vietnam_Pro } from "next/font/google";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
 import "./globals.css";
 
 const baloo = Baloo_2({ subsets: ["latin", "vietnamese"], variable: "--font-baloo", display: "swap" });
-const nunito = Nunito({ subsets: ["latin", "vietnamese"], variable: "--font-nunito", display: "swap" });
+const beVietnam = Be_Vietnam_Pro({ subsets: ["latin", "vietnamese"], weight: ["400", "500", "600", "700", "800"], variable: "--font-body", display: "swap" });
 
 export const metadata: Metadata = {
   title: "Cô Tú | Học tiếng Việt vui",
@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body className={`${baloo.variable} ${nunito.variable}`}><Header />{children}<SiteFooter /></body></html>;
+  return <html lang="vi"><body className={`${baloo.variable} ${beVietnam.variable}`}><Header />{children}<SiteFooter /></body></html>;
 }
