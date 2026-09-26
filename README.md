@@ -1,6 +1,6 @@
 # Cô Tú — Anime Kids
 
-Website Next.js 15, React, TypeScript và Tailwind CSS gồm: Trang chủ, Bài học, Bài tập, Kiểm tra, Liên hệ và Lớp học.
+Website Next.js 15, React, TypeScript và Tailwind CSS gồm: Trang chủ, Bài học, Bài tập, Kiểm tra và Liên hệ. Trang Lớp học dành cho giáo viên sẽ mở khi có đăng nhập và phân quyền.
 
 Bài kiểm tra chọn 20 câu mỗi lượt từ ngân hàng 60 câu chia theo 3 mức sao. Trả lời đúng tăng 1 sao (tối đa 3), trả lời sai quay về 1 sao; câu tiếp theo được chọn theo mức sao hiện tại và không lặp trong cùng lượt.
 

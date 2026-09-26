@@ -7,7 +7,6 @@ export const siteContent = {
     { label: "Bài tập", href: "/bai-tap", icon: "pencil" },
     { label: "Kiểm tra", href: "/kiem-tra", icon: "trophy" },
     { label: "Liên hệ", href: "/lien-he", icon: "mail" },
-    { label: "Lớp học", href: "/lop-hoc", icon: "school" },
   ],
   hero: {
     badge: "Dành cho học sinh tiểu học",

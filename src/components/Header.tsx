@@ -3,12 +3,12 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, GraduationCap, Home, Mail, Menu, Pencil, Trophy, Volume2, X } from "lucide-react";
+import { Menu, Volume2, X } from "lucide-react";
 import { siteContent } from "@/content/site";
 import { getVoicePreference, setVoicePreference, speakVietnamese } from "@/lib/speech";
 import { TeacherAvatar } from "./TeacherAvatar";
 
-const icons = { home: Home, book: BookOpen, pencil: Pencil, trophy: Trophy, mail: Mail, school: GraduationCap };
+const icons = { home: "🏠", book: "📚", pencil: "✏️", trophy: "🏆", mail: "💌" };
 
 export function Header() {
   const pathname = usePathname();
@@ -49,11 +49,10 @@ export function Header() {
 
         <nav className={`main-nav ${menuOpen ? "main-nav--open" : ""}`} aria-label="Điều hướng chính">
           {siteContent.navigation.map((item) => {
-            const Icon = icons[item.icon];
             const active = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href);
             return (
               <Link className={active ? "nav-link nav-link--active" : "nav-link"} href={item.href} key={item.label} aria-current={active ? "page" : undefined} onClick={() => setMenuOpen(false)}>
-                <Icon size={19} strokeWidth={2.5} aria-hidden="true" />
+                <span className="nav-icon" aria-hidden="true">{icons[item.icon]}</span>
                 <span>{item.label}</span>
               </Link>
             );

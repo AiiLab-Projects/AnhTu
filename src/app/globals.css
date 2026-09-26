@@ -54,6 +54,7 @@ a { text-decoration: none; }
   transition: transform .25s ease, background-color .25s ease, box-shadow .25s ease, color .25s ease;
 }
 .nav-link:hover { background: rgba(255,255,255,.2); transform: translateY(-4px); }
+.nav-icon { width: 21px; display: inline-grid; place-items: center; flex: 0 0 21px; font-size: 19px; line-height: 1; }
 .nav-link--active, .nav-link--active:hover {
   color: #704bdc; background: #fff;
   box-shadow: 0 6px 0 rgba(91, 48, 156, .15), 0 8px 20px rgba(60, 28, 101, .14);
@@ -100,10 +101,10 @@ a { text-decoration: none; }
   font-size: 14px; font-weight: 900;
 }
 .hero-badge svg { color: #ffdf5b; fill: #ffdf5b; }
-.hero-badge { animation: badge-breathe 2.4s ease-in-out infinite; transform-origin: center; }
+.hero-badge { animation: badge-breathe 4s ease-in-out infinite; transform-origin: center; }
 @keyframes badge-breathe {
-  0%, 100% { transform: scale(1); box-shadow: 0 4px 0 rgba(75,34,136,.16); }
-  50% { transform: scale(1.055); box-shadow: 0 8px 18px rgba(75,34,136,.22); }
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.015); }
 }
 .heading-wrap { position: relative; }
 .hero h1 {

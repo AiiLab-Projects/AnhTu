@@ -10,7 +10,7 @@ export default function ContactPage() {
   return (
     <main className="inner-page">
       <div className="page-container contact-container">
-        <div className="page-intro"><span className="page-eyebrow">✉️ Kết nối cùng Cô Tú</span><h1>✉️ Liên hệ với Cô Tú</h1><p>Phụ huynh có thể chuẩn bị lời nhắn và dùng kênh liên hệ khi Cô Tú cập nhật.</p></div>
+        <div className="page-intro"><span className="page-eyebrow">✉️ Kết nối cùng Cô Tú</span><h1>✉️ Liên hệ với Cô Tú</h1><p>Phụ huynh có thể soạn lời nhắn gửi Cô Tú qua email khi kênh liên hệ được cập nhật.</p></div>
         <div className="contact-grid">
           <section className="white-panel contact-info"><h2>📍 Thông tin liên hệ</h2><p>Thông tin của Cô Tú sẽ được hiển thị tại đây khi có.</p>
             {hasContact ? <div className="contact-list">

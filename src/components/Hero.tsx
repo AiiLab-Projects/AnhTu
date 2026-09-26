@@ -34,7 +34,7 @@ export function Hero() {
           <Stats />
         </div>
 
-        <div className="hero-visual" id="lop-hoc" aria-label="Cô Tú chào đón các em">
+        <div className="hero-visual" aria-label="Cô Tú chào đón các em">
           <div className="visual-halo visual-halo--one" />
           <div className="visual-halo visual-halo--two" />
           <div className="avatar-frame">
