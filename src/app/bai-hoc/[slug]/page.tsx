@@ -36,6 +36,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                 <h2>{point.title}</h2>
                 <p>{point.body}</p>
                 <div className="lesson-example">{point.example}</div>
+                <SpeakButton text={point.example} label="🔊 Nghe ví dụ" />
               </section>
             ))}
           </div>
