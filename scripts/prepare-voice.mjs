@@ -27,11 +27,12 @@ for (const question of quizQuestions) {
 }
 for (const item of wordExercises) texts.add(item.hint);
 
+// Mỗi câu có một mã băm cố định; mọi giọng dùng chung mã này làm tên file.
 const lines = [...texts].map((text) => ({
   text,
-  file: `${createHash("sha256").update(text).digest("hex").slice(0, 16)}.wav`,
+  id: createHash("sha256").update(text).digest("hex").slice(0, 16),
 }));
 mkdirSync(".audio-build", { recursive: true });
 writeFileSync(".audio-build/voice-lines.json", JSON.stringify(lines, null, 2) + "\n");
-writeFileSync("src/lib/voice-clips.json", JSON.stringify(Object.fromEntries(lines.map(({ text, file }) => [text, `/audio/vi/${file}`])), null, 2) + "\n");
+writeFileSync("src/lib/voice-clips.json", JSON.stringify(Object.fromEntries(lines.map(({ text, id }) => [text, id])), null, 2) + "\n");
 console.log(`Prepared ${lines.length} Vietnamese voice lines.`);
