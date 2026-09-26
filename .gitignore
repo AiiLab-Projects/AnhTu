@@ -5,3 +5,5 @@ out
 .sites-runtime
 .audio-build
 *.tsbuildinfo
+__pycache__/
+.claude/worktrees/

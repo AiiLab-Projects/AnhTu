@@ -1,0 +1,47 @@
+[
+  {
+    "id": "piper-vais1000",
+    "label": "Cô Tú · giọng gốc",
+    "description": "Giọng nữ đọc chậm, rõ. Tạo bằng Piper (vais1000).",
+    "dir": "/audio/vi",
+    "ext": "wav",
+    "engine": "piper",
+    "model": "vi_VN-vais1000-medium"
+  },
+  {
+    "id": "hn-ngochuyen",
+    "label": "Ngọc Huyền · miền Bắc",
+    "description": "Giọng nữ Hà Nội, tự nhiên. Tạo bằng Vbee.",
+    "dir": "/audio/vi/hn-ngochuyen",
+    "ext": "mp3",
+    "engine": "vbee",
+    "model": "hn_female_ngochuyen_full_48k-fhg"
+  },
+  {
+    "id": "hue-huonggiang",
+    "label": "Hương Giang · miền Trung",
+    "description": "Giọng nữ Huế. Tạo bằng Vbee.",
+    "dir": "/audio/vi/hue-huonggiang",
+    "ext": "mp3",
+    "engine": "vbee",
+    "model": "hue_female_huonggiang_full_48k-fhg"
+  },
+  {
+    "id": "sg-thaotrinh",
+    "label": "Thảo Trinh · miền Nam",
+    "description": "Giọng nữ Sài Gòn. Tạo bằng Vbee.",
+    "dir": "/audio/vi/sg-thaotrinh",
+    "ext": "mp3",
+    "engine": "vbee",
+    "model": "sg_female_thaotrinh_full_48k-fhg"
+  },
+  {
+    "id": "sg-minhhoang",
+    "label": "Minh Hoàng · giọng nam miền Nam",
+    "description": "Giọng nam Sài Gòn. Tạo bằng Vbee.",
+    "dir": "/audio/vi/sg-minhhoang",
+    "ext": "mp3",
+    "engine": "vbee",
+    "model": "sg_male_minhhoang_full_48k-fhg"
+  }
+]

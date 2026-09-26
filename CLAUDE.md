@@ -31,9 +31,10 @@ Hosting: `.openai/hosting.json` phục vụ thư mục `out/` (tĩnh). Remote: `
 | `src/app/*` | Trang: `/`, `/bai-hoc`, `/bai-hoc/[slug]`, `/bai-tap`, `/kiem-tra`, `/lien-he` |
 | `src/components/` | UI; các component tương tác là `"use client"` |
 | `src/lib/progress.ts` | Tiến độ lưu `localStorage` khoá `co-tu-progress` |
-| `src/lib/speech.ts` | Phát giọng đọc: ưu tiên file ghi âm, rồi mới tới Web Speech API |
-| `src/lib/voice-clips.json` | **Sinh tự động** — map chữ → `/audio/vi/<hash>.wav` |
-| `public/audio/vi/` | ~190 file WAV (~18 MB) sinh bằng Piper; giữ `CREDITS.txt` |
+| `src/lib/speech.ts` | Phát giọng đọc (ghi âm → dự phòng giọng mặc định → Web Speech API) + nhật ký `co-tu-voice-log` |
+| `src/lib/voice-catalog.json` | Danh mục giọng ghi âm; phần tử **đầu tiên là giọng mặc định** |
+| `src/lib/voice-clips.json` | **Sinh tự động** — map chữ → mã băm; file là `<dir>/<hash>.<ext>` của từng giọng |
+| `public/audio/vi/` | Piper vais1000: WAV ở gốc (~18 MB). Vbee: `<id>/*.mp3` mono 32 kbps. Giữ `CREDITS.txt` |
 | `src/app/globals.css` | Gần như toàn bộ style (class tự đặt, Tailwind chỉ phụ) |
 
 `src/components/Classroom.tsx` (trang Lớp học cho giáo viên) hiện **chưa gắn vào route nào** — chờ có
@@ -59,13 +60,25 @@ Hosting: `.openai/hosting.json` phục vụ thư mục `out/` (tĩnh). Remote: `
 
 ```bash
 node scripts/prepare-voice.mjs        # gom mọi chuỗi cần đọc → .audio-build/voice-lines.json + voice-clips.json
-# cần Piper + model vi_VN-vais1000-medium.onnx đặt trong .audio-build/ (không commit)
-PYTHONPATH=<piper> python3 scripts/generate-voice.py   # chỉ sinh file chưa có
+node scripts/check-voice.mjs          # mỗi giọng đủ bao nhiêu câu, câu nào thiếu, file nào thừa
+VBEE_CONFIG=~/.claude/skills/vbee-tts/config.json python3 scripts/generate-vbee.py [id-giọng]
+                                      # sinh các giọng Vbee còn thiếu, log từng câu vào .audio-build/vbee-log.jsonl
+# Piper (giọng gốc): cần piper-tts + vi_VN-vais1000-medium.onnx trong .audio-build/ (không commit)
+PYTHONPATH=<piper> python3 scripts/generate-voice.py
 ```
 
-Tên file là 16 ký tự đầu SHA-256 của chuỗi, nên file cũ của chuỗi đã sửa sẽ thành file mồ côi —
-xoá những WAV không còn trong `voice-clips.json`. Nếu thêm chỗ nào mới gọi `SpeakButton`/`speakVietnamese`,
-nhớ thêm chuỗi đó vào `prepare-voice.mjs`.
+- Vbee tốn credit theo ký tự (~8.600 ký tự/giọng) và mất ~30 giây/câu; chạy song song bằng
+  `VBEE_WORKERS=16`. Chạy lại an toàn: file đã có thì bỏ qua.
+- Piper 1.8 trên macOS: espeak-ng không đọc được đường dẫn dữ liệu dài quá ~160 ký tự, nên cài
+  venv ở đường ngắn hoặc trỏ `espeak_data_dir` qua symlink ngắn.
+- Tên file là 16 ký tự đầu SHA-256 của chuỗi, nên sửa chữ sẽ để lại file mồ côi; `check-voice.mjs`
+  liệt kê file thừa để xoá. Nếu thêm chỗ nào mới gọi `SpeakButton`/`speakVietnamese`, nhớ thêm chuỗi
+  đó vào `prepare-voice.mjs`.
+- Thêm giọng: thêm một phần tử vào `voice-catalog.json` (`engine: "vbee"`, `model` = mã giọng Vbee),
+  chạy `generate-vbee.py <id>`, rồi ghi nguồn vào `public/audio/vi/CREDITS.txt`.
+- Khi phụ huynh báo "không nghe được": hộp thoại 🔊 › "Nhật ký giọng đọc" › "Sao chép nhật ký" cho
+  biết trình duyệt, giọng đang chọn, và từng lượt đọc thành công/lỗi. Nhật ký cũng in ra console
+  với tiền tố `[Cô Tú · giọng đọc]`.
 
 ## Quy ước code
 

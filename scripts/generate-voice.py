@@ -22,7 +22,7 @@ def main() -> None:
     OUTPUT.mkdir(parents=True, exist_ok=True)
     voice = PiperVoice.load(MODEL)
     for index, line in enumerate(lines, start=1):
-        target = OUTPUT / line["file"]
+        target = OUTPUT / f"{line['id']}.wav"
         if target.exists() and target.stat().st_size > 44:
             continue
         spoken = line["text"].replace(" · ", ", ").replace(" — ", ", ")
