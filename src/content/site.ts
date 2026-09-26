@@ -29,10 +29,9 @@ export const siteContent = {
     ],
   },
   contact: {
-    // Điền thông tin thật của Cô Tú khi có. Để trống nếu chưa muốn công khai.
-    phone: "",
-    email: "",
-    facebook: "",
+    name: "Nguyễn Anh Tú",
+    phone: "0937198892",
+    email: "anhtutsn@gmail.com",
     hours: "",
   },
   footer: { note: "Mỗi ngày một chút, tiếng Việt sẽ thật dễ thương!" },
