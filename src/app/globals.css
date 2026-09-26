@@ -758,6 +758,7 @@ body:has(.exercise-page) .site-footer { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .progress-stat-bar > span, .progress-lesson { transition: none; }
+}
 
 /* Bài tập: tiến trình 10 từ, mẹo của Cô, footer trên desktop (#18) */
 .word-game .game-meta { flex-wrap: wrap; align-items: center; }
