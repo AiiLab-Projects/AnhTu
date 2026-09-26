@@ -89,6 +89,9 @@ EOF
 
 Luôn dùng heredoc nháy đơn: backtick trong `-m`/`--body` bị shell chạy như lệnh.
 
+Muốn PR **không** đóng issue (ví dụ sửa một phần) thì bỏ `Closes #n` khỏi **cả commit message** lẫn PR
+body: squash-merge dùng message của commit, nên sửa riêng PR body thành `Refs #n` vẫn đóng issue (#14).
+
 ## 4. Review rồi merge
 
 Tự review bằng `gh pr diff <pr>` trước khi merge, theo danh sách:
@@ -103,6 +106,10 @@ Tự review bằng `gh pr diff <pr>` trước khi merge, theo danh sách:
 PR có hơn 300 file (ví dụ thêm cả bộ mp3) thì `gh pr diff` báo HTTP 406: review bằng
 `git diff origin/main -- <file code>` ở máy.
 
+Rebase hai PR cùng thêm khối vào cuối `globals.css`: sau khi giải xung đột, **đếm `{` và `}`** và
+chạy `pnpm run build` rồi mới `git add` + `rebase --continue` + push — git hay coi dấu `}` cuối là phần
+chung và để một khối hở (đã làm `main` build hỏng ở #26, sửa ở #27).
+
 Ghi kết quả review thành comment (`gh pr comment`). Tài khoản mở PR cũng là tài khoản merge, nên
 GitHub không cho `--approve`. Sau đó:
 
@@ -112,8 +119,8 @@ git switch main && git pull --ff-only
 gh issue view <n> --json state      # Closes #n phải đã tự đóng
 ```
 
-**Check Netlify `deploy-preview` đang đỏ ở mọi PR** (lỗi ở cấu hình site `hoctiengvietcungcotu`,
-không do diff; tài khoản Netlify trên máy không xem được log của site). Đừng chặn merge vì nó, nhưng
+**Check Netlify `deploy-preview` đang đỏ ở mọi PR**: Netlify không chạy build (hỏng vài giây sau
+push), site không thuộc tài khoản Netlify `tanthanhkid` trên máy — xem issue #14. Đừng chặn merge vì nó, nhưng
 ghi một dòng trong comment review. Nếu build local cũng hỏng thì mới là lỗi thật.
 
 ## 5. Báo cáo

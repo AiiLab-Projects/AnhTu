@@ -19,7 +19,9 @@ pnpm run build              # BẮT BUỘC chạy trước khi push — đây l�
 Không có test, không có lint script. `pnpm run build` vừa type-check vừa prerender 31 trang bài học,
 nên lỗi TypeScript hay lỗi dữ liệu nội dung đều lộ ra ở đây.
 
-Hosting: `.openai/hosting.json` phục vụ thư mục `out/` (tĩnh). Remote: `AiiLab-Projects/AnhTu`.
+Hosting: Netlify site `hoctiengvietcungcotu` (cấu hình ở `netlify.toml`: publish `out/`), không nằm trong
+tài khoản Netlify `tanthanhkid` — xem issue #14 nếu deploy không chạy. `.openai/hosting.json` cũng trỏ `out/`.
+Remote: `AiiLab-Projects/AnhTu`.
 
 ## Cấu trúc
 
@@ -28,7 +30,7 @@ Hosting: `.openai/hosting.json` phục vụ thư mục `out/` (tĩnh). Remote: `
 | `src/content/site.ts` | Tên, menu, chữ trang chủ, thông tin liên hệ |
 | `src/content/lessons.ts` | 31 bài học (`Lesson`: slug, points, check…) |
 | `src/content/questions.ts` | `quizQuestions` (60 câu, 20/mức sao) + `wordExercises` (10 từ ghép chữ) |
-| `src/app/*` | Trang: `/`, `/bai-hoc`, `/bai-hoc/[slug]`, `/bai-tap`, `/kiem-tra`, `/lien-he` |
+| `src/app/*` | Trang: `/`, `/bai-hoc` (tab `?lop=1..5`), `/bai-hoc/[slug]`, `/bai-tap`, `/kiem-tra`, `/tien-do`, `/lien-he` |
 | `src/components/` | UI; các component tương tác là `"use client"` |
 | `src/lib/progress.ts` | Tiến độ lưu `localStorage` khoá `co-tu-progress` |
 | `src/lib/speech.ts` | Phát giọng đọc (ghi âm → dự phòng giọng mặc định → Web Speech API) + nhật ký `co-tu-voice-log` |
@@ -37,8 +39,8 @@ Hosting: `.openai/hosting.json` phục vụ thư mục `out/` (tĩnh). Remote: `
 | `public/audio/vi/` | Piper vais1000: WAV ở gốc (~18 MB). Vbee: `<id>/*.mp3` mono 32 kbps. Giữ `CREDITS.txt` |
 | `src/app/globals.css` | Gần như toàn bộ style (class tự đặt, Tailwind chỉ phụ) |
 
-`src/components/Classroom.tsx` (trang Lớp học cho giáo viên) hiện **chưa gắn vào route nào** — chờ có
-đăng nhập/phân quyền. Đừng xoá.
+`src/components/Classroom.tsx` là nội dung trang `/tien-do` (tiến độ của học sinh, đọc `co-tu-progress`).
+`grade` của bài trong `lessons.ts` là phân lớp **đề xuất** — cô Tú có quyền đổi.
 
 ## Nội dung — những ràng buộc dễ vỡ
 
