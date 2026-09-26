@@ -20,6 +20,7 @@ button { font: inherit; cursor: pointer; }
 a { text-decoration: none; }
 :focus-visible { outline: 4px solid #ffd755; outline-offset: 4px; }
 ::selection { background: #ffc8e6; color: var(--ink); }
+h1, h2 { text-wrap: balance; }
 
 .site-header {
   position: relative;
@@ -255,6 +256,7 @@ a { text-decoration: none; }
   .hero { min-height: 0; }
   .hero-inner { width: calc(100% - 48px); display: flex; flex-direction: column; padding: 42px 0 88px; gap: 16px; }
   .hero-copy { width: 100%; }
+  .hero-spark--one { display: none; }
   .hero-badge { font-size: 13px; padding: 9px 14px; }
   .hero-badge svg { width: 16px; }
   .hero h1 { margin: 21px 0 14px; font-size: clamp(42px, 9vw, 56px); line-height: 1.06; letter-spacing: -1.5px; }
@@ -513,7 +515,7 @@ body:has(.exercise-page) .site-footer { display: none; }
 .contact-grid p { color: #74809b; font-weight: 750; line-height: 1.55; }
 .contact-empty { min-height: 240px; margin-top: 26px; display: flex; align-items: center; justify-content: center; flex-direction: column; border: 2px dashed #dcd7ef; border-radius: 22px; background: #faf8ff; text-align: center; }
 .contact-empty > span { font-size: 52px; }.contact-empty strong { margin-top: 6px; font-size: 18px; }.contact-empty p { max-width: 290px; margin: 6px 0; font-size: 14px; }
-.contact-list { display: grid; gap: 4px; margin-top: 16px; }.contact-list > div { padding: 10px 12px; border-bottom: 1px solid #eae7f2; }.contact-list span { display: block; color: #9aa7be; font-size: 13px; font-weight: 1000; }.contact-list strong { overflow-wrap: anywhere; }
+.contact-list { display: grid; gap: 4px; margin-top: 16px; }.contact-list > div { padding: 10px 12px; border-bottom: 1px solid #eae7f2; }.contact-list span { display: block; color: #746b94; font-size: 13px; font-weight: 1000; }.contact-list strong { overflow-wrap: anywhere; }
 .contact-list a { color: #7047d9; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 4px; }
 .contact-list a:hover { text-decoration-color: currentColor; }
 .contact-form-panel form { display: grid; gap: 15px; margin-top: 20px; }
