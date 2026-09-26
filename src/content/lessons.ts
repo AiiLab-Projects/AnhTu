@@ -25,7 +25,7 @@ export const lessons: Lesson[] = [
   {
     slug: "nguyen-am-phu-am", number: 1, title: "Nguyên âm và phụ âm là gì?",
     summary: "Làm quen với chữ cái và cách ghép chúng thành tiếng.",
-    icon: "📗", tone: "blue", category: "Làm quen chữ cái", grade: 1,
+    icon: "🔤", tone: "blue", category: "Làm quen chữ cái", grade: 1,
     intro: "Bảng chữ cái tiếng Việt có 29 chữ. Ta sẽ nhận ra chữ ghi nguyên âm và chữ ghi phụ âm để tập đọc tiếng.",
     points: [
       { title: "Chữ ghi nguyên âm", body: "Khi phát âm, luồng hơi đi ra khá tự do. Một số nguyên âm có thêm dấu mũ hoặc dấu móc.", example: "a · ă · â · e · ê · i · o · ô · ơ · u · ư · y" },
@@ -37,7 +37,7 @@ export const lessons: Lesson[] = [
   {
     slug: "nhom-a", number: 2, title: "Nhóm A — A, Ă, Â",
     summary: "Nhận ra a, ă, â và đọc các tiếng quen thuộc.",
-    icon: "🔤", tone: "purple", category: "Nhóm nguyên âm", grade: 1,
+    icon: "🌙", tone: "purple", category: "Nhóm nguyên âm", grade: 1,
     intro: "Ba chữ a, ă, â có hình gần giống nhau. Hãy nhìn dấu trên đầu và nghe cách đọc từng chữ.",
     points: [
       { title: "Chữ a", body: "Chữ a không có dấu trên đầu; mở miệng khi đọc.", example: "ba · ca · lá" },
@@ -49,7 +49,7 @@ export const lessons: Lesson[] = [
   {
     slug: "nhom-e", number: 3, title: "Nhóm E — E, Ê",
     summary: "Đọc e và ê qua những tiếng gần gũi.",
-    icon: "🔤", tone: "pink", category: "Nhóm nguyên âm", grade: 1,
+    icon: "🚲", tone: "pink", category: "Nhóm nguyên âm", grade: 1,
     intro: "Chữ ê có thêm dấu mũ so với chữ e. Quan sát và đọc thành tiếng để phân biệt nhé.",
     points: [
       { title: "Chữ e", body: "Chữ e không có dấu mũ.", example: "em · xe · me" },
@@ -61,7 +61,7 @@ export const lessons: Lesson[] = [
   {
     slug: "nhom-o", number: 4, title: "Nhóm O — O, Ô, Ơ",
     summary: "Phân biệt ba chữ o, ô, ơ bằng hình chữ và tiếng mẫu.",
-    icon: "🔤", tone: "orange", category: "Nhóm nguyên âm", grade: 1,
+    icon: "🐄", tone: "orange", category: "Nhóm nguyên âm", grade: 1,
     intro: "O, ô, ơ là ba chữ ghi ba nguyên âm khác nhau. Dấu mũ và dấu móc giúp em nhận ra chúng.",
     points: [
       { title: "Chữ o", body: "Chữ o không có dấu trên đầu. Môi tròn khi đọc.", example: "o · bò · con" },
@@ -73,7 +73,7 @@ export const lessons: Lesson[] = [
   {
     slug: "nhom-u", number: 5, title: "Nhóm U — U, Ư",
     summary: "Nhận biết u và ư qua dấu móc và ví dụ.",
-    icon: "🔤", tone: "green", category: "Nhóm nguyên âm", grade: 1,
+    icon: "🧢", tone: "green", category: "Nhóm nguyên âm", grade: 1,
     intro: "U và ư nhìn rất gần nhau. Dấu móc ở bên phải sẽ giúp em tìm chữ ư.",
     points: [
       { title: "Chữ u", body: "Chữ u không có dấu móc; môi tròn khi đọc.", example: "u · thu · mũ" },
@@ -85,7 +85,7 @@ export const lessons: Lesson[] = [
   {
     slug: "nhom-i-y", number: 6, title: "Nhóm I — I, Y",
     summary: "Nhận ra i và y trong những tiếng thường gặp.",
-    icon: "🔤", tone: "yellow", category: "Nhóm nguyên âm", grade: 1,
+    icon: "🩺", tone: "yellow", category: "Nhóm nguyên âm", grade: 1,
     intro: "I và y đều có thể ghi âm /i/ trong một số tiếng. Cách viết từng từ cần được ghi nhớ khi đọc và viết.",
     points: [
       { title: "Chữ i", body: "Chữ i xuất hiện trong nhiều tiếng quen thuộc.", example: "bi · đi · im" },
@@ -97,7 +97,7 @@ export const lessons: Lesson[] = [
   {
     slug: "phu-am-dau", number: 7, title: "Phụ âm đầu",
     summary: "Làm quen 17 chữ cái phụ âm và cách chúng đứng đầu tiếng.",
-    icon: "🔡", tone: "blue", category: "Phụ âm", grade: 1,
+    icon: "🍎", tone: "blue", category: "Phụ âm", grade: 1,
     intro: "Ta cùng nhận diện 17 chữ cái thuộc nhóm phụ âm: b, c, d, đ, g, h, k, l, m, n, p, q, r, s, t, v, x. Một số chữ thường đi cùng chữ khác khi ghi âm đầu.",
     points: [
       { title: "Những chữ quen thuộc", body: "Nhiều chữ đứng đầu tiếng rồi ghép với vần.", example: "b + a = ba · m + e = me" },
@@ -109,7 +109,7 @@ export const lessons: Lesson[] = [
   {
     slug: "phu-am-b-c-d-d", number: 8, title: "Phụ âm B · C · D · Đ",
     summary: "Nghe, đọc và ghép tiếng với b, c, d, đ.",
-    icon: "🔡", tone: "purple", category: "Phụ âm", grade: 1,
+    icon: "🐐", tone: "purple", category: "Phụ âm", grade: 1,
     intro: "Bốn chữ b, c, d, đ có hình và cách đọc khác nhau. Bấm từng ví dụ để nghe, rồi đọc theo.",
     points: [
       { title: "B và C", body: "Ghép chữ đầu với vần để tạo tiếng.", example: "b + a = ba · c + a = ca" },
@@ -121,7 +121,7 @@ export const lessons: Lesson[] = [
   {
     slug: "phu-am-g-h-k-l", number: 9, title: "Phụ âm G · H · K · L",
     summary: "Tập đọc các tiếng mở đầu bằng g, h, k, l.",
-    icon: "🔡", tone: "pink", category: "Phụ âm", grade: 1,
+    icon: "🐔", tone: "pink", category: "Phụ âm", grade: 1,
     intro: "Cùng nghe bốn chữ đầu g, h, k, l trong những từ quen thuộc. Chữ k thường đứng trước e, ê, i.",
     points: [
       { title: "G và H", body: "Nhìn chữ đứng đầu rồi đọc tiếng.", example: "gà · gỗ · hoa · hổ" },
@@ -133,7 +133,7 @@ export const lessons: Lesson[] = [
   {
     slug: "phu-am-m-n-p-q", number: 10, title: "Phụ âm M · N · P · Q",
     summary: "Học m, n và các cặp chữ thường gặp ph, qu.",
-    icon: "🔡", tone: "orange", category: "Phụ âm", grade: 1,
+    icon: "🍜", tone: "orange", category: "Phụ âm", grade: 1,
     intro: "M và n thường đứng riêng ở đầu tiếng. Trong từ thông dụng, p hay đi với h, q hay đi với u.",
     points: [
       { title: "M và N", body: "Đọc hai chữ đầu qua từ gần gũi.", example: "mẹ · mèo · na · nón" },
@@ -145,7 +145,7 @@ export const lessons: Lesson[] = [
   {
     slug: "phu-am-r-s-t-v-x", number: 11, title: "Phụ âm R · S · T · V · X",
     summary: "Hoàn thành nhóm chữ phụ âm qua năm chữ cuối.",
-    icon: "🔡", tone: "green", category: "Phụ âm", grade: 1,
+    icon: "🐘", tone: "green", category: "Phụ âm", grade: 1,
     intro: "Cùng đọc r, s, t, v, x qua các tiếng quen. Em hãy nghe mẫu rồi đọc lại thật rõ.",
     points: [
       { title: "R và S", body: "Tìm chữ đầu trong từ.", example: "rổ · rau · sao · sách" },
@@ -157,7 +157,7 @@ export const lessons: Lesson[] = [
   {
     slug: "phu-am-ghep", number: 12, title: "Phụ âm ghép",
     summary: "Đọc các tổ hợp chữ đầu như ch, nh, ph, th và qu.",
-    icon: "🔠", tone: "yellow", category: "Phụ âm", grade: 1,
+    icon: "🐇", tone: "yellow", category: "Phụ âm", grade: 1,
     intro: "Một số tiếng bắt đầu bằng hai hoặc ba chữ viết liền. Hãy nhìn cả nhóm chữ trước khi đọc.",
     points: [
       { title: "Nhóm quen thuộc", body: "Đọc cả nhóm chữ đầu, không tách từng chữ khi đọc tiếng.", example: "chó · khăn · nhà · phở · thỏ · tre" },
@@ -169,7 +169,7 @@ export const lessons: Lesson[] = [
   {
     slug: "dau-thanh-la-gi", number: 13, title: "Dấu thanh là gì?",
     summary: "Khám phá vì sao đổi thanh có thể làm đổi nghĩa của tiếng.",
-    icon: "📙", tone: "blue", category: "Dấu thanh", grade: 1,
+    icon: "🎼", tone: "blue", category: "Dấu thanh", grade: 1,
     intro: "Tiếng Việt có sáu thanh. Thanh ngang không có dấu viết; năm thanh còn lại có dấu thanh.",
     points: [
       { title: "Nghe giọng cao thấp", body: "Cùng một phần chữ, thay đổi thanh thì cách đọc thay đổi.", example: "ma · má · mà" },
@@ -217,7 +217,7 @@ export const lessons: Lesson[] = [
   {
     slug: "van-thuong-gap", number: 17, title: "Vần thường gặp",
     summary: "Luyện đọc an, ăn, ân, on, ơn, ang, ong và nhiều vần khác.",
-    icon: "🧩", tone: "green", category: "Luyện đọc", grade: 1,
+    icon: "🎈", tone: "green", category: "Luyện đọc", grade: 1,
     intro: "Nhận ra vần giúp em đọc nhanh hơn. Cùng nghe, đọc và tìm vần giống nhau trong các tiếng.",
     points: [
       { title: "Vần kết thúc bằng n", body: "Nhìn nguyên âm đứng trước n để phân biệt vần.", example: "an: bàn · ăn: khăn · ân: sân · on: con" },
