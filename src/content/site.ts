@@ -28,6 +28,14 @@ export const siteContent = {
       { id: "kiem-tra", href: "/kiem-tra", icon: "🏅", title: "Kiểm tra có huy hiệu", description: "Trả lời câu hỏi và nhận sao sau mỗi lần hoàn thành.", color: "orange" },
     ],
   },
+  skills: {
+    title: "Các kỹ năng em sẽ luyện",
+  },
+  cta: {
+    title: "Em sẵn sàng chưa nào?",
+    description: "Làm thử 20 câu kiểm tra cùng Cô để biết mình đang giỏi tới đâu nhé!",
+    button: "Vào kiểm tra",
+  },
   contact: {
     name: "Nguyễn Anh Tú",
     phone: "0937198892",
