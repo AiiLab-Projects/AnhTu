@@ -73,7 +73,7 @@ export function QuizExperience() {
           <div><strong>4</strong><span>kỹ năng</span></div>
           <div><strong>∞</strong><span>lần thử</span></div>
         </div>
-        <div className="quiz-start"><button type="button" className="pill-button" onClick={() => setStarted(true)}>Bắt đầu kiểm tra →</button><p>Không cần đăng nhập. Kết quả tốt nhất lưu trên máy này.</p></div>
+        <div className="quiz-start"><button type="button" className="pill-button" onClick={() => setStarted(true)}>Bắt đầu kiểm tra →</button><p>Kết quả tốt nhất lưu trên máy này.</p></div>
       </div>
     );
   }

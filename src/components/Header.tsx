@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { BookOpen, GraduationCap, Home, LogOut, Mail, Menu, Pencil, Trophy, UserRound, Volume2, X } from "lucide-react";
+import { BookOpen, GraduationCap, Home, Mail, Menu, Pencil, Trophy, Volume2, X } from "lucide-react";
 import { siteContent } from "@/content/site";
 import { getVoicePreference, setVoicePreference, speakVietnamese } from "@/lib/speech";
 import { TeacherAvatar } from "./TeacherAvatar";
@@ -39,11 +39,6 @@ export function Header() {
     setVoicePreference(value);
   }
 
-  function showAccountNotice() {
-    setNotice("Chưa có tài khoản đăng nhập. Tiến độ học đang lưu trên thiết bị này.");
-    window.setTimeout(() => setNotice(""), 4500);
-  }
-
   return (
     <header className="site-header">
       <div className="header-inner">
@@ -67,8 +62,6 @@ export function Header() {
 
         <div className="header-tools">
           <button className="tool-button" type="button" onClick={() => setVoiceOpen(true)} aria-label="Cài đặt giọng đọc" title="Cài đặt giọng đọc"><Volume2 size={24} /></button>
-          <Link className="tool-button" href="/lop-hoc" aria-label="Lớp học của em" title="Lớp học của em"><UserRound size={24} /></Link>
-          <button className="tool-button tool-button--logout" type="button" onClick={showAccountNotice} aria-label="Đăng xuất" title="Đăng xuất"><LogOut size={23} /></button>
           <button className="tool-button menu-toggle" type="button" onClick={() => setMenuOpen((value) => !value)} aria-label={menuOpen ? "Đóng menu" : "Mở menu"} aria-expanded={menuOpen}>
             {menuOpen ? <X size={25} /> : <Menu size={25} />}
           </button>
