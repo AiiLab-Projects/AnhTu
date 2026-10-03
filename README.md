@@ -11,7 +11,7 @@ Nhấp đúp vào `C:\anhTu\Mo-website-Co-Tu.cmd`. Trình duyệt tự mở ở 
 ## Chỉnh sửa nội dung
 
 - Tên Cô Tú, menu, chữ ở trang chủ và thông tin liên hệ: `src/content/site.ts`
-- Nội dung 31 bài học, ví dụ và câu hỏi cuối bài: `src/content/lessons.ts`
+- Nội dung 36 bài học, ví dụ và câu hỏi cuối bài: `src/content/lessons.ts`
 - Câu hỏi kiểm tra và từ ghép chữ: `src/content/questions.ts`
 - Màu sắc, bố cục và hiệu ứng: `src/app/globals.css`
 - Minh họa Cô Tú dạng SVG: `src/components/TeacherAvatar.tsx`
@@ -20,4 +20,4 @@ Thông tin liên hệ đang để trống theo yêu cầu. Khi có email thật,
 
 Kết quả học tập được lưu trên trình duyệt của thiết bị hiện tại. Giọng đọc dùng tính năng có sẵn của trình duyệt và phụ thuộc vào các giọng tiếng Việt đã cài trên máy.
 
-Lộ trình 31 bài là tài liệu bổ trợ môn Tiếng Việt tiểu học, hướng đến bốn kĩ năng đọc, viết, nói và nghe trong Chương trình GDPT 2018. Thứ tự bài do Cô Tú biên soạn, không phải thứ tự bắt buộc của một bộ sách giáo khoa.
+Lộ trình 36 bài là tài liệu bổ trợ môn Tiếng Việt tiểu học, hướng đến bốn kĩ năng đọc, viết, nói và nghe trong Chương trình GDPT 2018. Thứ tự bài do Cô Tú biên soạn, không phải thứ tự bắt buộc của một bộ sách giáo khoa.

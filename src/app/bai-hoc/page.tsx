@@ -3,14 +3,15 @@ import Link from "next/link";
 import { lessonGrades, lessons, type Lesson } from "@/content/lessons";
 import { LessonGradeTabs, type LessonGradeTab } from "@/components/LessonGradeTabs";
 
-export const metadata: Metadata = { title: "Bài học | Cô Tú", description: "31 bài học tiếng Việt: chữ cái, vần, đọc hiểu, từ vựng, nói và viết." };
+export const metadata: Metadata = { title: "Bài học | Cô Tú", description: "36 bài học tiếng Việt: chữ cái, vần, đọc hiểu, từ vựng, nói và viết." };
 
 const lessonGroups = [
-  { id: "chu-cai", title: "🔤 Làm quen chữ cái", subtitle: "Bài 1–6 · Nhận biết nguyên âm và các nhóm chữ", from: 1, to: 6 },
-  { id: "phu-am", title: "🔡 Học phụ âm", subtitle: "Bài 7–12 · Đọc chữ đầu và nhóm chữ ghép", from: 7, to: 12 },
-  { id: "van-chinh-ta", title: "🎵 Dấu thanh và vần", subtitle: "Bài 13–17 · Đọc đúng, ghép vần, viết đúng", from: 13, to: 17 },
-  { id: "doc-tu-vung", title: "📖 Đọc hiểu và từ vựng", subtitle: "Bài 18–24 · Đọc đoạn ngắn, gọi tên thế giới quanh em", from: 18, to: 24 },
-  { id: "noi-viet", title: "💬 Nói và viết", subtitle: "Bài 25–31 · Giao tiếp, đặt câu và viết đoạn", from: 25, to: 31 },
+  { id: "hoc-van-lop-1", title: "🌟 Học vần lớp 1", subtitle: "Bài 1–5 · Chữ a, b, c, e, ê, dấu huyền, dấu sắc và truyện tranh", from: 1, to: 5 },
+  { id: "chu-cai", title: "🔤 Làm quen chữ cái", subtitle: "Bài 6–11 · Nhận biết nguyên âm và các nhóm chữ", from: 6, to: 11 },
+  { id: "phu-am", title: "🔡 Học phụ âm", subtitle: "Bài 12–17 · Đọc chữ đầu và nhóm chữ ghép", from: 12, to: 17 },
+  { id: "van-chinh-ta", title: "🎵 Dấu thanh và vần", subtitle: "Bài 18–22 · Đọc đúng, ghép vần, viết đúng", from: 18, to: 22 },
+  { id: "doc-tu-vung", title: "📖 Đọc hiểu và từ vựng", subtitle: "Bài 23–29 · Đọc đoạn ngắn, gọi tên thế giới quanh em", from: 23, to: 29 },
+  { id: "noi-viet", title: "💬 Nói và viết", subtitle: "Bài 30–36 · Giao tiếp, đặt câu và viết đoạn", from: 30, to: 36 },
 ];
 
 const gradeTones: LessonGradeTab["tone"][] = ["blue", "pink", "orange", "green", "yellow"];
@@ -57,7 +58,7 @@ export default function LessonsPage() {
         <div className="page-intro">
           <span className="page-eyebrow">📚 Học từng bước</span>
           <h1>📚 Bài học</h1>
-          <p>31 bài học từ chữ cái đến đọc hiểu, nói và viết. Chọn bài em muốn học nhé!</p>
+          <p>36 bài học từ chữ cái đến đọc hiểu, nói và viết. Chọn bài em muốn học nhé!</p>
         </div>
         <p className="lesson-curriculum-note">Lộ trình bổ trợ các kĩ năng đọc, viết, nói và nghe của môn Tiếng Việt tiểu học. Mỗi bài có ví dụ nghe được và câu hỏi tự kiểm tra.</p>
         <LessonGradeTabs tabs={tabs} />

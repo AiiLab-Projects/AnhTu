@@ -4,6 +4,10 @@ import { notFound } from "next/navigation";
 import { lessonIntroSpeech, lessons, type Lesson } from "@/content/lessons";
 import { LessonCheck } from "@/components/LessonCheck";
 import { SpeakButton } from "@/components/SpeakButton";
+import { LetterCard } from "@/components/LetterCard";
+import { PictureWords } from "@/components/PictureWords";
+import { StoryBoard } from "@/components/StoryBoard";
+import { PictureGame } from "@/components/PictureGame";
 
 // Mỗi thẻ ý chính lấy một màu, bắt đầu từ màu của bài rồi xoay vòng bảng tone.
 const tones: Lesson["tone"][] = ["blue", "purple", "pink", "orange", "green", "yellow"];
@@ -33,6 +37,8 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             <div><span className="page-eyebrow">Bài {lesson.number} · {lesson.category}</span><h1>{lesson.title}</h1><p>{lesson.intro}</p></div>
           </div>
           <div className="lesson-listen-main"><SpeakButton text={lessonIntroSpeech(lesson)} label="🔊 Nghe Cô Tú đọc" /></div>
+          {lesson.letterCard && <LetterCard data={lesson.letterCard} />}
+          {lesson.pictureWords && <PictureWords data={lesson.pictureWords} />}
           <div className="lesson-point-grid">
             {lesson.points.map((point, index) => (
               <section className={`lesson-point lesson-card--${pointTone(lesson.tone, index)}`} key={point.title}>
@@ -44,6 +50,8 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
               </section>
             ))}
           </div>
+          {lesson.story && <StoryBoard data={lesson.story} />}
+          {lesson.game && <PictureGame data={lesson.game} />}
         </article>
         <LessonCheck slug={lesson.slug} {...lesson.check} />
         <div className="lesson-nav"><Link href="/bai-hoc">← Danh sách bài học</Link>{next ? <Link href={`/bai-hoc/${next.slug}`}>Bài tiếp theo →</Link> : <Link href="/bai-tap">Đến bài tập →</Link>}</div>
