@@ -9,8 +9,25 @@ const DEFAULT_VOICE = recordedVoices[0];
 const clips = voiceClips as Record<string, string>;
 
 const VOICE_KEY = "co-tu-voice";
+const MUTE_KEY = "co-tu-voice-muted";
 const LOG_KEY = "co-tu-voice-log";
 const LOG_LIMIT = 40;
+
+const muteListeners = new Set<() => void>();
+
+/** Trạng thái tắt tiếng — lưu trong localStorage; không tự động mở lại sau khi tắt. */
+export function isVoiceMuted() {
+  if (typeof window === "undefined") return false;
+  return safeGet(MUTE_KEY) === "1";
+}
+export function setVoiceMuted(muted: boolean) {
+  safeSet(MUTE_KEY, muted ? "1" : null);
+  muteListeners.forEach((listener) => listener());
+}
+export function subscribeVoiceMuted(listener: () => void) {
+  muteListeners.add(listener);
+  return () => { muteListeners.delete(listener); };
+}
 const NO_VIETNAMESE_VOICE = "Nội dung này chưa có bản ghi âm và thiết bị chưa có giọng tiếng Việt.";
 
 let speechRequest = 0;
@@ -153,6 +170,8 @@ async function playWithFallback(text: string, voice: RecordedVoice, request: num
 
 export async function speakVietnamese(text: string, onError?: (message: string) => void): Promise<string | null> {
   if (typeof window === "undefined") return null;
+  // Nếu người dùng tắt tiếng ở nút trên header, bỏ qua mọi yêu cầu phát.
+  if (isVoiceMuted()) return null;
 
   const synth = window.speechSynthesis;
   const request = ++speechRequest;

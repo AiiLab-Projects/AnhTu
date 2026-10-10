@@ -4,6 +4,7 @@ import { useState } from "react";
 import { glyphStrokes, markStrokes } from "@/content/letter-strokes";
 import type { Lesson } from "@/content/lessons";
 import { SpeakButton } from "@/components/SpeakButton";
+import { Icon } from "@/components/Icon";
 
 type LetterCardData = NonNullable<Lesson["letterCard"]>;
 
@@ -42,11 +43,11 @@ export function LetterCard({ data }: { data: LetterCardData }) {
     <section className="letter-card" aria-labelledby="letter-card-title">
       <div className="letter-card-head">
         <div>
-          <span className="eyebrow">✏️ Tập viết</span>
+          <span className="eyebrow">Tập viết</span>
           <h2 id="letter-card-title">Xem chữ được viết từng nét</h2>
           <p>{data.tip}</p>
         </div>
-        <button className="letter-replay" type="button" onClick={() => setRun((value) => value + 1)}>🔁 Viết lại</button>
+        <button className="letter-replay" type="button" onClick={() => setRun((value) => value + 1)}><Icon name="play" size={16} /> Viết lại</button>
       </div>
       <div className={`letter-pairs${compact ? " letter-pairs--compact" : ""}`}>
         {data.letters.map((letter) => (
@@ -55,7 +56,7 @@ export function LetterCard({ data }: { data: LetterCardData }) {
               <figure><Strokes className="letter-svg" strokes={glyphStrokes[letter.upper]} run={run} viewBox="0 0 120 150" label={`Chữ ${letter.upper} in hoa`} /><figcaption>{letter.upper}</figcaption></figure>
               <figure><Strokes className="letter-svg" strokes={glyphStrokes[letter.lower]} run={run} viewBox="0 0 120 150" label={`Chữ ${letter.lower} viết thường`} /><figcaption>{letter.lower}</figcaption></figure>
             </div>
-            <SpeakButton text={letter.say} label="🔊 Nghe âm" />
+            <SpeakButton text={letter.say} label="Nghe âm" />
           </div>
         ))}
       </div>
@@ -68,7 +69,7 @@ export function LetterCard({ data }: { data: LetterCardData }) {
                 <strong>{tone.name}</strong>
                 <span>{tone.tip}</span>
                 <span className="tone-mark-word">{tone.example}</span>
-                <SpeakButton text={tone.example} label="🔊 Nghe tiếng" />
+                <SpeakButton text={tone.example} label="Nghe tiếng" />
               </div>
             </div>
           ))}

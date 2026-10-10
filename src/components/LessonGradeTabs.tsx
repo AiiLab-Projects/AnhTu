@@ -1,12 +1,14 @@
 "use client";
 
 import { useEffect, useRef, useState, type KeyboardEvent, type ReactNode } from "react";
+import { Icon, type IconName } from "./Icon";
 
 export type LessonGradeTab = {
   /** "tat-ca" hoặc số lớp dạng chuỗi ("1".."5") — cũng là giá trị của query `?lop=`. */
   id: string;
   label: string;
-  icon: string;
+  /** Chấp nhận tên Icon mới hoặc emoji cũ cho các tab chưa cập nhật. */
+  icon: IconName | string;
   tone: "blue" | "purple" | "pink" | "orange" | "green" | "yellow";
   count: number;
   /** null = lớp chưa có bài, hiện lời nhắn của Cô. */
@@ -72,7 +74,7 @@ export function LessonGradeTabs({ tabs }: { tabs: LessonGradeTab[] }) {
               onClick={() => select(tab.id)}
               onKeyDown={(event) => onKeyDown(event, index)}
             >
-              <span aria-hidden="true">{tab.icon}</span>
+              <span aria-hidden="true"><Icon name={tab.icon as IconName} size={16} /></span>
               {tab.label}
               <span className="grade-tab-count" aria-label={`${tab.count} bài`}>{tab.count}</span>
             </button>
@@ -91,10 +93,10 @@ export function LessonGradeTabs({ tabs }: { tabs: LessonGradeTab[] }) {
         >
           {tab.content ?? (
             <div className={`grade-empty lesson-card--${tab.tone}`}>
-              <span className="grade-empty-icon" aria-hidden="true">📝</span>
+              <span className="grade-empty-icon" aria-hidden="true"><Icon name="pencil" size={34} /></span>
               <h2>Cô Tú đang soạn bài cho {tab.label}, em quay lại sau nhé!</h2>
               <p>Trong lúc chờ, em cùng Cô ôn lại các bài ở mục Tất cả nha.</p>
-              <button type="button" className="pill-button" onClick={() => select(ALL, true)}>📚 Xem tất cả bài học</button>
+              <button type="button" className="pill-button" onClick={() => select(ALL, true)}><Icon name="book" size={16} /> Xem tất cả bài học</button>
             </div>
           )}
         </div>

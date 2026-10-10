@@ -20,7 +20,7 @@ export function PictureGame({ data }: { data: GameData }) {
 
   return (
     <section className="picture-game" aria-labelledby="picture-game-title">
-      <span className="eyebrow">🎮 Trò chơi nhỏ</span>
+      <span className="eyebrow">Trò chơi nhỏ</span>
       <h2 id="picture-game-title">{data.prompt}</h2>
       <div className="picture-game-grid">
         {data.options.map((option, index) => {
@@ -37,7 +37,7 @@ export function PictureGame({ data }: { data: GameData }) {
         })}
       </div>
       <p className="picture-game-feedback" role="status">
-        {solved ? `🎉 ${data.explanation}` : selected !== null ? "Chưa đúng rồi, em thử tranh khác nhé!" : "Nghe cô đọc khi em bấm vào tranh."}
+        {solved ? data.explanation : selected !== null ? "Chưa đúng rồi, em thử tranh khác nhé!" : "Nghe cô đọc khi em bấm vào tranh."}
       </p>
     </section>
   );

@@ -2,15 +2,22 @@
 
 import { useRef, useState } from "react";
 import Link from "next/link";
-import { X } from "lucide-react";
 import { quizQuestions, type QuizQuestion } from "@/content/questions";
 import { readProgress, saveProgress } from "@/lib/progress";
 import { TeacherAvatar } from "@/components/TeacherAvatar";
 import { SpeakButton } from "@/components/SpeakButton";
+import { Icon, type IconName } from "@/components/Icon";
+import { RewardModal } from "@/components/RewardModal";
 
 const QUIZ_LENGTH = 20;
 type Level = QuizQuestion["difficulty"];
 
+// LOGIC KIỂM TRA — không thay đổi so với trước:
+// - Mỗi lượt 20 câu, bank 60 câu.
+// - Chọn ngẫu nhiên câu theo mức sao hiện tại, ưu tiên câu chưa gặp.
+// - Trả lời đúng: +1 câu đúng, level +1 (tối đa 3).
+// - Trả lời sai: level reset về 1.
+// - Khi `next()` ở câu cuối: lưu `quizBest = max(cũ, score)` vào localStorage.
 function chooseQuestion(level: Level, used: Set<number>): QuizQuestion {
   const available = quizQuestions
     .map((question, index) => ({ question, index }))
@@ -23,6 +30,14 @@ function chooseQuestion(level: Level, used: Set<number>): QuizQuestion {
   return chosen.question;
 }
 
+type Stat = { icon: IconName; value: string | number; label: string; tone: "purple" | "pink" | "yellow" | "blue" };
+const QUIZ_STATS: Stat[] = [
+  { icon: "book",    value: QUIZ_LENGTH,          label: "Câu mỗi lượt",      tone: "purple" },
+  { icon: "star",    value: 3,                    label: "Mức độ sao",         tone: "yellow" },
+  { icon: "target",  value: quizQuestions.length, label: "Câu trong ngân hàng", tone: "pink" },
+  { icon: "rocket",  value: "∞",                  label: "Lần thử",            tone: "blue" },
+];
+
 export function QuizExperience() {
   const [started, setStarted] = useState(false);
   const [index, setIndex] = useState(0);
@@ -33,6 +48,7 @@ export function QuizExperience() {
   const [level, setLevel] = useState<Level>(1);
   const [highestLevel, setHighestLevel] = useState<Level>(1);
   const [done, setDone] = useState(false);
+  const [showComplete, setShowComplete] = useState(false);
   const usedQuestions = useRef(new Set<number>());
 
   function start() {
@@ -45,6 +61,7 @@ export function QuizExperience() {
     setLevel(1);
     setHighestLevel(1);
     setDone(false);
+    setShowComplete(false);
     setStarted(true);
   }
 
@@ -66,6 +83,7 @@ export function QuizExperience() {
     if (index === QUIZ_LENGTH - 1) {
       saveProgress({ quizBest: Math.max(readProgress().quizBest, score) });
       setDone(true);
+      setShowComplete(true);
       return;
     }
     setQuestion(chooseQuestion(level, usedQuestions.current));
@@ -75,39 +93,90 @@ export function QuizExperience() {
   }
 
   if (done) {
+    const bestEver = Math.max(readProgress().quizBest, score);
     return (
-      <div className="quiz-shell quiz-result" aria-live="polite">
-        <div className="result-emoji">🏆</div>
-        <span className="eyebrow">Em đã hoàn thành</span>
-        <h1>Thật tuyệt vời!</h1>
-        <p>Em trả lời đúng <strong>{score}/{QUIZ_LENGTH}</strong> câu hỏi.</p>
-        <div className="result-stars" aria-label={`Cấp độ cuối cùng ${level} trên 3 sao`}>
-          {[1, 2, 3].map((star) => <span key={star} className={star <= level ? "earned" : ""}>★</span>)}
+      <>
+        <div className="quiz-result-screen" aria-live="polite">
+          <img src="/img/06-star-mascot-v2.png" alt="" width={180} height={180} className="quiz-result-mascot" />
+          <span className="eyebrow">Em đã hoàn thành</span>
+          <h1>Thật tuyệt vời!</h1>
+          <p className="quiz-result-score">Em trả lời đúng <strong>{score}/{QUIZ_LENGTH}</strong> câu hỏi.</p>
+          <div className="result-stars" aria-label={`Cấp độ cuối cùng ${level} trên 3 sao`}>
+            {[1, 2, 3].map((star) => (
+              <span key={star} className={star <= level ? "earned" : ""}>
+                <Icon name="star" size={44} fill={star <= level ? "currentColor" : "none"} />
+              </span>
+            ))}
+          </div>
+          <p className="result-advice">
+            Cấp độ cuối cùng: <strong>{level} sao</strong> · Cao nhất lượt này: <strong>{highestLevel} sao</strong>
+          </p>
+          <p className="result-best">
+            <Icon name="trophy" size={16} /> Kỉ lục trên máy này: <strong>{bestEver}/{QUIZ_LENGTH}</strong>
+          </p>
+          <div className="result-actions">
+            <button type="button" className="pill-button" onClick={start}>
+              <Icon name="rocket" size={16} /> Chơi lại
+            </button>
+            <Link className="pill-button pill-button--light" href="/tien-do">
+              Xem tiến độ <Icon name="arrow-right" size={16} />
+            </Link>
+            <Link className="pill-button pill-button--ghost" href="/">
+              Về trang chủ
+            </Link>
+          </div>
         </div>
-        <p className="result-advice">Cấp độ cuối cùng: <strong>{level} sao</strong> · Cao nhất: <strong>{highestLevel} sao</strong></p>
-        <div className="result-actions"><button type="button" className="pill-button" onClick={start}>↻ Làm lại</button><Link className="pill-button pill-button--light" href="/bai-hoc">Ôn bài học →</Link></div>
-      </div>
+        <RewardModal
+          open={showComplete}
+          onClose={() => setShowComplete(false)}
+          variant="complete"
+          title={score >= 18 ? "Xuất sắc!" : score >= 12 ? "Giỏi lắm, em ơi!" : "Em đã làm xong rồi!"}
+          message={<>Em trả lời đúng <strong>{score}/{QUIZ_LENGTH}</strong> câu. Mỗi lượt thử là một lần Cô Tú thêm tự hào.</>}
+          stars={{ earned: level, max: 3 }}
+          primaryAction={{ label: "Chơi lại", onClick: () => { setShowComplete(false); start(); } }}
+          secondaryAction={{ label: "Xem tiến độ", href: "/tien-do" }}
+        />
+      </>
     );
   }
 
   if (!started) {
     return (
-      <div className="quiz-shell quiz-intro">
-        <div className="quiz-intro-gradient">
-          <span className="quiz-spark quiz-spark--left">⭐</span><span className="quiz-spark quiz-spark--right">✨</span>
-          <div className="quiz-avatar"><TeacherAvatar /></div>
-          <span className="quiz-badge">🏆 Bài kiểm tra trình độ</span>
-          <h1>Thử tài tiếng Việt<br /><em>cùng Cô Tú!</em></h1>
-          <p>Trả lời đúng để lên sao và gặp câu khó hơn. Sai thì quay lại 1 sao nhé!</p>
+      <section className="quiz-intro" aria-labelledby="quiz-intro-title">
+        <div className="quiz-intro-card">
+          <div className="quiz-intro-copy">
+            <span className="page-eyebrow"><Icon name="trophy" size={14} /> Thử thách cùng Cô Tú</span>
+            <h1 id="quiz-intro-title">
+              Thử tài <span className="text-gradient-soft">tiếng Việt</span>!
+            </h1>
+            <p>Cùng Cô Tú trả lời những câu hỏi thú vị và chinh phục các ngôi sao nhé!</p>
+            <ul className="quiz-intro-rules" aria-label="Luật chơi">
+              <li><span><Icon name="check-circle" size={16} /></span> Trả lời đúng để lên sao và gặp câu khó hơn.</li>
+              <li><span><Icon name="lightbulb" size={16} /></span> Sai cũng không sao — quay lại 1 sao rồi học tiếp.</li>
+              <li><span><Icon name="star" size={16} fill="currentColor" /></span> Kỉ lục cao nhất được lưu trên máy này.</li>
+            </ul>
+            <button type="button" className="quiz-start-btn" onClick={start}>
+              <Icon name="play" size={20} /> Bắt đầu kiểm tra
+            </button>
+            <p className="quiz-start-note">Kết quả tốt nhất lưu trên máy này — có thể thử lại không giới hạn.</p>
+          </div>
+          <div className="quiz-intro-visual" aria-hidden="true">
+            <img src="/img/05-reward-island-v2.png" alt="" width={520} height={520} />
+            <span className="quiz-intro-spark quiz-intro-spark--a"><Icon name="star" size={18} fill="currentColor" /></span>
+            <span className="quiz-intro-spark quiz-intro-spark--b"><Icon name="sparkles" size={18} /></span>
+            <span className="quiz-intro-spark quiz-intro-spark--c"><Icon name="star" size={14} fill="currentColor" /></span>
+          </div>
         </div>
-        <div className="quiz-facts">
-          <div><strong>{QUIZ_LENGTH}</strong><span>câu mỗi lượt</span></div>
-          <div><strong>3 ⭐</strong><span>mức độ khó</span></div>
-          <div><strong>{quizQuestions.length}</strong><span>câu trong ngân hàng</span></div>
-          <div><strong>∞</strong><span>lần thử</span></div>
+        <div className="quiz-stats-grid">
+          {QUIZ_STATS.map((stat) => (
+            <div key={stat.label} className={`quiz-stat quiz-stat--${stat.tone}`}>
+              <span className="quiz-stat-icon"><Icon name={stat.icon} size={22} fill={stat.icon === "star" ? "currentColor" : "none"} /></span>
+              <strong>{stat.value}</strong>
+              <span className="quiz-stat-label">{stat.label}</span>
+            </div>
+          ))}
         </div>
-        <div className="quiz-start"><button type="button" className="pill-button" onClick={start}>Bắt đầu kiểm tra →</button><p>Kết quả tốt nhất lưu trên máy này.</p></div>
-      </div>
+      </section>
     );
   }
 
@@ -117,24 +186,38 @@ export function QuizExperience() {
   const correct = selected === question.answer;
 
   return (
-    <div className="quiz-play">
-      <div className="quiz-progress-top">
-        <Link className="quiz-exit" href="/bai-hoc" aria-label="Thoát bài kiểm tra" title="Thoát bài kiểm tra"><X size={27} /></Link>
+    <section className="quiz-play" aria-labelledby="quiz-play-title">
+      <header className="quiz-progress-top">
+        <Link className="quiz-exit" href="/bai-hoc" aria-label="Thoát bài kiểm tra" title="Thoát bài kiểm tra">
+          <Icon name="x" size={22} />
+        </Link>
         <div className="quiz-level-stars" aria-label={`Độ khó hiện tại ${level} sao`}>
-          {[1, 2, 3].map((star) => <span key={star} className={star <= level ? "earned" : ""}>★</span>)}
+          {[1, 2, 3].map((star) => (
+            <span key={star} className={star <= level ? "earned" : ""}>
+              <Icon name="star" size={22} fill={star <= level ? "currentColor" : "none"} />
+            </span>
+          ))}
         </div>
-        <div className="quiz-progress-track" role="progressbar" aria-label="Tiến độ bài kiểm tra" aria-valuenow={index + 1} aria-valuemin={1} aria-valuemax={QUIZ_LENGTH}>
-          <span style={{ width: `${(index / QUIZ_LENGTH) * 100}%` }} />
+        <div
+          className="quiz-progress-track"
+          role="progressbar"
+          aria-label="Tiến độ bài kiểm tra"
+          aria-valuenow={index + 1}
+          aria-valuemin={1}
+          aria-valuemax={QUIZ_LENGTH}
+        >
+          <span style={{ width: `${((index + (submitted ? 1 : 0)) / QUIZ_LENGTH) * 100}%` }} />
         </div>
         <strong className="quiz-progress-count">{index + 1}/{QUIZ_LENGTH}</strong>
-      </div>
+      </header>
 
-      <div className="quiz-shell quiz-question-card">
+      <article className="quiz-shell quiz-question-card">
         <div className="quiz-question-tags">
-          <span className="quiz-skill">📝 {question.skill}</span>
-          <span className="quiz-difficulty">☆ Câu {question.difficulty} sao</span>
+          <span className="quiz-skill"><Icon name="target" size={13} /> {question.skill}</span>
+          <span className="quiz-difficulty"><Icon name="star" size={13} fill="currentColor" /> Câu {question.difficulty} sao</span>
+          <span className="quiz-question-number">Câu {index + 1}</span>
         </div>
-        <h1><span aria-hidden="true">📝</span> {question.question}</h1>
+        <h1 id="quiz-play-title">{question.question}</h1>
         {question.sentence && (
           <p className="quiz-sentence">
             {sentenceParts?.[0]}
@@ -142,7 +225,7 @@ export function QuizExperience() {
             {sentenceParts?.[1]}
           </p>
         )}
-        <SpeakButton text={speakText} label="🔊 Nghe câu hỏi" />
+        <SpeakButton text={speakText} label="Nghe câu hỏi" />
         <div className="quiz-options">
           {question.options.map((option, optionIndex) => (
             <button
@@ -152,15 +235,39 @@ export function QuizExperience() {
               aria-pressed={selected === optionIndex}
               className={`quiz-option ${selected === optionIndex ? "quiz-option--selected" : ""} ${submitted && optionIndex === question.answer ? "quiz-option--correct" : ""} ${submitted && selected === optionIndex && !correct ? "quiz-option--wrong" : ""}`}
               onClick={() => setSelected(optionIndex)}
-            ><span>{String.fromCharCode(65 + optionIndex)}</span>{option}</button>
+            >
+              <span>{String.fromCharCode(65 + optionIndex)}</span>
+              <span className="quiz-option-text">{option}</span>
+              {submitted && optionIndex === question.answer && <Icon name="check-circle" size={20} />}
+            </button>
           ))}
         </div>
-        {submitted && <div className={correct ? "feedback feedback--good" : "feedback feedback--retry"} role="status"><strong>{correct ? `Chính xác! Lên ${level} sao 🌟` : "Chưa đúng, quay về 1 sao 💪"}</strong> {question.explanation}</div>}
+        {submitted && (
+          <div className={`quiz-teacher-feedback quiz-teacher-feedback--${correct ? "good" : "retry"}`} role="status">
+            <span className="quiz-teacher-avatar"><TeacherAvatar title="Cô Tú" /></span>
+            <div className="quiz-teacher-bubble">
+              <strong>
+                {correct
+                  ? (level === 3 ? "Giỏi lắm! Em đã đạt 3 sao." : `Chính xác! Em đã lên ${level} sao.`)
+                  : "Không sao, mình cùng thử câu tiếp theo nhé!"}
+              </strong>
+              <span>{question.explanation}</span>
+            </div>
+          </div>
+        )}
         <div className="quiz-controls">
-          <span>{score} câu đúng · Chọn đáp án rồi kiểm tra nhé.</span>
-          {submitted ? <button type="button" className="pill-button" onClick={next}>{index === QUIZ_LENGTH - 1 ? "Xem kết quả →" : "Câu tiếp theo →"}</button> : <button type="button" className="pill-button" disabled={selected === null} onClick={submit}>Kiểm tra đáp án</button>}
+          <span>{score} câu đúng · {submitted ? "Bấm 'Câu tiếp theo' để qua câu khác." : "Chọn đáp án rồi kiểm tra nhé."}</span>
+          {submitted ? (
+            <button type="button" className="pill-button" onClick={next}>
+              {index === QUIZ_LENGTH - 1 ? "Xem kết quả" : "Câu tiếp theo"} <Icon name="arrow-right" size={16} />
+            </button>
+          ) : (
+            <button type="button" className="pill-button" disabled={selected === null} onClick={submit}>
+              Kiểm tra đáp án
+            </button>
+          )}
         </div>
-      </div>
-    </div>
+      </article>
+    </section>
   );
 }

@@ -8,7 +8,7 @@ export function PictureWords({ data }: { data: PictureWordsData }) {
   return (
     <section className="picture-words" aria-labelledby="picture-words-title">
       <div className="picture-words-head">
-        <span className="eyebrow">🖼️ Thẻ tranh</span>
+        <span className="eyebrow">Thẻ tranh</span>
         <h2 id="picture-words-title">{data.title}</h2>
         <p>{data.note}</p>
       </div>
@@ -20,7 +20,7 @@ export function PictureWords({ data }: { data: PictureWordsData }) {
               <span className="picture-word-text">
                 {[...item.word.normalize("NFC")].map((char, i) => <span key={i} className={focus.includes(char.toLowerCase()) ? "pw-focus" : undefined}>{char}</span>)}
               </span>
-              <SpeakButton text={item.word} label="🔊 Nghe" />
+              <SpeakButton text={item.word} label="Nghe" />
             </figcaption>
           </figure>
         ))}

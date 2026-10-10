@@ -8,6 +8,7 @@ import { LetterCard } from "@/components/LetterCard";
 import { PictureWords } from "@/components/PictureWords";
 import { StoryBoard } from "@/components/StoryBoard";
 import { PictureGame } from "@/components/PictureGame";
+import { Icon } from "@/components/Icon";
 
 // Mỗi thẻ ý chính lấy một màu, bắt đầu từ màu của bài rồi xoay vòng bảng tone.
 const tones: Lesson["tone"][] = ["blue", "purple", "pink", "orange", "green", "yellow"];
@@ -30,13 +31,17 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   return (
     <main className="inner-page">
       <div className="page-container lesson-detail-container">
-        <nav className="breadcrumb" aria-label="Đường dẫn"><Link href="/bai-hoc">← Tất cả bài học</Link><span>/</span><span>Bài {lesson.number}</span></nav>
+        <nav className="breadcrumb" aria-label="Đường dẫn">
+          <Link href="/bai-hoc"><Icon name="arrow-left" size={14} /> Tất cả bài học</Link>
+          <span>/</span>
+          <span>Bài {lesson.number}</span>
+        </nav>
         <article className={`lesson-detail-card lesson-detail-card--vivid lesson-card--${lesson.tone}`}>
           <div className="lesson-detail-head">
             <span className={`lesson-card-icon lesson-card--${lesson.tone}`} aria-hidden="true">{lesson.icon}</span>
             <div><span className="page-eyebrow">Bài {lesson.number} · {lesson.category}</span><h1>{lesson.title}</h1><p>{lesson.intro}</p></div>
           </div>
-          <div className="lesson-listen-main"><SpeakButton text={lessonIntroSpeech(lesson)} label="🔊 Nghe Cô Tú đọc" /></div>
+          <div className="lesson-listen-main"><SpeakButton text={lessonIntroSpeech(lesson)} label="Nghe Cô Tú đọc" /></div>
           {lesson.letterCard && <LetterCard data={lesson.letterCard} />}
           {lesson.pictureWords && <PictureWords data={lesson.pictureWords} />}
           <div className="lesson-point-grid">
@@ -45,8 +50,8 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
                 <span className="lesson-point-number">0{index + 1}</span>
                 <h2>{point.title}</h2>
                 <p>{point.body}</p>
-                <div className="lesson-example"><span className="lesson-example-label">✨ Ví dụ</span>{point.example}</div>
-                <SpeakButton text={point.example} label="🔊 Nghe ví dụ" />
+                <div className="lesson-example"><span className="lesson-example-label">Ví dụ</span>{point.example}</div>
+                <SpeakButton text={point.example} label="Nghe ví dụ" />
               </section>
             ))}
           </div>
@@ -54,7 +59,10 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
           {lesson.game && <PictureGame data={lesson.game} />}
         </article>
         <LessonCheck slug={lesson.slug} {...lesson.check} />
-        <div className="lesson-nav"><Link href="/bai-hoc">← Danh sách bài học</Link>{next ? <Link href={`/bai-hoc/${next.slug}`}>Bài tiếp theo →</Link> : <Link href="/bai-tap">Đến bài tập →</Link>}</div>
+        <div className="lesson-nav">
+          <Link href="/bai-hoc"><Icon name="arrow-left" size={16} /> Danh sách bài học</Link>
+          {next ? <Link href={`/bai-hoc/${next.slug}`}>Bài tiếp theo <Icon name="arrow-right" size={16} /></Link> : <Link href="/bai-tap">Đến bài tập <Icon name="arrow-right" size={16} /></Link>}
+        </div>
       </div>
     </main>
   );
