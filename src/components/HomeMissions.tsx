@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { lessons } from "@/content/lessons";
-import { wordExercises } from "@/content/questions";
+import { EXERCISE_ROUND_LENGTH } from "@/content/questions";
 import { readProgress, type LocalProgress } from "@/lib/progress";
 import { Icon, type IconName } from "./Icon";
 
@@ -37,7 +37,7 @@ export function HomeMissions() {
     {
       key: "exercise", href: "/bai-tap", icon: "palette",
       title: "Luyện ghép từ", subtitle: "Nhìn tranh, ghép chữ thành từ đúng.",
-      value: exerciseBest, total: wordExercises.length, valueLabel: "từ ghép đúng",
+      value: exerciseBest, total: EXERCISE_ROUND_LENGTH, valueLabel: "từ ghép đúng",
       tone: "pink",
     },
     {

@@ -76,15 +76,59 @@ export const quizQuestions: QuizQuestion[] = [
   { question: "Từ nào điền vào câu để chỉ kết quả?", sentence: "Em chăm đọc sách, ___ vốn từ ngày càng phong phú.", options: ["nhưng", "nên", "vì", "hoặc"], answer: 1, difficulty: 3, skill: "Ngữ pháp", explanation: "“Nên” nối việc chăm đọc sách với kết quả vốn từ phong phú." },
 ];
 
+// Số từ mỗi lượt bài tập — WordGame random `EXERCISE_ROUND_LENGTH` câu từ bank.
+// Dùng ở HomeMissions, Classroom để hiển thị tử số/mẫu số đúng.
+export const EXERCISE_ROUND_LENGTH = 10;
+
+// Ngân hàng từ cho /bai-tap — mỗi lượt WordGame random 10 từ không trùng.
+// Mỗi item: emoji + hint (câu gợi ý) + answer (chuỗi NFC) + letters (ký tự
+// composed, đã shuffle sẵn — ghép đúng thứ tự = answer).
 export const wordExercises = [
+  // Động vật
   { emoji: "🐶", hint: "Con vật giữ nhà", answer: "chó", letters: ["ó", "c", "h"] },
   { emoji: "🐱", hint: "Con vật kêu meo meo", answer: "mèo", letters: ["o", "m", "è"] },
   { emoji: "🐟", hint: "Con vật sống dưới nước", answer: "cá", letters: ["á", "c"] },
+  { emoji: "🐔", hint: "Con vật thường gáy báo sáng", answer: "gà", letters: ["à", "g"] },
+  { emoji: "🐷", hint: "Con vật tai to, mũi tẹt", answer: "heo", letters: ["e", "h", "o"] },
+  { emoji: "🐄", hint: "Con vật cho sữa", answer: "bò", letters: ["ò", "b"] },
+  { emoji: "🐘", hint: "Con vật có mũi dài", answer: "voi", letters: ["o", "v", "i"] },
+  { emoji: "🐵", hint: "Con vật leo cây giỏi, thích ăn chuối", answer: "khỉ", letters: ["ỉ", "k", "h"] },
+  { emoji: "🦋", hint: "Côn trùng có đôi cánh xinh đẹp", answer: "bướm", letters: ["m", "b", "ướ"] },
+  { emoji: "🐝", hint: "Con vật nhỏ chăm làm, cho ta mật", answer: "ong", letters: ["g", "o", "n"] },
+
+  // Trái cây
   { emoji: "🍊", hint: "Loại quả màu cam", answer: "cam", letters: ["m", "c", "a"] },
-  { emoji: "🌸", hint: "Bông hoa xinh", answer: "hoa", letters: ["a", "h", "o"] },
-  { emoji: "🪑", hint: "Đồ dùng để học và viết", answer: "bàn", letters: ["n", "b", "à"] },
+  { emoji: "🍌", hint: "Loại quả cong, màu vàng", answer: "chuối", letters: ["i", "c", "ố", "h", "u"] },
+  { emoji: "🍎", hint: "Loại quả đỏ, ăn giòn", answer: "táo", letters: ["t", "á", "o"] },
+  { emoji: "🍉", hint: "Loại quả xanh ruột đỏ, nhiều nước", answer: "dưa", letters: ["ư", "d", "a"] },
+  { emoji: "🍇", hint: "Loại quả nhỏ, thường thành chùm", answer: "nho", letters: ["o", "n", "h"] },
+  { emoji: "🍓", hint: "Loại quả đỏ, nhỏ nhỏ, có hạt bên ngoài", answer: "dâu", letters: ["â", "d", "u"] },
+  { emoji: "🥥", hint: "Loại quả có nước ngọt bên trong", answer: "dừa", letters: ["ừ", "d", "a"] },
+
+  // Đồ dùng & phương tiện
   { emoji: "📚", hint: "Đồ dùng để đọc", answer: "sách", letters: ["h", "á", "s", "c"] },
+  { emoji: "✏️", hint: "Dụng cụ để viết", answer: "bút", letters: ["ú", "b", "t"] },
+  { emoji: "🎒", hint: "Em đeo đến trường mỗi ngày", answer: "cặp", letters: ["ặ", "c", "p"] },
+  { emoji: "🚗", hint: "Phương tiện có bốn bánh", answer: "xe", letters: ["e", "x"] },
+  { emoji: "⛵", hint: "Phương tiện di chuyển trên nước", answer: "thuyền", letters: ["t", "ề", "h", "u", "n", "y"] },
+
+  // Tự nhiên
+  { emoji: "🌸", hint: "Bông ... xinh", answer: "hoa", letters: ["a", "h", "o"] },
   { emoji: "☀️", hint: "Ánh sáng của mặt trời", answer: "nắng", letters: ["g", "n", "ắ", "n"] },
   { emoji: "🌙", hint: "Tỏa sáng vào ban đêm", answer: "trăng", letters: ["g", "t", "n", "r", "ă"] },
-  { emoji: "🍌", hint: "Loại quả màu vàng", answer: "chuối", letters: ["i", "c", "ố", "h", "u"] },
+  { emoji: "🌧️", hint: "Nước rơi từ bầu trời", answer: "mưa", letters: ["m", "ư", "a"] },
+  { emoji: "🌊", hint: "Vùng nước mặn rộng mênh mông", answer: "biển", letters: ["b", "ể", "i", "n"] },
+  { emoji: "⛰️", hint: "Nơi rất cao, cao hơn mặt đất nhiều", answer: "núi", letters: ["n", "ú", "i"] },
+
+  // Gia đình
+  { emoji: "👩", hint: "Người sinh ra em", answer: "mẹ", letters: ["m", "ẹ"] },
+  { emoji: "👨", hint: "Bố của em, còn gọi là ...", answer: "ba", letters: ["b", "a"] },
+  { emoji: "👵", hint: "Mẹ của ba hoặc mẹ", answer: "bà", letters: ["à", "b"] },
+  { emoji: "👴", hint: "Ba của ba hoặc mẹ", answer: "ông", letters: ["g", "ô", "n"] },
+
+  // Cơ thể
+  { emoji: "👁️", hint: "Em dùng để nhìn", answer: "mắt", letters: ["ắ", "m", "t"] },
+  { emoji: "👂", hint: "Em dùng để nghe", answer: "tai", letters: ["t", "a", "i"] },
+  { emoji: "🦵", hint: "Em dùng để đi và chạy", answer: "chân", letters: ["c", "h", "â", "n"] },
+  { emoji: "👄", hint: "Em dùng để nói và cười", answer: "miệng", letters: ["m", "i", "ệ", "n", "g"] },
 ] as const;

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { lessons } from "@/content/lessons";
-import { wordExercises } from "@/content/questions";
+import { EXERCISE_ROUND_LENGTH } from "@/content/questions";
 import { LocalProgress, readProgress } from "@/lib/progress";
 import { Icon, type IconName } from "./Icon";
 
@@ -23,7 +23,7 @@ export function Classroom() {
 
   const stats: Array<{ icon: IconName; tone: "purple" | "pink" | "orange"; value: number; total: number; label: string }> = [
     { icon: "book", tone: "purple", value: doneCount, total: lessons.length, label: "bài em đã học xong" },
-    { icon: "pencil", tone: "pink", value: Math.min(progress.exerciseBest, wordExercises.length), total: wordExercises.length, label: "từ ghép đúng nhiều nhất" },
+    { icon: "pencil", tone: "pink", value: Math.min(progress.exerciseBest, EXERCISE_ROUND_LENGTH), total: EXERCISE_ROUND_LENGTH, label: "từ ghép đúng nhiều nhất" },
     { icon: "trophy", tone: "orange", value: Math.min(progress.quizBest, QUIZ_TOTAL), total: QUIZ_TOTAL, label: "câu kiểm tra đúng nhiều nhất" },
   ];
 
@@ -31,7 +31,7 @@ export function Classroom() {
     { id: "first-lesson", label: "Bước đầu tiên", icon: "flame", color: "var(--accent-strong)", soft: "var(--accent-soft)", unlocked: doneCount >= 1 },
     { id: "five-lessons", label: "5 bài học", icon: "medal", color: "var(--primary-strong)", soft: "var(--primary-soft)", unlocked: doneCount >= 5 },
     { id: "ten-lessons", label: "10 bài học", icon: "star", color: "var(--secondary-strong)", soft: "var(--secondary-soft)", unlocked: doneCount >= 10 },
-    { id: "word-done", label: "Ghép đủ 10 từ", icon: "palette", color: "var(--success-strong)", soft: "var(--success-soft)", unlocked: progress.exerciseBest >= wordExercises.length },
+    { id: "word-done", label: "Ghép đủ 10 từ", icon: "palette", color: "var(--success-strong)", soft: "var(--success-soft)", unlocked: progress.exerciseBest >= EXERCISE_ROUND_LENGTH },
     { id: "quiz-good", label: "Kiểm tra 18/20", icon: "trophy", color: "var(--secondary-strong)", soft: "var(--secondary-soft)", unlocked: progress.quizBest >= 18 },
     { id: "all-done", label: "Hoàn tất 36 bài", icon: "rocket", color: "var(--primary-strong)", soft: "var(--primary-soft)", unlocked: doneCount >= lessons.length },
   ];

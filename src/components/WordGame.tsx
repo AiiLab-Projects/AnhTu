@@ -11,7 +11,23 @@ import { RewardModal } from "@/components/RewardModal";
 import { celebrate } from "@/lib/confetti";
 import { applyRipple } from "@/components/effects";
 
+const ROUNDS_PER_RUN = 10;
+
+// Chọn ngẫu nhiên N từ không trùng trong bank. Fisher-Yates partial shuffle.
+function pickRoundItems(count = ROUNDS_PER_RUN): typeof wordExercises[number][] {
+  const pool = [...wordExercises];
+  const picked: typeof wordExercises[number][] = [];
+  const take = Math.min(count, pool.length);
+  for (let i = 0; i < take; i++) {
+    const idx = Math.floor(Math.random() * pool.length);
+    picked.push(pool.splice(idx, 1)[0]);
+  }
+  return picked;
+}
+
 export function WordGame() {
+  // Chọn 10 từ random ngay khi mount, random lại khi restart.
+  const [items, setItems] = useState<typeof wordExercises[number][]>(() => pickRoundItems());
   const [round, setRound] = useState(0);
   const [selected, setSelected] = useState<number[]>([]);
   const [score, setScore] = useState(0);
@@ -21,7 +37,7 @@ export function WordGame() {
   const [shake, setShake] = useState(false);
   const shakeTimer = useRef<number | null>(null);
 
-  const item = wordExercises[round];
+  const item = items[round];
   const word = selected.map((index) => item.letters[index]).join("");
   const full = selected.length === item.letters.length;
   const correct = full && word === item.answer;
@@ -52,7 +68,7 @@ export function WordGame() {
     const nextScore = score + (correct ? 1 : 0);
     setScore(nextScore);
     setResults([...results, correct ? "good" : "skip"]);
-    if (round === wordExercises.length - 1) {
+    if (round === items.length - 1) {
       setDone(true);
       setShowFinish(true);
       saveProgress({ exerciseBest: Math.max(readProgress().exerciseBest, nextScore) });
@@ -64,6 +80,7 @@ export function WordGame() {
   }
 
   function restart() {
+    setItems(pickRoundItems());
     setRound(0);
     setSelected([]);
     setScore(0);
@@ -72,7 +89,7 @@ export function WordGame() {
     setShowFinish(false);
   }
 
-  const progressPercent = Math.round(((round + (done ? 1 : 0)) / wordExercises.length) * 100);
+  const progressPercent = Math.round(((round + (done ? 1 : 0)) / items.length) * 100);
 
   // Màn hình kết quả: nền + mascot + CTA. Modal RewardModal phủ lên, có thể đóng lại.
   if (done) {
@@ -82,7 +99,7 @@ export function WordGame() {
           <img className="quiz-result-mascot" src="/img/06-star-mascot-v2.webp" alt="" width={160} height={160} decoding="async" />
           <span className="eyebrow">Hoàn thành bài tập</span>
           <h2>Giỏi lắm, em ơi!</h2>
-          <p>Em ghép đúng <strong>{score}/{wordExercises.length}</strong> từ. Mỗi lần luyện là thêm một lần nhớ chữ nhé!</p>
+          <p>Em ghép đúng <strong>{score}/{items.length}</strong> từ. Mỗi lần luyện là thêm một lần nhớ chữ nhé!</p>
           <div className="result-actions">
             <button type="button" className="pill-button" onClick={restart}>Chơi lại</button>
             <Link className="pill-button pill-button--light" href="/tien-do">Xem tiến độ <Icon name="arrow-right" size={16} /></Link>
@@ -92,9 +109,9 @@ export function WordGame() {
           open={showFinish}
           onClose={() => setShowFinish(false)}
           variant="complete"
-          title={score === wordExercises.length ? "Xuất sắc!" : score >= 7 ? "Giỏi lắm, em ơi!" : "Em đã hoàn thành rồi!"}
-          message={<>Em ghép đúng <strong>{score}/{wordExercises.length}</strong> từ.</>}
-          stars={{ earned: Math.min(3, Math.max(1, Math.ceil((score / wordExercises.length) * 3))), max: 3 }}
+          title={score === items.length ? "Xuất sắc!" : score >= 7 ? "Giỏi lắm, em ơi!" : "Em đã hoàn thành rồi!"}
+          message={<>Em ghép đúng <strong>{score}/{items.length}</strong> từ.</>}
+          stars={{ earned: Math.min(3, Math.max(1, Math.ceil((score / items.length) * 3))), max: 3 }}
           primaryAction={{ label: "Chơi lại", onClick: restart }}
           secondaryAction={{ label: "Xem tiến độ", href: "/tien-do" }}
         />
@@ -106,7 +123,7 @@ export function WordGame() {
     <section className="word-game word-game--v3" aria-labelledby="word-game-title">
       <header className="word-game-progress">
         <div className="word-game-progress-label">
-          <strong>Câu {round + 1}/{wordExercises.length}</strong>
+          <strong>Câu {round + 1}/{items.length}</strong>
           <span>Ghép chữ tiếng Việt</span>
         </div>
         <div
@@ -115,7 +132,7 @@ export function WordGame() {
           aria-label="Tiến trình 10 câu"
           aria-valuenow={round + 1}
           aria-valuemin={1}
-          aria-valuemax={wordExercises.length}
+          aria-valuemax={items.length}
         >
           <span style={{ width: `${progressPercent}%` }} />
         </div>
@@ -209,7 +226,7 @@ export function WordGame() {
               onPointerDown={applyRipple}
             >
               {correct
-                ? (round === wordExercises.length - 1 ? "Xem kết quả" : "Từ tiếp theo")
+                ? (round === items.length - 1 ? "Xem kết quả" : "Từ tiếp theo")
                 : "Bỏ qua"}
               <Icon name="arrow-right" size={16} />
             </button>
