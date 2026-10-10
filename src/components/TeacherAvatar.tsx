@@ -15,12 +15,13 @@ export function TeacherAvatar({
   return (
     <img
       className={className}
-      src="/img/09-co-tu-avatar-v2.png"
+      src="/img/09-co-tu-avatar-v2.webp"
       alt={title}
-      width={1254}
-      height={1254}
+      width={300}
+      height={300}
       style={{ width: "100%", height: "100%", display: "block", objectFit: "cover" }}
       loading="eager"
+      decoding="async"
     />
   );
 }

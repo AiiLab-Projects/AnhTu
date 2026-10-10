@@ -44,10 +44,10 @@ export function Hero() {
 
         <div className="hero-stage" aria-hidden="true">
           <div className="hero-character">
-            <img src="/img/01-co-tu-character-v2.png" alt="" width={520} height={693} loading="eager" />
+            <img src="/img/01-co-tu-character-v2.webp" alt="" width={520} height={693} loading="eager" decoding="async" fetchPriority="high" />
           </div>
           <div className="hero-cat">
-            <img src="/img/02-cat-mascot-v2.png" alt="" width={260} height={260} loading="eager" />
+            <img src="/img/02-cat-mascot-v2.webp" alt="" width={260} height={260} loading="eager" decoding="async" />
           </div>
           <div className="hero-sparkle hero-sparkle--a"><Icon name="star" size={18} fill="currentColor" /></div>
           <div className="hero-sparkle hero-sparkle--b"><Icon name="sparkles" size={18} /></div>

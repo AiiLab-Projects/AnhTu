@@ -76,7 +76,7 @@ export function WordGame() {
     return (
       <>
         <section className="word-game-finish" aria-live="polite">
-          <img className="quiz-result-mascot" src="/img/06-star-mascot-v2.png" alt="" width={160} height={160} />
+          <img className="quiz-result-mascot" src="/img/06-star-mascot-v2.webp" alt="" width={160} height={160} decoding="async" />
           <span className="eyebrow">Hoàn thành bài tập</span>
           <h2>Giỏi lắm, em ơi!</h2>
           <p>Em ghép đúng <strong>{score}/{wordExercises.length}</strong> từ. Mỗi lần luyện là thêm một lần nhớ chữ nhé!</p>

@@ -10,7 +10,7 @@ export function LessonHero() {
         <p>36 bài học từ chữ cái đến đọc hiểu, nói và viết. Chọn bài em muốn học nhé!</p>
       </div>
       <div className="lesson-hero-visual" aria-hidden="true">
-        <img src="/img/03-alphabet-island-v2.png" alt="" width={520} height={520} />
+        <img src="/img/03-alphabet-island-v2.webp" alt="" width={520} height={520} decoding="async" />
         <span className="lesson-hero-chip lesson-hero-chip--a"><Icon name="book" size={16} /> A B C</span>
         <span className="lesson-hero-chip lesson-hero-chip--b"><Icon name="music" size={16} /> Dấu thanh</span>
       </div>

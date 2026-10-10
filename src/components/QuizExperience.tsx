@@ -97,7 +97,7 @@ export function QuizExperience() {
     return (
       <>
         <div className="quiz-result-screen" aria-live="polite">
-          <img src="/img/06-star-mascot-v2.png" alt="" width={180} height={180} className="quiz-result-mascot" />
+          <img src="/img/06-star-mascot-v2.webp" alt="" width={180} height={180} className="quiz-result-mascot" decoding="async" />
           <span className="eyebrow">Em đã hoàn thành</span>
           <h1>Thật tuyệt vời!</h1>
           <p className="quiz-result-score">Em trả lời đúng <strong>{score}/{QUIZ_LENGTH}</strong> câu hỏi.</p>
@@ -161,7 +161,7 @@ export function QuizExperience() {
             <p className="quiz-start-note">Kết quả tốt nhất lưu trên máy này — có thể thử lại không giới hạn.</p>
           </div>
           <div className="quiz-intro-visual" aria-hidden="true">
-            <img src="/img/05-reward-island-v2.png" alt="" width={520} height={520} />
+            <img src="/img/05-reward-island-v2.webp" alt="" width={520} height={520} decoding="async" />
             <span className="quiz-intro-spark quiz-intro-spark--a"><Icon name="star" size={18} fill="currentColor" /></span>
             <span className="quiz-intro-spark quiz-intro-spark--b"><Icon name="sparkles" size={18} /></span>
             <span className="quiz-intro-spark quiz-intro-spark--c"><Icon name="star" size={14} fill="currentColor" /></span>

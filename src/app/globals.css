@@ -196,7 +196,7 @@ p { margin: 0; line-height: 1.55; }
 }
 .hero--landscape .hero-bg {
   position: absolute; inset: 0; z-index: 0;
-  background-image: url("/img/01-hero-background.png");
+  background-image: url("/img/01-hero-background.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;

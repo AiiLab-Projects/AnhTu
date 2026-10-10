@@ -14,5 +14,17 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="vi"><body className={`${baloo.variable} ${nunito.variable}`}><Header />{children}<SiteFooter /></body></html>;
+  return (
+    <html lang="vi">
+      <head>
+        {/* Preload ảnh nền hero để render first-paint nhanh hơn trên trang chủ. */}
+        <link rel="preload" as="image" href="/img/01-hero-background.webp" type="image/webp" fetchPriority="high" />
+      </head>
+      <body className={`${baloo.variable} ${nunito.variable}`}>
+        <Header />
+        {children}
+        <SiteFooter />
+      </body>
+    </html>
+  );
 }

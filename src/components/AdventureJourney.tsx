@@ -13,7 +13,7 @@ type Island = {
 const islands: Island[] = [
   {
     id: "alphabet",
-    image: "/img/03-alphabet-island-v2.png",
+    image: "/img/03-alphabet-island-v2.webp",
     title: "Khám phá chữ cái",
     description: "Học chữ, ghép vần và khám phá từng bài thật dễ nhớ.",
     href: "/bai-hoc?lop=1",
@@ -21,7 +21,7 @@ const islands: Island[] = [
   },
   {
     id: "tone",
-    image: "/img/04-tone-island-v2.png",
+    image: "/img/04-tone-island-v2.webp",
     title: "Săn tìm dấu thanh",
     description: "Luyện đọc, nghe và nhận biết các dấu thanh.",
     href: "/bai-hoc",
@@ -29,7 +29,7 @@ const islands: Island[] = [
   },
   {
     id: "reward",
-    image: "/img/05-reward-island-v2.png",
+    image: "/img/05-reward-island-v2.webp",
     title: "Vượt thử thách nhận huy hiệu",
     description: "Làm bài tập, kiểm tra và thu thập huy hiệu.",
     href: "/kiem-tra",

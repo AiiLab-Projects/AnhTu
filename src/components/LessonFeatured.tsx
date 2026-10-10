@@ -4,21 +4,21 @@ import { Icon } from "./Icon";
 // 3 chặng học nổi bật — mỗi card dẫn tới một bộ lọc hoặc trang liên quan.
 const cards = [
   {
-    id: "alphabet", image: "/img/03-alphabet-island-v2.png",
+    id: "alphabet", image: "/img/03-alphabet-island-v2.webp",
     title: "Làm quen chữ cái",
     description: "Học a, b, c và khám phá những âm đầu tiên thật dễ nhớ.",
     cta: "Khám phá", href: "/bai-hoc?nhom=hoc-van-lop-1",
     tone: "blue",
   },
   {
-    id: "tone", image: "/img/04-tone-island-v2.png",
+    id: "tone", image: "/img/04-tone-island-v2.webp",
     title: "Dấu thanh và vần",
     description: "Luyện đọc, ghép vần và nhận biết dấu thanh qua từng bài.",
     cta: "Vào học", href: "/bai-hoc?nhom=van-chinh-ta",
     tone: "pink",
   },
   {
-    id: "reward", image: "/img/05-reward-island-v2.png",
+    id: "reward", image: "/img/05-reward-island-v2.webp",
     title: "Ôn tập và thử thách",
     description: "Học xong rồi thì cùng luyện tập và nhận ngôi sao nhé!",
     cta: "Thử ngay", href: "/kiem-tra",

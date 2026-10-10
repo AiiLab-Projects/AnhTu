@@ -17,7 +17,7 @@ type RewardModalProps = {
   secondaryAction?: Action;
 };
 
-const MASCOT_SRC = "/img/06-star-mascot-v2.png";
+const MASCOT_SRC = "/img/06-star-mascot-v2.webp";
 
 export function RewardModal({ open, onClose, variant, title, message, stars, primaryAction, secondaryAction }: RewardModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
@@ -69,7 +69,7 @@ export function RewardModal({ open, onClose, variant, title, message, stars, pri
         </button>
         <div className="reward-top">
           {showMascot ? (
-            <img className="reward-mascot" src={MASCOT_SRC} alt="" width={180} height={180} />
+            <img className="reward-mascot" src={MASCOT_SRC} alt="" width={180} height={180} decoding="async" loading="lazy" />
           ) : (
             <div className="reward-icon reward-icon--wrong"><Icon name="lightbulb" size={44} /></div>
           )}
