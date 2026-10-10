@@ -2368,3 +2368,221 @@ body:has(.exercise-page) .site-footer { display: none; }
   .glyph-ink { animation: none; stroke-dashoffset: 0; }
   .picture-word:hover, .picture-game-option:hover:not(:disabled), .letter-replay:hover, .hero-button:hover, .lesson-card:hover, .feature-card:hover, .mission-card:hover, .lesson-group-nav a:hover { transform: none; }
 }
+
+/* ===========================================================================
+   EFFECTS PACK — stagger entrance, tilt 3D, squishy tiles, floating stars,
+   button ripple, toast, cat peek, streak chip
+   =========================================================================== */
+
+/* Stagger entrance khi scroll vào viewport. Dùng animation-timeline: view()
+   (Chrome/Edge 115+/Firefox 115+). Fallback: ẩn → hiện bình thường.
+   Áp dụng cho card trong mission/adventure/feature/lesson grids. */
+.mission-tile, .adventure-card, .feature-card, .skill-card, .lesson-card,
+.lesson-browser-group, .quiz-stat, .badge-chip {
+  opacity: 1;
+  transform: none;
+}
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .mission-tile, .adventure-card, .feature-card, .skill-card, .lesson-card,
+    .lesson-browser-group, .quiz-stat {
+      animation: card-enter linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 60%;
+    }
+    @keyframes card-enter {
+      from { opacity: 0; transform: translateY(28px) scale(.96); }
+      to   { opacity: 1; transform: none; }
+    }
+  }
+}
+
+/* Tilt 3D — perspective được set ở card, inner wrapper transform theo CSS vars
+   do useTilt hook ghi. Specificity 20 để thắng :hover (specificity 11). */
+.tilt-card {
+  --tilt-x: 0deg; --tilt-y: 0deg; --tilt-scale: 1;
+  transform-style: preserve-3d;
+  transition: transform .22s cubic-bezier(.22,.9,.3,1.1), box-shadow .22s ease;
+}
+.tilt-card.adventure-card,
+.tilt-card.lesson-card {
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--tilt-scale));
+}
+.tilt-card.adventure-card:hover,
+.tilt-card.lesson-card:hover {
+  /* Giữ hover transform đồng bộ với tilt (tránh conflict với .adventure-card:hover translateY cũ) */
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) scale(var(--tilt-scale));
+}
+/* Giữ child media (hình đảo, icon) nổi bật khi tilt. */
+.tilt-card > .adventure-card-image, .tilt-card > .lesson-card-icon { transform: translateZ(14px); }
+
+/* Letter tile squishy — khi hover, tile vàng bị bóp waving. */
+@media (prefers-reduced-motion: no-preference) {
+  .word-game--v3 .letter-tray button:hover:not(:disabled) {
+    animation: tile-squish .32s cubic-bezier(.22,.9,.3,1.4);
+  }
+  @keyframes tile-squish {
+    0%   { transform: translateY(-3px) scale(1, 1); }
+    40%  { transform: translateY(-3px) scale(1.08, .92); }
+    75%  { transform: translateY(-3px) scale(.96, 1.06); }
+    100% { transform: translateY(-3px) scale(1, 1); }
+  }
+}
+
+/* Floating stars trong hero landscape — 5 sao mờ bay nhẹ. */
+.hero--landscape .hero-stars {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+}
+.hero-star {
+  position: absolute; width: 14px; height: 14px; border-radius: 50%;
+  background: radial-gradient(circle, #fff 0%, rgba(255, 203, 87, 0.6) 60%, transparent 70%);
+  opacity: 0; animation: star-drift 14s linear infinite;
+}
+.hero-star--1 { left: 8%;  top: 72%; animation-delay: 0s;   width: 10px; height: 10px; }
+.hero-star--2 { left: 32%; top: 24%; animation-delay: 3s;   width: 16px; height: 16px; }
+.hero-star--3 { left: 52%; top: 60%; animation-delay: 6s;   width: 8px;  height: 8px; }
+.hero-star--4 { left: 74%; top: 32%; animation-delay: 9s;   width: 12px; height: 12px; }
+.hero-star--5 { left: 90%; top: 58%; animation-delay: 11s;  width: 14px; height: 14px; }
+@keyframes star-drift {
+  0%   { opacity: 0; transform: translate(0, 20px); }
+  12%  { opacity: .9; }
+  50%  { opacity: .6; transform: translate(14px, -40px); }
+  88%  { opacity: .9; }
+  100% { opacity: 0; transform: translate(0, -90px); }
+}
+
+/* Button ripple — pseudo ::after lan rộng từ --ripple-x / --ripple-y.
+   Trigger qua class .is-rippling (removed trước khi set lại trong effects.ts). */
+.pill-button, .hero-button, .quiz-start-btn, .word-game-action, .mission-tile-cta {
+  position: relative; overflow: hidden;
+}
+.pill-button::after, .hero-button::after, .quiz-start-btn::after,
+.word-game-action::after, .mission-tile-cta::after {
+  content: ""; position: absolute; pointer-events: none;
+  left: var(--ripple-x, 50%); top: var(--ripple-y, 50%);
+  width: 0; height: 0; border-radius: 50%;
+  background: rgba(255, 255, 255, 0.45);
+  transform: translate(-50%, -50%);
+  opacity: 0;
+}
+.pill-button.is-rippling::after, .hero-button.is-rippling::after,
+.quiz-start-btn.is-rippling::after, .word-game-action.is-rippling::after,
+.mission-tile-cta.is-rippling::after {
+  animation: ripple-grow .6s ease-out;
+}
+@keyframes ripple-grow {
+  0%   { width: 0; height: 0; opacity: .6; }
+  100% { width: 420px; height: 420px; opacity: 0; }
+}
+.pill-button--light.is-rippling::after, .pill-button--ghost.is-rippling::after,
+.word-game-action--neutral.is-rippling::after, .word-game-action--ghost.is-rippling::after {
+  background: rgba(124, 92, 250, 0.24);
+}
+
+/* Streak chip — hiển thị trong QuizExperience khi đúng liên tiếp 3+. */
+.quiz-streak {
+  position: fixed; z-index: 70;
+  right: 24px; top: calc(var(--header-h) + 36px);
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--radius-pill);
+  background: linear-gradient(135deg, #FF6A3D, var(--accent));
+  color: #fff;
+  font: 800 14px var(--font-display), sans-serif;
+  box-shadow: 0 10px 24px rgba(224, 62, 100, 0.3);
+  animation: streak-pop .4s cubic-bezier(.2,.9,.3,1.3) both;
+}
+.quiz-streak svg { width: 16px; height: 16px; }
+@keyframes streak-pop {
+  from { opacity: 0; transform: translateY(-10px) scale(.85); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Toast host — stack ở góc dưới phải, trượt từ phải vào. */
+.toast-host {
+  position: fixed; z-index: 90;
+  right: 20px; bottom: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  pointer-events: none;
+}
+.toast {
+  pointer-events: auto;
+  display: flex; align-items: flex-start; gap: 10px;
+  min-width: 260px; max-width: 360px; padding: 12px 14px;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--primary);
+  border-radius: 16px;
+  box-shadow: 0 14px 30px rgba(37, 49, 83, 0.14), 0 4px 10px rgba(37, 49, 83, 0.06);
+  animation: toast-in .35s cubic-bezier(.2,.9,.3,1.1) both;
+}
+.toast--success { border-left-color: var(--success-strong); }
+.toast--achievement { border-left-color: var(--secondary-strong); }
+.toast-icon {
+  width: 32px; height: 32px; display: grid; place-items: center; flex: 0 0 auto;
+  border-radius: 10px;
+  background: var(--primary-soft); color: var(--primary-strong);
+}
+.toast--success .toast-icon { background: var(--success-soft); color: var(--success-strong); }
+.toast--achievement .toast-icon { background: var(--secondary-soft); color: var(--secondary-strong); }
+.toast-body { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.toast-body strong { font: 800 14px var(--font-display), sans-serif; color: var(--ink); }
+.toast-body span { color: var(--ink-soft); font-size: 13px; font-weight: 500; }
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@media (max-width: 560px) {
+  .toast-host { right: 12px; left: 12px; bottom: 12px; }
+  .toast { min-width: 0; max-width: 100%; }
+}
+
+/* Cat peek — ngồi ở cạnh dưới trái/phải, slide-up khi visible. */
+.cat-peek {
+  position: fixed; z-index: 55; bottom: -40px;
+  width: 120px; height: 120px;
+  border: 0; background: transparent; padding: 0;
+  cursor: pointer;
+  filter: drop-shadow(0 8px 10px rgba(37, 49, 83, 0.18));
+  animation: cat-peek-slide 3.5s ease-in-out both;
+}
+.cat-peek img { width: 100%; height: 100%; display: block; }
+.cat-peek--left { left: 20px; }
+.cat-peek--right { right: 20px; }
+.cat-peek:hover { animation-play-state: paused; transform: translateY(-70px) rotate(-4deg); }
+@keyframes cat-peek-slide {
+  0%   { transform: translateY(0); }
+  18%  { transform: translateY(-60px); }
+  28%  { transform: translateY(-55px) rotate(-3deg); }
+  38%  { transform: translateY(-60px) rotate(3deg); }
+  48%  { transform: translateY(-60px); }
+  82%  { transform: translateY(-60px); }
+  100% { transform: translateY(0); }
+}
+@media (max-width: 560px) {
+  .cat-peek { width: 90px; height: 90px; }
+}
+
+/* Easter egg burst — khi click Cô Tú 5 lần, hero có 1 burst star trong 1.5s. */
+.easter-burst {
+  position: absolute; inset: 0; pointer-events: none; z-index: 10;
+}
+.easter-burst span {
+  position: absolute; left: 50%; top: 50%; width: 20px; height: 20px;
+  margin: -10px 0 0 -10px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--secondary), rgba(255, 203, 87, 0));
+  animation: easter-fly 1.4s ease-out forwards;
+}
+.easter-burst span:nth-child(1) { --tx: -180px; --ty: -120px; }
+.easter-burst span:nth-child(2) { --tx: 180px;  --ty: -140px; animation-delay: .05s; }
+.easter-burst span:nth-child(3) { --tx: -220px; --ty: 40px;   animation-delay: .1s; }
+.easter-burst span:nth-child(4) { --tx: 220px;  --ty: 20px;   animation-delay: .15s; background: radial-gradient(circle, var(--accent), rgba(255, 142, 158, 0)); }
+.easter-burst span:nth-child(5) { --tx: 0;      --ty: -200px; animation-delay: .08s; background: radial-gradient(circle, var(--primary), rgba(124, 92, 250, 0)); }
+.easter-burst span:nth-child(6) { --tx: -120px; --ty: -220px; animation-delay: .12s; background: radial-gradient(circle, var(--blue), rgba(69, 181, 255, 0)); }
+.easter-burst span:nth-child(7) { --tx: 140px;  --ty: -220px; animation-delay: .2s;  background: radial-gradient(circle, var(--success), rgba(98, 207, 168, 0)); }
+@keyframes easter-fly {
+  0%   { opacity: 0; transform: translate(0, 0) scale(.3); }
+  20%  { opacity: 1; }
+  100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(1.3); }
+}

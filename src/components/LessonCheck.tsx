@@ -6,6 +6,8 @@ import { lessons } from "@/content/lessons";
 import { readProgress, saveProgress } from "@/lib/progress";
 import { Icon } from "./Icon";
 import { RewardModal } from "./RewardModal";
+import { celebrate } from "@/lib/confetti";
+import { showToast } from "@/lib/toast";
 
 type LessonCheckProps = { slug: string; question: string; options: string[]; answer: number; explanation: string };
 
@@ -18,13 +20,34 @@ export function LessonCheck({ slug, question, options, answer, explanation }: Le
   const current = lessons.find((lesson) => lesson.slug === slug);
   const next = current ? lessons.find((lesson) => lesson.number === current.number + 1) : undefined;
 
-  // Khi trả lời đúng lần đầu, bật popup phần thưởng + lưu tiến độ.
+  // Khi trả lời đúng lần đầu, bật popup phần thưởng + lưu tiến độ + confetti.
+  // Thêm milestone toast khi tổng số bài đã học qua các mốc 25/50/75/100%.
   useEffect(() => {
     if (selected === null) return;
     if (correct) {
-      const done = readProgress().lessonsDone;
-      if (!done.includes(slug)) saveProgress({ lessonsDone: [...done, slug] });
+      const prevDone = readProgress().lessonsDone;
+      if (!prevDone.includes(slug)) {
+        const nextDone = [...prevDone, slug];
+        saveProgress({ lessonsDone: nextDone });
+        const total = lessons.length;
+        const prevPct = Math.floor((prevDone.length / total) * 100);
+        const nextPct = Math.floor((nextDone.length / total) * 100);
+        const MILESTONES = [25, 50, 75, 100] as const;
+        for (const m of MILESTONES) {
+          if (prevPct < m && nextPct >= m) {
+            showToast({
+              icon: m === 100 ? "trophy" : "star",
+              title: m === 100 ? "Hoàn tất toàn bộ bài học!" : `Em đã học ${m}% chặng đường!`,
+              description: m === 100 ? "Cô Tú rất tự hào về em." : `${nextDone.length}/${total} bài — tiếp tục nhé!`,
+              tone: "achievement",
+              duration: 3800,
+            });
+            break;
+          }
+        }
+      }
       setShowReward(true);
+      void celebrate("lesson");
     } else {
       setShowRetry(true);
     }

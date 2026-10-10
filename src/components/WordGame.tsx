@@ -8,6 +8,8 @@ import { SpeakButton } from "@/components/SpeakButton";
 import { Icon } from "@/components/Icon";
 import { TeacherAvatar } from "@/components/TeacherAvatar";
 import { RewardModal } from "@/components/RewardModal";
+import { celebrate } from "@/lib/confetti";
+import { applyRipple } from "@/components/effects";
 
 export function WordGame() {
   const [round, setRound] = useState(0);
@@ -54,6 +56,7 @@ export function WordGame() {
       setDone(true);
       setShowFinish(true);
       saveProgress({ exerciseBest: Math.max(readProgress().exerciseBest, nextScore) });
+      void celebrate("exercise");
     } else {
       setRound(round + 1);
       setSelected([]);
@@ -194,6 +197,7 @@ export function WordGame() {
               type="button"
               className="word-game-action word-game-action--ghost"
               onClick={clearAll}
+              onPointerDown={applyRipple}
               disabled={selected.length === 0 || correct}
             >
               <Icon name="x" size={16} /> Xóa hết
@@ -202,6 +206,7 @@ export function WordGame() {
               type="button"
               className={`word-game-action${correct ? " word-game-action--primary" : " word-game-action--neutral"}`}
               onClick={next}
+              onPointerDown={applyRipple}
             >
               {correct
                 ? (round === wordExercises.length - 1 ? "Xem kết quả" : "Từ tiếp theo")

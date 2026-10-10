@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Baloo_2, Nunito } from "next/font/google";
 import { Header } from "@/components/Header";
 import { SiteFooter } from "@/components/SiteFooter";
+import { ToastHost } from "@/components/ToastHost";
+import { CatPeek } from "@/components/CatPeek";
 import "./globals.css";
 
 const baloo = Baloo_2({ subsets: ["latin", "vietnamese"], weight: ["600", "700", "800"], variable: "--font-display", display: "swap" });
@@ -24,6 +26,8 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <Header />
         {children}
         <SiteFooter />
+        <ToastHost />
+        <CatPeek />
       </body>
     </html>
   );

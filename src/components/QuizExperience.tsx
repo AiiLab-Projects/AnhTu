@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { quizQuestions, type QuizQuestion } from "@/content/questions";
 import { readProgress, saveProgress } from "@/lib/progress";
@@ -8,6 +8,9 @@ import { TeacherAvatar } from "@/components/TeacherAvatar";
 import { SpeakButton } from "@/components/SpeakButton";
 import { Icon, type IconName } from "@/components/Icon";
 import { RewardModal } from "@/components/RewardModal";
+import { celebrate } from "@/lib/confetti";
+import { showToast } from "@/lib/toast";
+import { applyRipple } from "@/components/effects";
 
 const QUIZ_LENGTH = 20;
 type Level = QuizQuestion["difficulty"];
@@ -49,6 +52,7 @@ export function QuizExperience() {
   const [highestLevel, setHighestLevel] = useState<Level>(1);
   const [done, setDone] = useState(false);
   const [showComplete, setShowComplete] = useState(false);
+  const [streak, setStreak] = useState(0);
   const usedQuestions = useRef(new Set<number>());
 
   function start() {
@@ -62,6 +66,7 @@ export function QuizExperience() {
     setHighestLevel(1);
     setDone(false);
     setShowComplete(false);
+    setStreak(0);
     setStarted(true);
   }
 
@@ -74,8 +79,17 @@ export function QuizExperience() {
       setScore((value) => value + 1);
       setLevel(nextLevel);
       setHighestLevel((value) => Math.max(value, nextLevel) as Level);
+      // Streak chip khi đúng liên tiếp từ 3 câu trở lên.
+      setStreak((s) => {
+        const next = s + 1;
+        if (next === 3) showToast({ icon: "flame", title: "Streak 3!", description: "Em đang đúng liên tiếp, giữ nhịp nhé!", tone: "achievement" });
+        if (next === 5) showToast({ icon: "flame", title: "Streak 5! Siêu lắm!", tone: "achievement" });
+        if (next === 10) showToast({ icon: "trophy", title: "Streak 10 — Cô Tú tự hào!", tone: "achievement" });
+        return next;
+      });
     } else {
       setLevel(1);
+      setStreak(0);
     }
   }
 
@@ -84,6 +98,8 @@ export function QuizExperience() {
       saveProgress({ quizBest: Math.max(readProgress().quizBest, score) });
       setDone(true);
       setShowComplete(true);
+      // Confetti ăn mừng hoàn thành quiz.
+      void celebrate("quiz");
       return;
     }
     setQuestion(chooseQuestion(level, usedQuestions.current));
@@ -91,6 +107,32 @@ export function QuizExperience() {
     setSelected(null);
     setSubmitted(false);
   }
+
+  // Keyboard shortcuts: 1-4 chọn đáp án, Space/Enter kiểm tra hoặc sang câu tiếp, Esc thoát.
+  useEffect(() => {
+    if (!started || done) return;
+    function onKey(event: KeyboardEvent) {
+      if (!question) return;
+      const target = event.target as HTMLElement | null;
+      // Bỏ qua khi đang gõ trong input/textarea (hiện quiz chưa có nhưng cho tương lai).
+      if (target && (target.tagName === "INPUT" || target.tagName === "TEXTAREA")) return;
+      if (/^[1-4]$/.test(event.key)) {
+        if (submitted) return;
+        const idx = Number(event.key) - 1;
+        if (idx < question.options.length) {
+          event.preventDefault();
+          setSelected(idx);
+        }
+      } else if (event.key === " " || event.key === "Enter") {
+        event.preventDefault();
+        if (submitted) next();
+        else if (selected !== null) submit();
+      }
+    }
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [started, done, question, submitted, selected, index, level, score]);
 
   if (done) {
     const bestEver = Math.max(readProgress().quizBest, score);
@@ -155,7 +197,7 @@ export function QuizExperience() {
               <li><span><Icon name="lightbulb" size={16} /></span> Sai cũng không sao — quay lại 1 sao rồi học tiếp.</li>
               <li><span><Icon name="star" size={16} fill="currentColor" /></span> Kỉ lục cao nhất được lưu trên máy này.</li>
             </ul>
-            <button type="button" className="quiz-start-btn" onClick={start}>
+            <button type="button" className="quiz-start-btn" onClick={start} onPointerDown={applyRipple}>
               <Icon name="play" size={20} /> Bắt đầu kiểm tra
             </button>
             <p className="quiz-start-note">Kết quả tốt nhất lưu trên máy này — có thể thử lại không giới hạn.</p>
@@ -187,6 +229,11 @@ export function QuizExperience() {
 
   return (
     <section className="quiz-play" aria-labelledby="quiz-play-title">
+      {streak >= 3 && (
+        <div key={streak} className="quiz-streak" role="status" aria-live="polite">
+          <Icon name="flame" size={16} /> Streak {streak}!
+        </div>
+      )}
       <header className="quiz-progress-top">
         <Link className="quiz-exit" href="/bai-hoc" aria-label="Thoát bài kiểm tra" title="Thoát bài kiểm tra">
           <Icon name="x" size={22} />
@@ -258,11 +305,11 @@ export function QuizExperience() {
         <div className="quiz-controls">
           <span>{score} câu đúng · {submitted ? "Bấm 'Câu tiếp theo' để qua câu khác." : "Chọn đáp án rồi kiểm tra nhé."}</span>
           {submitted ? (
-            <button type="button" className="pill-button" onClick={next}>
+            <button type="button" className="pill-button" onClick={next} onPointerDown={applyRipple}>
               {index === QUIZ_LENGTH - 1 ? "Xem kết quả" : "Câu tiếp theo"} <Icon name="arrow-right" size={16} />
             </button>
           ) : (
-            <button type="button" className="pill-button" disabled={selected === null} onClick={submit}>
+            <button type="button" className="pill-button" disabled={selected === null} onClick={submit} onPointerDown={applyRipple}>
               Kiểm tra đáp án
             </button>
           )}

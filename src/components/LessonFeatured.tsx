@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Icon } from "./Icon";
+import { useTilt } from "./effects";
 
 // 3 chặng học nổi bật — mỗi card dẫn tới một bộ lọc hoặc trang liên quan.
 const cards = [
@@ -26,6 +29,20 @@ const cards = [
   },
 ] as const;
 
+function FeaturedCard({ card }: { card: typeof cards[number] }) {
+  const ref = useTilt<HTMLAnchorElement>({ max: 5, scale: 1.02 });
+  return (
+    <Link ref={ref} href={card.href} className={`adventure-card tilt-card adventure-card--${card.tone}`}>
+      <div className="adventure-card-image" aria-hidden="true">
+        <img src={card.image} alt="" width={420} height={420} loading="lazy" decoding="async" />
+      </div>
+      <h3>{card.title}</h3>
+      <p>{card.description}</p>
+      <span className="adventure-card-cta" aria-hidden="true"><Icon name="arrow-right" size={18} /></span>
+    </Link>
+  );
+}
+
 export function LessonFeatured() {
   return (
     <section className="lesson-featured" aria-labelledby="lesson-featured-title">
@@ -38,16 +55,7 @@ export function LessonFeatured() {
         </div>
       </div>
       <div className="adventure-grid">
-        {cards.map((card) => (
-          <Link key={card.id} href={card.href} className={`adventure-card adventure-card--${card.tone}`}>
-            <div className="adventure-card-image" aria-hidden="true">
-              <img src={card.image} alt="" width={420} height={420} loading="lazy" />
-            </div>
-            <h3>{card.title}</h3>
-            <p>{card.description}</p>
-            <span className="adventure-card-cta" aria-hidden="true"><Icon name="arrow-right" size={18} /></span>
-          </Link>
-        ))}
+        {cards.map((card) => <FeaturedCard key={card.id} card={card} />)}
       </div>
     </section>
   );

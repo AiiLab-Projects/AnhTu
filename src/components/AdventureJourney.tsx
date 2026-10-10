@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { Icon } from "./Icon";
+import { useTilt } from "./effects";
 
 type Island = {
   id: string;
@@ -37,6 +40,20 @@ const islands: Island[] = [
   },
 ];
 
+function IslandCard({ island }: { island: Island }) {
+  const ref = useTilt<HTMLAnchorElement>({ max: 5, scale: 1.02 });
+  return (
+    <Link ref={ref} href={island.href} className={`adventure-card tilt-card adventure-card--${island.tone}`}>
+      <div className="adventure-card-image" aria-hidden="true">
+        <img src={island.image} alt="" width={420} height={420} loading="lazy" decoding="async" />
+      </div>
+      <h3>{island.title}</h3>
+      <p>{island.description}</p>
+      <span className="adventure-card-cta" aria-hidden="true"><Icon name="arrow-right" size={18} /></span>
+    </Link>
+  );
+}
+
 export function AdventureJourney() {
   return (
     <section className="home-section adventure-section" aria-labelledby="adventure-title">
@@ -50,14 +67,7 @@ export function AdventureJourney() {
       </div>
       <div className="adventure-grid">
         {islands.map((island) => (
-          <Link key={island.id} href={island.href} className={`adventure-card adventure-card--${island.tone}`}>
-            <div className="adventure-card-image" aria-hidden="true">
-              <img src={island.image} alt="" width={420} height={420} loading="lazy" />
-            </div>
-            <h3>{island.title}</h3>
-            <p>{island.description}</p>
-            <span className="adventure-card-cta" aria-hidden="true"><Icon name="arrow-right" size={18} /></span>
-          </Link>
+          <IslandCard key={island.id} island={island} />
         ))}
       </div>
     </section>

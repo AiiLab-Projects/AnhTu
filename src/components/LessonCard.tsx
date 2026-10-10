@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { readProgress } from "@/lib/progress";
 import { Icon, type IconName } from "./Icon";
+import { useTilt } from "./effects";
 import type { Lesson } from "@/content/lessons";
 
 type Status = "todo" | "doing" | "done";
@@ -16,6 +17,7 @@ const STATUS_META: Record<Status, { label: string; icon: IconName }> = {
 
 export function LessonCard({ lesson, lessonsBefore }: { lesson: Lesson; lessonsBefore: string[] }) {
   const [status, setStatus] = useState<Status>("todo");
+  const tiltRef = useTilt<HTMLAnchorElement>({ max: 4, scale: 1.015 });
   useEffect(() => {
     const done = new Set(readProgress().lessonsDone);
     if (done.has(lesson.slug)) setStatus("done");
@@ -26,7 +28,7 @@ export function LessonCard({ lesson, lessonsBefore }: { lesson: Lesson; lessonsB
   const meta = STATUS_META[status];
 
   return (
-    <Link href={`/bai-hoc/${lesson.slug}`} className={`lesson-card lesson-card--${lesson.tone}`}>
+    <Link ref={tiltRef} href={`/bai-hoc/${lesson.slug}`} className={`lesson-card tilt-card lesson-card--${lesson.tone}`}>
       <div className="lesson-card-top">
         <span className="lesson-card-icon" aria-hidden="true">{lesson.icon}</span>
         <span className={`lesson-card-status lesson-card-status--${status}`}>
