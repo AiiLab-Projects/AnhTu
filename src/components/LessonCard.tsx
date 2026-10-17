@@ -5,7 +5,7 @@ import Link from "next/link";
 import { readProgress } from "@/lib/progress";
 import { Icon, type IconName } from "./Icon";
 import { useTilt } from "./effects";
-import type { Lesson } from "@/content/lessons";
+import { lessons, type Lesson } from "@/content/lessons";
 
 type Status = "todo" | "doing" | "done";
 
@@ -15,15 +15,18 @@ const STATUS_META: Record<Status, { label: string; icon: IconName }> = {
   done:  { label: "Hoàn thành", icon: "check" },
 };
 
-export function LessonCard({ lesson, lessonsBefore }: { lesson: Lesson; lessonsBefore: string[] }) {
+export function LessonCard({ lesson }: { lesson: Lesson }) {
   const [status, setStatus] = useState<Status>("todo");
   const tiltRef = useTilt<HTMLAnchorElement>({ max: 4, scale: 1.015 });
   useEffect(() => {
     const done = new Set(readProgress().lessonsDone);
+    // "Đang học" chỉ cho bài kế tiếp = bài đầu tiên chưa xong (giống nút "Học tiếp" ở trang Tiến độ),
+    // và chỉ khi em đã học xong ít nhất một bài.
+    const next = done.size ? lessons.find((item) => !done.has(item.slug)) : undefined;
     if (done.has(lesson.slug)) setStatus("done");
-    else if (lessonsBefore.some((slug) => done.has(slug))) setStatus("doing");
+    else if (next?.slug === lesson.slug) setStatus("doing");
     else setStatus("todo");
-  }, [lesson.slug, lessonsBefore]);
+  }, [lesson.slug]);
 
   const meta = STATUS_META[status];
 

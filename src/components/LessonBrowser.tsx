@@ -151,7 +151,6 @@ export function LessonBrowser() {
         </div>
       ) : (
         groupedView.map((group) => {
-          const beforeSlugs = lessons.filter((l) => l.number < group.from).map((l) => l.slug);
           const groupDone = group.items.filter((l) => doneSlugs.has(l.slug)).length;
           return (
             <section key={group.id} className={`lesson-browser-group lesson-browser-group--${group.tone}`}>
@@ -173,10 +172,7 @@ export function LessonBrowser() {
                 </div>
               </header>
               <div className="lesson-grid">
-                {group.items.map((lesson, idx) => {
-                  const beforeInGroup = group.items.slice(0, idx).map((l) => l.slug);
-                  return <LessonCard key={lesson.slug} lesson={lesson} lessonsBefore={[...beforeSlugs, ...beforeInGroup]} />;
-                })}
+                {group.items.map((lesson) => <LessonCard key={lesson.slug} lesson={lesson} />)}
               </div>
             </section>
           );
