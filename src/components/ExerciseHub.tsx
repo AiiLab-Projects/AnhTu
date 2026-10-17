@@ -3,11 +3,13 @@
 import { useEffect, useRef, useState, type ComponentType } from "react";
 import { exerciseTypes, type ExerciseType } from "@/content/exercise-types";
 import { WordGame } from "@/components/WordGame";
+import { ListenGame } from "@/components/ListenGame";
 import { Icon } from "@/components/Icon";
 
 // Component của từng trò, theo `id` trong exercise-types.ts.
 const GAMES: Record<string, ComponentType> = {
   "ghep-chu": WordGame,
+  "nghe-chon-tranh": ListenGame,
 };
 
 const readyTypes = exerciseTypes.filter((type) => type.status === "ready" && GAMES[type.id]);

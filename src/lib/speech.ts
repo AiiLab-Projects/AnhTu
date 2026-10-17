@@ -132,6 +132,11 @@ function waitForVietnameseVoices(synth: SpeechSynthesis): Promise<SpeechSynthesi
   });
 }
 
+/** Câu này đã có trong danh mục ghi âm chưa (voice-clips.json sinh cùng lúc với file âm thanh). */
+export function hasRecordedClip(text: string) {
+  return Boolean(clips[text]);
+}
+
 function clipUrl(voice: RecordedVoice, text: string) {
   const id = clips[text];
   return id ? `${voice.dir}/${id}.${voice.ext}` : null;

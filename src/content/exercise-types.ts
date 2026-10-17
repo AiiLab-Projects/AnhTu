@@ -24,7 +24,7 @@ export const exerciseTypes: ExerciseType[] = [
   {
     id: "nghe-chon-tranh", title: "Nghe và chọn tranh", skill: "Nghe",
     description: "Nghe Cô Tú đọc một từ, bấm vào bức tranh đúng.",
-    emoji: "🎧", image: "/img/bai-tap/nghe-chon-tranh.webp", tone: "blue", status: "soon",
+    emoji: "🎧", image: "/img/bai-tap/nghe-chon-tranh.webp", tone: "blue", status: "ready",
   },
   {
     id: "dien-dau-thanh", title: "Đặt dấu thanh", skill: "Dấu thanh",
