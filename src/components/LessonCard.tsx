@@ -32,13 +32,15 @@ export function LessonCard({ lesson, lessonsBefore }: { lesson: Lesson; lessonsB
       <div className="lesson-card-banner">
         <span className="lesson-card-icon" aria-hidden="true">{lesson.icon}</span>
         <span className="lesson-card-num" aria-label={`Bài ${lesson.number}`}>{lesson.number}</span>
+      </div>
+      <div className="lesson-card-meta">
+        <span className="lesson-card-category">{lesson.category}</span>
         {status !== "todo" && (
           <span className={`lesson-card-status lesson-card-status--${status}`}>
             <Icon name={meta.icon} size={12} /> {meta.label}
           </span>
         )}
       </div>
-      <span className="lesson-card-category">{lesson.category}</span>
       <h3>{lesson.title}</h3>
       <p>{lesson.summary}</p>
       <span className="lesson-card-cta">

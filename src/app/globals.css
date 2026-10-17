@@ -1029,18 +1029,16 @@ p { margin: 0; line-height: 1.55; }
 .lesson-card:hover .lesson-card-cta { transform: translateY(-2px); box-shadow: 0 6px 0 color-mix(in srgb, var(--lesson-ink) 70%, #000); }
 .lesson-card:hover .lesson-card-cta svg { transform: translateX(3px); }
 
-/* Status badge — chỉ hiện khi đang học / đã xong, nằm trên dải màu */
+/* Status badge — chỉ hiện khi đang học / đã xong; nằm cùng dòng với tên nhóm bài để không đè số bài */
+.lesson-card-meta { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 24px; }
 .lesson-card-status {
-  position: absolute; top: 10px; right: 12px;
-  display: inline-flex; align-items: center; gap: 4px;
+  flex: none; display: inline-flex; align-items: center; gap: 4px;
   padding: 4px 10px; border-radius: var(--radius-pill);
-  font-size: 11.5px; font-weight: 800; background: #fff;
-  box-shadow: 0 2px 6px rgba(31, 37, 71, .12);
+  font-size: 11.5px; font-weight: 800;
 }
 .lesson-card-status svg { width: 12px; height: 12px; }
-.lesson-card-status--doing { color: var(--secondary-strong); }
-.lesson-card-status--done  { color: var(--success-strong); }
-.lesson-card-status ~ .lesson-card-num { margin-top: 18px; }
+.lesson-card-status--doing { background: var(--secondary-soft); color: #A8730A; }
+.lesson-card-status--done  { background: var(--success-soft); color: var(--success-strong); }
 
 /* Legacy class — vẫn giữ map pill-button cho các component khác dùng lesson-card-link */
 .lesson-card-link {
