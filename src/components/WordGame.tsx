@@ -89,8 +89,6 @@ export function WordGame() {
     setShowFinish(false);
   }
 
-  const progressPercent = Math.round(((round + (done ? 1 : 0)) / items.length) * 100);
-
   // Màn hình kết quả: nền + mascot + CTA. Modal RewardModal phủ lên, có thể đóng lại.
   if (done) {
     return (
@@ -126,16 +124,24 @@ export function WordGame() {
           <strong>Câu {round + 1}/{items.length}</strong>
           <span>Ghép chữ tiếng Việt</span>
         </div>
-        <div
-          className="word-game-progress-bar"
+        {/* Mỗi câu một chấm: đúng ✓, bỏ qua xám, câu đang làm nổi lên. */}
+        <ol
+          className="word-game-dots"
           role="progressbar"
           aria-label="Tiến trình 10 câu"
           aria-valuenow={round + 1}
           aria-valuemin={1}
           aria-valuemax={items.length}
         >
-          <span style={{ width: `${progressPercent}%` }} />
-        </div>
+          {items.map((_, index) => {
+            const state = results[index] ?? (index === round ? "current" : "todo");
+            return (
+              <li key={index} className={`word-game-dot word-game-dot--${state}`}>
+                {state === "good" ? <Icon name="check" size={14} /> : index + 1}
+              </li>
+            );
+          })}
+        </ol>
         <div className="word-game-progress-score" aria-label={`${score} câu đúng`}>
           <Icon name="star" size={16} fill="currentColor" />
           <strong>{score}</strong>
@@ -143,21 +149,18 @@ export function WordGame() {
       </header>
 
       <div className="word-game-board">
-        <aside className="word-game-visual" aria-hidden="true">
-          <div className="word-game-visual-frame">
-            <span className="word-game-visual-emoji">{item.emoji}</span>
+        <aside className="word-game-visual">
+          <div className="word-game-visual-frame" aria-hidden="true">
+            <span className="word-game-visual-emoji" aria-hidden="true">{item.emoji}</span>
             <span className="word-game-visual-spark word-game-visual-spark--a"><Icon name="star" size={16} fill="currentColor" /></span>
             <span className="word-game-visual-spark word-game-visual-spark--b"><Icon name="sparkles" size={14} /></span>
           </div>
-          <p className="word-game-hint-text" aria-hidden="true">{item.hint}</p>
+          <p className="word-game-hint-text" id="word-game-title"><Icon name="lightbulb" size={18} /> {item.hint}</p>
           <SpeakButton text={item.hint} label="Nghe gợi ý" />
         </aside>
 
         <section className="word-game-play" aria-labelledby="word-game-play-title">
           <h2 className="word-game-play-title" id="word-game-play-title">Xếp các chữ thành từ đúng!</h2>
-          <p className="word-game-play-hint" id="word-game-title">
-            <Icon name="lightbulb" size={16} /> {item.hint}
-          </p>
           <div
             className={`word-slots${shake ? " word-slots--shake" : ""}${correct ? " word-slots--correct" : ""}`}
             aria-label="Từ đang ghép"
@@ -185,6 +188,7 @@ export function WordGame() {
               <button
                 key={index}
                 type="button"
+                className={`letter-tile letter-tile--${index % 4}`}
                 disabled={selected.includes(index) || correct}
                 onClick={() => add(index)}
                 aria-label={`Chọn chữ ${letter}`}

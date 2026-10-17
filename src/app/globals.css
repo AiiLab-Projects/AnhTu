@@ -2876,3 +2876,85 @@ body:has(.exercise-page) .site-footer { display: none; }
   box-shadow: 0 4px 0 color-mix(in srgb, var(--lesson-ink) 70%, #000);
 }
 .lesson-detail-card--vivid .lesson-example-label { color: var(--lesson-ink); }
+
+/* === WordGame v4 — khung trắng sạch, chấm kết quả từng câu, khay chữ màu kẹo === */
+.word-game--v3 {
+  background: #fff;
+  border: 2px solid var(--line);
+  box-shadow: 0 18px 40px rgba(124, 92, 250, 0.12), 0 4px 10px rgba(37, 49, 83, 0.05);
+}
+.word-game--v3::before { display: none; }
+.word-game-progress {
+  background: transparent; border: 0; box-shadow: none; backdrop-filter: none;
+  padding: 0 4px; margin-bottom: 20px;
+}
+.word-game-dots {
+  display: flex; justify-content: center; gap: 8px;
+  margin: 0; padding: 0; list-style: none;
+}
+.word-game-dot {
+  width: 32px; height: 32px; flex: 0 1 32px; display: grid; place-items: center;
+  border-radius: 50%; background: var(--primary-soft); color: var(--primary-strong);
+  font: 800 13px/1 var(--font-display), sans-serif;
+  transition: transform .2s ease, background .2s ease;
+}
+.word-game-dot svg { width: 14px; height: 14px; }
+.word-game-dot--good { background: var(--success); color: #fff; box-shadow: 0 3px 0 var(--success-strong); }
+.word-game-dot--skip { background: #E4E1EC; color: var(--muted); }
+.word-game-dot--current {
+  background: var(--primary); color: #fff; transform: scale(1.18);
+  box-shadow: 0 3px 0 var(--primary-strong), 0 0 0 4px color-mix(in srgb, var(--primary) 22%, transparent);
+}
+.word-game-visual {
+  background: linear-gradient(160deg, #DCF2FB 0%, #E9E3FF 100%);
+  border: 0; box-shadow: none;
+}
+.word-game-hint-text { display: inline-flex; align-items: center; gap: 6px; }
+.word-game-hint-text svg { flex: none; color: var(--secondary-strong); }
+.word-game-play {
+  background: linear-gradient(160deg, #FFF6E6 0%, #FFEDF1 100%);
+  border: 0; box-shadow: none; justify-content: center;
+}
+.word-game--v3 .word-slot {
+  width: clamp(54px, 8vw, 66px); height: clamp(62px, 9vw, 74px);
+  background: #fff;
+  border: 3px dashed color-mix(in srgb, var(--primary) 40%, #fff);
+  font-size: 30px;
+}
+.word-game--v3 .word-slot--filled {
+  border: 3px solid var(--primary); color: #fff;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 80%, #fff), var(--primary));
+  box-shadow: 0 5px 0 var(--primary-strong), 0 10px 16px rgba(124, 92, 250, 0.2);
+}
+.word-game--v3 .word-slots--correct .word-slot--filled {
+  border-color: var(--success-strong); color: #fff;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--success) 80%, #fff), var(--success));
+  box-shadow: 0 5px 0 var(--success-strong), 0 10px 16px rgba(98, 207, 168, 0.25);
+}
+.word-game--v3 .letter-tray {
+  background: rgba(255, 255, 255, .7);
+  border: 2px dashed color-mix(in srgb, var(--secondary) 45%, #fff);
+}
+/* Mỗi chữ trong khay một màu kẹo; --tile-shadow là mặt đáy nổi khối. */
+.word-game--v3 .letter-tray .letter-tile { color: var(--ink); background: linear-gradient(180deg, color-mix(in srgb, var(--tile) 60%, #fff), var(--tile)); box-shadow: 0 5px 0 var(--tile-shadow), inset 0 2px 0 rgba(255, 255, 255, 0.6); }
+.word-game--v3 .letter-tray .letter-tile:hover:not(:disabled) { box-shadow: 0 8px 0 var(--tile-shadow), inset 0 2px 0 rgba(255, 255, 255, 0.6); }
+.word-game--v3 .letter-tray .letter-tile:active:not(:disabled) { box-shadow: 0 2px 0 var(--tile-shadow), inset 0 2px 0 rgba(255, 255, 255, 0.6); }
+.letter-tile--0 { --tile: #FFCB57; --tile-shadow: #E6A21E; }
+.letter-tile--1 { --tile: #FF9EAE; --tile-shadow: #E35F72; }
+.letter-tile--2 { --tile: #7FCBF5; --tile-shadow: #2E95D3; }
+.letter-tile--3 { --tile: #7EDDB9; --tile-shadow: #35A683; }
+.word-game--v3 .letter-tray .letter-tile:disabled { opacity: .25; }
+.word-game-action--ghost { background: #fff; color: var(--ink-soft); border: 2px solid var(--line); }
+.word-game-action--neutral { border-width: 2px; }
+.word-game-action:disabled { opacity: .5; }
+.word-game-tip { background: var(--primary-soft); border: 0; box-shadow: none; }
+@media (max-width: 560px) {
+  .word-game-progress { grid-template-columns: 1fr auto; row-gap: 12px; }
+  .word-game-dots { grid-column: 1 / -1; order: 2; gap: 4px; justify-content: space-between; }
+  .word-game-dot { width: auto; height: auto; aspect-ratio: 1; flex: 1 1 0; max-width: 30px; font-size: 11px; }
+  .word-game-dot--current { transform: scale(1.1); }
+  .word-game--v3 .word-slot { width: 48px; height: 56px; font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .word-game-dot--current { transform: none; }
+}
