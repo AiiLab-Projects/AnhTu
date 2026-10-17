@@ -158,8 +158,105 @@ export const lessons: Lesson[] = [
     game: { prompt: "Trong truyện, ai bế bé? Bấm vào tranh đó.", options: [{ word: "Ba", emoji: "👨" }, { word: "Bà", emoji: "👵" }, { word: "Bé", emoji: "👶" }], answer: 1, explanation: "Đúng rồi, bà bế bé." },
     check: { question: "Tiếng nào có chữ ê và dấu sắc?", options: ["bế", "bé", "bè"], answer: 0, explanation: "Tiếng bế có chữ ê và dấu sắc." },
   },
+  // Bốn bài học vần tiếp theo (#31): t, tr → th, ia → ua, ưa → ôn tập và kể chuyện. Cũng do Cô Tú soạn lại như năm bài trên.
   {
-    slug: "nguyen-am-phu-am", number: 6, title: "Nguyên âm và phụ âm là gì?",
+    slug: "bai-6-t-tr", number: 6, title: "T t, Tr tr",
+    summary: "Học chữ t và chữ tr, đọc tô, tổ, tre, trà.",
+    icon: "🎋", tone: "yellow", category: "Học vần lớp 1", grade: 1,
+    intro: "Em học chữ t và chữ tr. Chữ t đọc là tờ, có trong tiếng tô, tổ. Chữ t đứng liền chữ r thành tr, đọc là trờ, có trong tiếng tre, trà. Em nhìn, nghe rồi viết theo nét nhé!",
+    letterCard: {
+      letters: [{ upper: "T", lower: "t", say: "tờ" }, { upper: "Tr", lower: "tr", say: "trờ" }],
+      tip: "Chữ t có nét sổ và nét ngang ngắn. Chữ tr viết chữ t trước rồi viết tiếp chữ r.",
+    },
+    pictureWords: {
+      title: "Tô, tổ, tre, trà", focus: ["t", "r"],
+      note: "Chữ t và chữ r được tô màu nổi bật. Em nghe xem tiếng nào đọc tờ, tiếng nào đọc trờ nhé.",
+      words: [{ word: "tô", emoji: "🥣" }, { word: "tổ", emoji: "🪺" }, { word: "tre", emoji: "🎋" }, { word: "trà", emoji: "🍵" }],
+    },
+    points: [
+      { title: "Chữ t", body: "Chữ t có một nét sổ và một nét ngang ngắn. Chữ t đọc là tờ.", example: "t · tô · tổ · ti vi" },
+      { title: "Chữ tr", body: "Chữ tr gồm chữ t và chữ r đứng liền nhau. Khi đọc, em uốn lưỡi lên: trờ.", example: "tr · tre · trà · cá trê" },
+      { title: "Phân biệt t và tr", body: "Nhìn xem sau chữ t có chữ r hay không. Có chữ r thì đọc là trờ.", example: "ta · tra · tê · trê" },
+    ],
+    game: { prompt: "Bấm vào tranh có chữ tr.", options: [{ word: "tô", emoji: "🥣" }, { word: "tre", emoji: "🎋" }, { word: "tổ", emoji: "🪺" }], answer: 1, explanation: "Đúng rồi, tre có chữ tr." },
+    check: { question: "Tiếng nào bắt đầu bằng chữ tr?", options: ["tô", "trà", "ti"], answer: 1, explanation: "Tiếng trà bắt đầu bằng chữ tr." },
+  },
+  {
+    slug: "bai-7-th-ia", number: 7, title: "Th th, ia",
+    summary: "Học chữ th và vần ia, đọc thỏ, thư, mía, tía tô.",
+    icon: "🐰", tone: "blue", category: "Học vần lớp 1", grade: 1,
+    intro: "Em học chữ th và vần ia. Chữ th gồm chữ t và chữ h, đọc là thờ, có trong tiếng thỏ. Vần ia có chữ i đứng trước, chữ a đứng sau, có trong tiếng mía. Em cùng học nhé!",
+    letterCard: {
+      letters: [{ upper: "Th", lower: "th", say: "thờ" }, { upper: "Ia", lower: "ia", say: "ia" }],
+      tip: "Chữ th viết chữ t rồi viết tiếp chữ h. Vần ia viết chữ i rồi đến chữ a.",
+    },
+    pictureWords: {
+      title: "Thỏ, thư, mía, tía tô", focus: ["t", "h", "i", "í", "a"],
+      note: "Chữ th và vần ia được tô màu nổi bật. Em đọc chậm từng tiếng nhé.",
+      words: [{ word: "thỏ", emoji: "🐰" }, { word: "thư", emoji: "✉️" }, { word: "mía", emoji: "🎋" }, { word: "tía tô", emoji: "🌿" }],
+    },
+    points: [
+      { title: "Chữ th", body: "Chữ th gồm chữ t và chữ h đứng liền nhau. Chữ th đọc là thờ.", example: "th · thỏ · thư · thả" },
+      { title: "Vần ia", body: "Vần ia có chữ i đứng trước, chữ a đứng sau. Em đọc i trước rồi lướt nhẹ sang a.", example: "ia · mía · tía · chia" },
+      { title: "Ghép tiếng", body: "Ghép chữ đầu với vần ia, rồi thêm dấu thanh để được tiếng mới.", example: "m + ia = mia · mia + dấu sắc = mía" },
+    ],
+    game: { prompt: "Bấm vào tranh con thỏ.", options: [{ word: "thư", emoji: "✉️" }, { word: "thỏ", emoji: "🐰" }, { word: "mía", emoji: "🎋" }], answer: 1, explanation: "Đúng rồi, đây là con thỏ." },
+    check: { question: "Tiếng nào có vần ia?", options: ["thỏ", "mía", "tre"], answer: 1, explanation: "Tiếng mía có vần ia và dấu sắc." },
+  },
+  {
+    slug: "bai-8-ua-ua", number: 8, title: "ua, ưa",
+    summary: "Học hai vần ua và ưa, đọc cua, rùa, dưa, mưa.",
+    icon: "🦀", tone: "purple", category: "Học vần lớp 1", grade: 1,
+    intro: "Em học hai vần ua và ưa. Vần ua có trong tiếng cua, rùa. Vần ưa có trong tiếng dưa, mưa. Em nhìn kĩ chữ ư có dấu móc nhé!",
+    letterCard: {
+      letters: [{ upper: "Ua", lower: "ua", say: "ua" }, { upper: "Ưa", lower: "ưa", say: "ưa" }],
+      tip: "Hai vần đều kết thúc bằng chữ a. Vần ưa có thêm dấu móc nhỏ ở chữ ư.",
+    },
+    pictureWords: {
+      title: "Cua, rùa, dưa, mưa", focus: ["u", "ù", "ư", "a"],
+      note: "Vần ua và vần ưa được tô màu nổi bật. Em tìm xem chữ nào có dấu móc nhé.",
+      words: [{ word: "cua", emoji: "🦀" }, { word: "rùa", emoji: "🐢" }, { word: "dưa", emoji: "🍉" }, { word: "mưa", emoji: "🌧️" }],
+    },
+    points: [
+      { title: "Vần ua", body: "Vần ua có chữ u đứng trước, chữ a đứng sau. Em đọc u rồi lướt nhẹ sang a.", example: "ua · cua · rùa · mua" },
+      { title: "Vần ưa", body: "Vần ưa có chữ ư đứng trước, chữ a đứng sau. Chữ ư có dấu móc.", example: "ưa · dưa · mưa · cửa" },
+      { title: "So sánh ua và ưa", body: "Nhìn chữ đầu vần: không có dấu móc là ua, có dấu móc là ưa.", example: "cua · cửa · mua · mưa" },
+    ],
+    game: { prompt: "Bấm vào tranh có vần ưa.", options: [{ word: "cua", emoji: "🦀" }, { word: "dưa", emoji: "🍉" }, { word: "rùa", emoji: "🐢" }], answer: 1, explanation: "Đúng rồi, dưa có vần ưa." },
+    check: { question: "Tiếng nào có vần ua?", options: ["mưa", "rùa", "dưa"], answer: 1, explanation: "Tiếng rùa có vần ua và dấu huyền." },
+  },
+  {
+    slug: "bai-9-on-tap-ke-chuyen", number: 9, title: "Ôn tập và kể chuyện",
+    summary: "Ôn t, tr, th, các vần ia, ua, ưa và đọc truyện tranh Thỏ và rùa.",
+    icon: "📚", tone: "green", category: "Học vần lớp 1", grade: 1,
+    intro: "Em đã học chữ t, tr, th và ba vần ia, ua, ưa. Hôm nay em ôn lại, rồi đọc truyện tranh Thỏ và rùa và kể lại bằng lời của em.",
+    letterCard: {
+      letters: [
+        { upper: "T", lower: "t", say: "tờ" }, { upper: "Tr", lower: "tr", say: "trờ" }, { upper: "Th", lower: "th", say: "thờ" },
+        { upper: "Ia", lower: "ia", say: "ia" }, { upper: "Ua", lower: "ua", say: "ua" }, { upper: "Ưa", lower: "ưa", say: "ưa" },
+      ],
+      tip: "Bấm Viết lại để xem các chữ và vần được viết từng nét.",
+    },
+    story: {
+      title: "Thỏ và rùa", note: "Trú mưa nghĩa là tìm chỗ có mái che để không bị ướt.",
+      frames: [
+        { scene: "🐰🍉", text: "Thỏ mua dưa." },
+        { scene: "🐢🎋", text: "Rùa có mía." },
+        { scene: "🌧️🏡", text: "Trời mưa, thỏ và rùa trú mưa." },
+        { scene: "🐰🍉🎋🐢", text: "Thỏ chia dưa, rùa chia mía." },
+      ],
+      retell: ["Thỏ mua gì?", "Rùa có gì?", "Khi trời mưa, thỏ và rùa làm gì?", "Ở khung cuối, hai bạn chia gì cho nhau?"],
+    },
+    points: [
+      { title: "Ôn chữ t, tr, th", body: "Em đọc lại chữ t, tr, th. Nhìn chữ đứng sau t để đọc cho đúng.", example: "tô · tre · thỏ" },
+      { title: "Ôn vần ia, ua, ưa", body: "Em đọc lại ba vần và tìm tiếng có vần đó.", example: "mía · cua · dưa" },
+      { title: "Đọc câu ngắn", body: "Đọc từng tiếng rồi đọc liền cả câu. Nghỉ một chút ở dấu phẩy và dấu chấm.", example: "Thỏ chia dưa, rùa chia mía." },
+    ],
+    game: { prompt: "Trong truyện, ai mua dưa? Bấm vào tranh đó.", options: [{ word: "Rùa", emoji: "🐢" }, { word: "Thỏ", emoji: "🐰" }, { word: "Cua", emoji: "🦀" }], answer: 1, explanation: "Đúng rồi, thỏ mua dưa." },
+    check: { question: "Tiếng nào có chữ th và vần ưa?", options: ["thưa", "thỏ", "mưa"], answer: 0, explanation: "Tiếng thưa có chữ th và vần ưa." },
+  },
+  {
+    slug: "nguyen-am-phu-am", number: 10, title: "Nguyên âm và phụ âm là gì?",
     summary: "Làm quen với chữ cái và cách ghép chúng thành tiếng.",
     icon: "🔤", tone: "blue", category: "Làm quen chữ cái", grade: 1,
     intro: "Bảng chữ cái tiếng Việt có 29 chữ. Ta sẽ nhận ra chữ ghi nguyên âm và chữ ghi phụ âm để tập đọc tiếng.",
@@ -171,7 +268,7 @@ export const lessons: Lesson[] = [
     check: { question: "Chữ nào là chữ ghi nguyên âm?", options: ["b", "a", "m"], answer: 1, explanation: "Chữ a ghi một nguyên âm." },
   },
   {
-    slug: "nhom-a", number: 7, title: "Nhóm A — A, Ă, Â",
+    slug: "nhom-a", number: 11, title: "Nhóm A — A, Ă, Â",
     summary: "Nhận ra a, ă, â và đọc các tiếng quen thuộc.",
     icon: "🌙", tone: "purple", category: "Nhóm nguyên âm", grade: 1,
     intro: "Ba chữ a, ă, â có hình gần giống nhau. Hãy nhìn dấu trên đầu và nghe cách đọc từng chữ.",
@@ -183,7 +280,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng nào có chữ ă?", options: ["cá", "trăng", "sân"], answer: 1, explanation: "Tiếng trăng có chữ ă." },
   },
   {
-    slug: "nhom-e", number: 8, title: "Nhóm E — E, Ê",
+    slug: "nhom-e", number: 12, title: "Nhóm E — E, Ê",
     summary: "Đọc e và ê qua những tiếng gần gũi.",
     icon: "🚲", tone: "pink", category: "Nhóm nguyên âm", grade: 1,
     intro: "Chữ ê có thêm dấu mũ so với chữ e. Quan sát và đọc thành tiếng để phân biệt nhé.",
@@ -195,7 +292,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng nào có chữ ê?", options: ["xe", "em", "ghế"], answer: 2, explanation: "Tiếng ghế có chữ ê." },
   },
   {
-    slug: "nhom-o", number: 9, title: "Nhóm O — O, Ô, Ơ",
+    slug: "nhom-o", number: 13, title: "Nhóm O — O, Ô, Ơ",
     summary: "Phân biệt ba chữ o, ô, ơ bằng hình chữ và tiếng mẫu.",
     icon: "🐄", tone: "orange", category: "Nhóm nguyên âm", grade: 1,
     intro: "O, ô, ơ là ba chữ ghi ba nguyên âm khác nhau. Dấu mũ và dấu móc giúp em nhận ra chúng.",
@@ -207,7 +304,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng nào có chữ ơ?", options: ["cô", "mơ", "con"], answer: 1, explanation: "Tiếng mơ có chữ ơ với dấu móc." },
   },
   {
-    slug: "nhom-u", number: 10, title: "Nhóm U — U, Ư",
+    slug: "nhom-u", number: 14, title: "Nhóm U — U, Ư",
     summary: "Nhận biết u và ư qua dấu móc và ví dụ.",
     icon: "🧢", tone: "green", category: "Nhóm nguyên âm", grade: 1,
     intro: "U và ư nhìn rất gần nhau. Dấu móc ở bên phải sẽ giúp em tìm chữ ư.",
@@ -219,7 +316,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng nào có chữ ư?", options: ["thu", "thư", "mũ"], answer: 1, explanation: "Tiếng thư có chữ ư." },
   },
   {
-    slug: "nhom-i-y", number: 11, title: "Nhóm I — I, Y",
+    slug: "nhom-i-y", number: 15, title: "Nhóm I — I, Y",
     summary: "Nhận ra i và y trong những tiếng thường gặp.",
     icon: "🩺", tone: "yellow", category: "Nhóm nguyên âm", grade: 1,
     intro: "I và y đều có thể ghi âm /i/ trong một số tiếng. Cách viết từng từ cần được ghi nhớ khi đọc và viết.",
@@ -231,7 +328,7 @@ export const lessons: Lesson[] = [
     check: { question: "Từ nào viết bằng chữ y?", options: ["đi", "y tá", "bi"], answer: 1, explanation: "Từ y tá bắt đầu bằng chữ y." },
   },
   {
-    slug: "phu-am-dau", number: 12, title: "Phụ âm đầu",
+    slug: "phu-am-dau", number: 16, title: "Phụ âm đầu",
     summary: "Làm quen 17 chữ cái phụ âm và cách chúng đứng đầu tiếng.",
     icon: "🍎", tone: "blue", category: "Phụ âm", grade: 1,
     intro: "Ta cùng nhận diện 17 chữ cái thuộc nhóm phụ âm: b, c, d, đ, g, h, k, l, m, n, p, q, r, s, t, v, x. Một số chữ thường đi cùng chữ khác khi ghi âm đầu.",
@@ -243,7 +340,7 @@ export const lessons: Lesson[] = [
     check: { question: "Chữ đầu của tiếng mèo là gì?", options: ["m", "e", "o"], answer: 0, explanation: "Tiếng mèo bắt đầu bằng chữ m." },
   },
   {
-    slug: "phu-am-b-c-d-d", number: 13, title: "Phụ âm B · C · D · Đ",
+    slug: "phu-am-b-c-d-d", number: 17, title: "Phụ âm B · C · D · Đ",
     summary: "Nghe, đọc và ghép tiếng với b, c, d, đ.",
     icon: "🐐", tone: "purple", category: "Phụ âm", grade: 1,
     intro: "Bốn chữ b, c, d, đ có hình và cách đọc khác nhau. Bấm từng ví dụ để nghe, rồi đọc theo.",
@@ -255,7 +352,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng nào bắt đầu bằng chữ đ?", options: ["dê", "đèn", "cá"], answer: 1, explanation: "Đèn bắt đầu bằng chữ đ có gạch ngang." },
   },
   {
-    slug: "phu-am-g-h-k-l", number: 14, title: "Phụ âm G · H · K · L",
+    slug: "phu-am-g-h-k-l", number: 18, title: "Phụ âm G · H · K · L",
     summary: "Tập đọc các tiếng mở đầu bằng g, h, k, l.",
     icon: "🐔", tone: "pink", category: "Phụ âm", grade: 1,
     intro: "Cùng nghe bốn chữ đầu g, h, k, l trong những từ quen thuộc. Chữ k thường đứng trước e, ê, i.",
@@ -267,7 +364,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng kẹo bắt đầu bằng chữ nào?", options: ["c", "k", "l"], answer: 1, explanation: "Kẹo bắt đầu bằng chữ k." },
   },
   {
-    slug: "phu-am-m-n-p-q", number: 15, title: "Phụ âm M · N · P · Q",
+    slug: "phu-am-m-n-p-q", number: 19, title: "Phụ âm M · N · P · Q",
     summary: "Học m, n và các cặp chữ thường gặp ph, qu.",
     icon: "🍜", tone: "orange", category: "Phụ âm", grade: 1,
     intro: "M và n thường đứng riêng ở đầu tiếng. Trong từ thông dụng, p hay đi với h, q hay đi với u.",
@@ -279,7 +376,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng quả bắt đầu bằng cặp chữ nào?", options: ["ph", "qu", "ng"], answer: 1, explanation: "Quả bắt đầu bằng qu." },
   },
   {
-    slug: "phu-am-r-s-t-v-x", number: 16, title: "Phụ âm R · S · T · V · X",
+    slug: "phu-am-r-s-t-v-x", number: 20, title: "Phụ âm R · S · T · V · X",
     summary: "Hoàn thành nhóm chữ phụ âm qua năm chữ cuối.",
     icon: "🐘", tone: "green", category: "Phụ âm", grade: 1,
     intro: "Cùng đọc r, s, t, v, x qua các tiếng quen. Em hãy nghe mẫu rồi đọc lại thật rõ.",
@@ -291,7 +388,7 @@ export const lessons: Lesson[] = [
     check: { question: "Từ nào bắt đầu bằng x?", options: ["sách", "xe", "rau"], answer: 1, explanation: "Xe bắt đầu bằng chữ x." },
   },
   {
-    slug: "phu-am-ghep", number: 17, title: "Phụ âm ghép",
+    slug: "phu-am-ghep", number: 21, title: "Phụ âm ghép",
     summary: "Đọc các tổ hợp chữ đầu như ch, nh, ph, th và qu.",
     icon: "🐇", tone: "yellow", category: "Phụ âm", grade: 1,
     intro: "Một số tiếng bắt đầu bằng hai hoặc ba chữ viết liền. Hãy nhìn cả nhóm chữ trước khi đọc.",
@@ -303,7 +400,7 @@ export const lessons: Lesson[] = [
     check: { question: "Từ nào bắt đầu bằng nh?", options: ["nhà", "chó", "thỏ"], answer: 0, explanation: "Nhà bắt đầu bằng nh." },
   },
   {
-    slug: "dau-thanh-la-gi", number: 18, title: "Dấu thanh là gì?",
+    slug: "dau-thanh-la-gi", number: 22, title: "Dấu thanh là gì?",
     summary: "Khám phá vì sao đổi thanh có thể làm đổi nghĩa của tiếng.",
     icon: "🎼", tone: "blue", category: "Dấu thanh", grade: 1,
     intro: "Tiếng Việt có sáu thanh. Thanh ngang không có dấu viết; năm thanh còn lại có dấu thanh.",
@@ -315,7 +412,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng nào có dấu sắc?", options: ["ma", "má", "mà"], answer: 1, explanation: "Má mang dấu sắc." },
   },
   {
-    slug: "sau-dau-thanh", number: 19, title: "6 Dấu thanh",
+    slug: "sau-dau-thanh", number: 23, title: "6 Dấu thanh",
     summary: "Học sáu thanh: ngang, huyền, sắc, hỏi, ngã, nặng.",
     icon: "🎵", tone: "purple", category: "Dấu thanh", grade: 1,
     intro: "Có sáu thanh nhưng chỉ năm dấu thanh được viết: huyền, sắc, hỏi, ngã, nặng. Thanh ngang không ghi dấu.",
@@ -327,7 +424,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng nào mang dấu nặng?", options: ["má", "mạ", "mã"], answer: 1, explanation: "Mạ có dấu nặng ở dưới." },
   },
   {
-    slug: "quy-tac-chinh-ta", number: 20, title: "Quy tắc chính tả c/k, g/gh, ng/ngh",
+    slug: "quy-tac-chinh-ta", number: 24, title: "Quy tắc chính tả c/k, g/gh, ng/ngh",
     summary: "Nhớ cách viết k, gh, ngh trước e, ê, i.",
     icon: "✍️", tone: "pink", category: "Chính tả", grade: 2,
     intro: "Trước e, ê, i, ta thường dùng k, gh, ngh để ghi những âm đầu tương ứng. Hãy học qua từ mẫu.",
@@ -339,7 +436,7 @@ export const lessons: Lesson[] = [
     check: { question: "Cách viết nào đúng?", options: ["nge", "nghe", "ngê"], answer: 1, explanation: "Trước e, ta viết ngh: nghe." },
   },
   {
-    slug: "ghep-van", number: 21, title: "Ghép vần",
+    slug: "ghep-van", number: 25, title: "Ghép vần",
     summary: "Ghép âm đầu với vần và dấu thanh để đọc tiếng.",
     icon: "🧩", tone: "orange", category: "Luyện đọc", grade: 1,
     intro: "Khi đã biết chữ và dấu, em hãy ghép âm đầu với vần rồi đọc trọn tiếng.",
@@ -351,7 +448,7 @@ export const lessons: Lesson[] = [
     check: { question: "Ghép c + am được tiếng nào?", options: ["cam", "căm", "câm"], answer: 0, explanation: "C cộng vần am tạo tiếng cam." },
   },
   {
-    slug: "van-thuong-gap", number: 22, title: "Vần thường gặp",
+    slug: "van-thuong-gap", number: 26, title: "Vần thường gặp",
     summary: "Luyện đọc an, ăn, ân, on, ơn, ang, ong và nhiều vần khác.",
     icon: "🎈", tone: "green", category: "Luyện đọc", grade: 1,
     intro: "Nhận ra vần giúp em đọc nhanh hơn. Cùng nghe, đọc và tìm vần giống nhau trong các tiếng.",
@@ -363,7 +460,7 @@ export const lessons: Lesson[] = [
     check: { question: "Tiếng nào có vần an?", options: ["lan", "lên", "lơn"], answer: 0, explanation: "Lan có vần an." },
   },
   {
-    slug: "doc-hieu", number: 23, title: "Đọc hiểu",
+    slug: "doc-hieu", number: 27, title: "Đọc hiểu",
     summary: "Đọc đoạn ngắn và trả lời câu hỏi về nội dung.",
     icon: "📖", tone: "yellow", category: "Đọc hiểu", grade: 3,
     intro: "Đọc không chỉ là phát âm đúng. Em còn cần hiểu ai, việc gì và điều gì xảy ra trong đoạn văn.",
@@ -375,7 +472,7 @@ export const lessons: Lesson[] = [
     check: { question: "Trong đoạn đọc, chú mèo tên là gì?", options: ["Lan", "Miu", "Bông"], answer: 1, explanation: "Đoạn văn nói: Mèo tên là Miu." },
   },
   {
-    slug: "tu-vung-theo-chu-de", number: 24, title: "Từ vựng theo chủ đề",
+    slug: "tu-vung-theo-chu-de", number: 28, title: "Từ vựng theo chủ đề",
     summary: "Gọi tên con vật, màu sắc và đồ ăn quanh em.",
     icon: "🖼️", tone: "blue", category: "Từ vựng", grade: 2,
     intro: "Nhóm các từ theo chủ đề giúp em nhớ và dùng từ khi nói, đọc, viết.",
@@ -387,7 +484,7 @@ export const lessons: Lesson[] = [
     check: { question: "Từ nào gọi tên con vật?", options: ["xanh", "mèo", "bánh"], answer: 1, explanation: "Mèo là tên một con vật." },
   },
   {
-    slug: "tu-vung-gia-dinh", number: 25, title: "Từ vựng gia đình",
+    slug: "tu-vung-gia-dinh", number: 29, title: "Từ vựng gia đình",
     summary: "Gọi tên người thân và nói một câu về gia đình.",
     icon: "👨‍👩‍👧‍👦", tone: "purple", category: "Từ vựng", grade: 2,
     intro: "Mỗi gia đình có thể khác nhau. Hãy học cách gọi những người thân quen của em.",
@@ -399,7 +496,7 @@ export const lessons: Lesson[] = [
     check: { question: "Từ nào gọi tên người trong gia đình?", options: ["chị", "bàn", "xanh"], answer: 0, explanation: "Chị là cách gọi một người trong gia đình." },
   },
   {
-    slug: "tu-vung-co-the", number: 26, title: "Từ vựng cơ thể",
+    slug: "tu-vung-co-the", number: 30, title: "Từ vựng cơ thể",
     summary: "Nhận biết và gọi tên các bộ phận cơ thể.",
     icon: "🧍", tone: "pink", category: "Từ vựng", grade: 2,
     intro: "Em hãy chỉ vào bộ phận trên cơ thể mình hoặc tranh minh họa và đọc tên bộ phận đó.",
@@ -411,7 +508,7 @@ export const lessons: Lesson[] = [
     check: { question: "Em dùng bộ phận nào để nghe?", options: ["tai", "chân", "tay"], answer: 0, explanation: "Tai giúp em nghe." },
   },
   {
-    slug: "tu-vung-truong-hoc", number: 27, title: "Từ vựng trường học",
+    slug: "tu-vung-truong-hoc", number: 31, title: "Từ vựng trường học",
     summary: "Đọc tên đồ dùng học tập và đặt câu ngắn.",
     icon: "🎒", tone: "orange", category: "Từ vựng", grade: 2,
     intro: "Lớp học có nhiều đồ vật quen thuộc. Hãy tìm chúng quanh em rồi gọi tên.",
@@ -423,7 +520,7 @@ export const lessons: Lesson[] = [
     check: { question: "Vật nào dùng để viết?", options: ["bút", "cửa", "ghế"], answer: 0, explanation: "Bút là đồ dùng để viết." },
   },
   {
-    slug: "tu-vung-nghe-nghiep", number: 28, title: "Từ vựng nghề nghiệp",
+    slug: "tu-vung-nghe-nghiep", number: 32, title: "Từ vựng nghề nghiệp",
     summary: "Gọi tên một số nghề và công việc của họ.",
     icon: "👷", tone: "green", category: "Từ vựng", grade: 2,
     intro: "Mỗi nghề đều có công việc có ích. Cùng tập nói về những người em gặp trong cuộc sống.",
@@ -435,7 +532,7 @@ export const lessons: Lesson[] = [
     check: { question: "Ai thường khám bệnh cho người bệnh?", options: ["bác sĩ", "phi công", "thợ may"], answer: 0, explanation: "Bác sĩ khám bệnh và chăm sóc sức khỏe." },
   },
   {
-    slug: "thoi-tiet-mua", number: 29, title: "Thời tiết & mùa",
+    slug: "thoi-tiet-mua", number: 33, title: "Thời tiết & mùa",
     summary: "Nói về nắng, mưa, gió và tên các mùa.",
     icon: "🌦️", tone: "yellow", category: "Từ vựng", grade: 2,
     intro: "Quan sát bầu trời hôm nay rồi dùng từ phù hợp để kể về thời tiết. Các vùng ở Việt Nam có đặc điểm mùa khác nhau.",
@@ -447,7 +544,7 @@ export const lessons: Lesson[] = [
     check: { question: "Từ nào nói về thời tiết?", options: ["mưa", "quyển vở", "bác sĩ"], answer: 0, explanation: "Mưa là một hiện tượng thời tiết." },
   },
   {
-    slug: "so-dem-1-20", number: 30, title: "Số đếm 1–20",
+    slug: "so-dem-1-20", number: 34, title: "Số đếm 1–20",
     summary: "Đọc và viết bằng chữ các số từ một đến hai mươi.",
     icon: "🔢", tone: "blue", category: "Giao tiếp", grade: 2,
     intro: "Em hãy vừa đếm đồ vật, vừa đọc tên số bằng tiếng Việt.",
@@ -459,7 +556,7 @@ export const lessons: Lesson[] = [
     check: { question: "Số 15 đọc là gì?", options: ["mười năm", "mười lăm", "năm mươi"], answer: 1, explanation: "15 đọc là mười lăm." },
   },
   {
-    slug: "ngay-thang", number: 31, title: "Ngày tháng",
+    slug: "ngay-thang", number: 35, title: "Ngày tháng",
     summary: "Đọc thứ trong tuần và tháng trong năm.",
     icon: "📅", tone: "purple", category: "Giao tiếp", grade: 2,
     intro: "Biết đọc thứ và ngày tháng giúp em theo dõi lịch học, ngày sinh nhật và các hoạt động gia đình.",
@@ -471,7 +568,7 @@ export const lessons: Lesson[] = [
     check: { question: "Ngày nào đứng sau thứ Hai?", options: ["thứ Ba", "thứ Sáu", "Chủ nhật"], answer: 0, explanation: "Sau thứ Hai là thứ Ba." },
   },
   {
-    slug: "mo-ta-nguoi", number: 32, title: "Mô tả người",
+    slug: "mo-ta-nguoi", number: 36, title: "Mô tả người",
     summary: "Chọn từ chỉ đặc điểm và nói câu lịch sự về một người.",
     icon: "👤", tone: "pink", category: "Nói và viết", grade: 5,
     intro: "Khi tả người, em có thể nói về dáng vẻ, mái tóc hoặc việc làm của họ bằng lời thân thiện.",
@@ -483,7 +580,7 @@ export const lessons: Lesson[] = [
     check: { question: "Từ nào chỉ đặc điểm mái tóc?", options: ["tóc dài", "chạy", "quyển sách"], answer: 0, explanation: "Tóc dài là một đặc điểm có thể dùng khi tả người." },
   },
   {
-    slug: "danh-tu-dong-tu-tinh-tu", number: 33, title: "Danh từ – Động từ – Tính từ",
+    slug: "danh-tu-dong-tu-tinh-tu", number: 37, title: "Danh từ – Động từ – Tính từ",
     summary: "Phân biệt từ gọi tên, từ chỉ hoạt động và từ chỉ đặc điểm.",
     icon: "🧱", tone: "orange", category: "Kiến thức tiếng Việt", grade: 4,
     intro: "Ba nhóm từ này giúp em hiểu câu và chọn từ phù hợp khi viết. Trước tiên hãy nhìn ý nghĩa của từ.",
@@ -495,7 +592,7 @@ export const lessons: Lesson[] = [
     check: { question: "Từ nào chỉ hoạt động?", options: ["bút", "đọc", "xanh"], answer: 1, explanation: "Đọc là một hoạt động." },
   },
   {
-    slug: "dat-cau-hoi", number: 34, title: "Đặt câu hỏi",
+    slug: "dat-cau-hoi", number: 38, title: "Đặt câu hỏi",
     summary: "Tập hỏi bằng ai, gì, ở đâu, khi nào, vì sao, thế nào.",
     icon: "❓", tone: "green", category: "Nói và viết", grade: 3,
     intro: "Khi muốn biết thêm điều gì, em hãy chọn từ hỏi đúng và kết thúc câu bằng dấu hỏi.",
@@ -507,7 +604,7 @@ export const lessons: Lesson[] = [
     check: { question: "Muốn hỏi địa điểm, em dùng từ nào?", options: ["ai", "ở đâu", "vì sao"], answer: 1, explanation: "Ở đâu dùng để hỏi về địa điểm." },
   },
   {
-    slug: "hoi-thoai-co-ban", number: 35, title: "Hội thoại cơ bản",
+    slug: "hoi-thoai-co-ban", number: 39, title: "Hội thoại cơ bản",
     summary: "Chào hỏi, giới thiệu và lắng nghe người đối thoại.",
     icon: "💬", tone: "yellow", category: "Nói và nghe", grade: 2,
     intro: "Một cuộc trò chuyện vui bắt đầu bằng lời chào, câu giới thiệu rõ ràng và sự lắng nghe.",
@@ -519,7 +616,7 @@ export const lessons: Lesson[] = [
     check: { question: "Câu nào là lời giới thiệu bản thân?", options: ["Mình tên là An.", "Quyển sách ở đâu?", "Trời đang mưa."], answer: 0, explanation: "Mình tên là An là câu tự giới thiệu." },
   },
   {
-    slug: "viet-doan-van-ngan", number: 36, title: "Viết đoạn văn ngắn",
+    slug: "viet-doan-van-ngan", number: 40, title: "Viết đoạn văn ngắn",
     summary: "Viết khoảng năm câu giới thiệu bản thân và đọc lại để sửa.",
     icon: "📝", tone: "blue", category: "Luyện viết", grade: 3,
     intro: "Em sẽ viết một đoạn ngắn bằng những câu của chính mình. Có thể viết tên, lớp, sở thích và điều em muốn chia sẻ.",

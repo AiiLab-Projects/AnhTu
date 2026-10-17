@@ -16,7 +16,7 @@ COTU_DEV=1 pnpm dev         # dev vào .next-local, không đè .next của lầ
 pnpm run build              # BẮT BUỘC chạy trước khi push — đây là bước kiểm duy nhất
 ```
 
-Không có test, không có lint script. `pnpm run build` vừa type-check vừa prerender 36 trang bài học,
+Không có test, không có lint script. `pnpm run build` vừa type-check vừa prerender 40 trang bài học,
 nên lỗi TypeScript hay lỗi dữ liệu nội dung đều lộ ra ở đây.
 
 Hosting: Netlify site `hoctiengvietcungcotu` (cấu hình ở `netlify.toml`: publish `out/`), không nằm trong
@@ -28,7 +28,7 @@ Remote: `AiiLab-Projects/AnhTu`.
 | Đường | Vai trò |
 |---|---|
 | `src/content/site.ts` | Tên, menu, chữ trang chủ, thông tin liên hệ |
-| `src/content/lessons.ts` | 36 bài học (`Lesson`: slug, points, check…; 5 bài đầu lớp 1 có thêm `letterCard`, `pictureWords`, `story`, `game`) |
+| `src/content/lessons.ts` | 40 bài học (`Lesson`: slug, points, check…; 9 bài đầu lớp 1 có thêm `letterCard`, `pictureWords`, `story`, `game`) |
 | `src/content/questions.ts` | `quizQuestions` (60 câu, 20/mức sao) + `wordExercises` (10 từ ghép chữ) |
 | `src/app/*` | Trang: `/`, `/bai-hoc` (tab `?lop=1..5`), `/bai-hoc/[slug]`, `/bai-tap`, `/kiem-tra`, `/tien-do`, `/lien-he` |
 | `src/components/` | UI; các component tương tác là `"use client"` |
@@ -49,7 +49,7 @@ Remote: `AiiLab-Projects/AnhTu`.
   `question + sentence` (thay `___` bằng "chỗ trống"), `wordExercises[].hint`, và câu chào trong
   `Header.tsx`. Đổi một ký tự ở các chỗ này thì chuỗi đó rơi về giọng trình duyệt (có thể không có
   giọng tiếng Việt). Sau khi sửa, sinh lại âm thanh (xem dưới) hoặc báo cho Thanh. Mọi chuỗi đọc của
-  trang bài học (cả thẻ tranh, truyện, trò chơi của 5 bài lớp 1) gom trong `lessonSpeechLines()` ở
+  trang bài học (cả thẻ tranh, truyện, trò chơi của 9 bài lớp 1) gom trong `lessonSpeechLines()` ở
   `lessons.ts`; `prepare-voice.mjs` gọi hàm này, nên thêm chỗ đọc mới thì thêm vào hàm đó.
 - Bài lớp 1 có các trường tuỳ chọn `letterCard` (nét chữ SVG ở `src/content/letter-strokes.ts`),
   `pictureWords`, `story`, `game`; ở bài đầu chỉ dùng chữ/dấu đã học đến bài đó.

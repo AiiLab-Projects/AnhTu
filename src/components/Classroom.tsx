@@ -33,7 +33,7 @@ export function Classroom() {
     { id: "ten-lessons", label: "10 bài học", icon: "star", color: "var(--secondary-strong)", soft: "var(--secondary-soft)", unlocked: doneCount >= 10 },
     { id: "word-done", label: "Ghép đủ 10 từ", icon: "palette", color: "var(--success-strong)", soft: "var(--success-soft)", unlocked: progress.exerciseBest >= EXERCISE_ROUND_LENGTH },
     { id: "quiz-good", label: "Kiểm tra 18/20", icon: "trophy", color: "var(--secondary-strong)", soft: "var(--secondary-soft)", unlocked: progress.quizBest >= 18 },
-    { id: "all-done", label: "Hoàn tất 36 bài", icon: "rocket", color: "var(--primary-strong)", soft: "var(--primary-soft)", unlocked: doneCount >= lessons.length },
+    { id: "all-done", label: "Hoàn tất 40 bài", icon: "rocket", color: "var(--primary-strong)", soft: "var(--primary-soft)", unlocked: doneCount >= lessons.length },
   ];
 
   return (

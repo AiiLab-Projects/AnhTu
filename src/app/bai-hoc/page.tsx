@@ -5,7 +5,7 @@ import { LessonBrowser } from "@/components/LessonBrowser";
 
 export const metadata: Metadata = {
   title: "Bài học | Cô Tú",
-  description: "36 bài học tiếng Việt: chữ cái, vần, đọc hiểu, từ vựng, nói và viết.",
+  description: "40 bài học tiếng Việt: chữ cái, vần, đọc hiểu, từ vựng, nói và viết.",
 };
 
 export default function LessonsPage() {

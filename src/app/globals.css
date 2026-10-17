@@ -2281,7 +2281,7 @@ body:has(.exercise-page) .site-footer { display: none; }
 .letter-pair figure { margin: 0; text-align: center; }
 .letter-pair figcaption { margin-top: 2px; color: var(--lesson-color); font: 800 32px/1 var(--font-display), sans-serif; }
 .letter-svg {
-  display: block; width: 132px; height: auto; border-radius: 16px; background-color: #fff;
+  display: block; width: calc(132px * var(--glyph-w, 1)); height: auto; border-radius: 16px; background-color: #fff;
   background-image:
     linear-gradient(to bottom, transparent 39.4%, color-mix(in srgb, var(--lesson-color) 24%, transparent) 40%, transparent 40.6%),
     linear-gradient(to bottom, transparent 80.6%, color-mix(in srgb, var(--lesson-color) 50%, transparent) 81.3%, transparent 82%);
@@ -2289,7 +2289,7 @@ body:has(.exercise-page) .site-footer { display: none; }
 .letter-pairs--compact { gap: 12px; }
 .letter-pairs--compact .letter-pair { padding: 12px 12px 14px; }
 .letter-pairs--compact .letter-pair-glyphs { gap: 6px; }
-.letter-pairs--compact .letter-svg { width: 88px; }
+.letter-pairs--compact .letter-svg { width: calc(88px * var(--glyph-w, 1)); }
 .letter-pairs--compact .letter-pair figcaption { font-size: 24px; }
 .glyph-guide, .glyph-ink { fill: none; stroke-linecap: round; stroke-linejoin: round; }
 .glyph-guide { stroke: color-mix(in srgb, var(--lesson-color) 18%, white); stroke-width: 10; }
@@ -2498,10 +2498,15 @@ body:has(.exercise-page) .site-footer { display: none; }
   .letter-card h2, .picture-words h2, .story-board h2, .picture-game h2 { font-size: 22px; }
   .letter-card-head, .story-head { flex-direction: column; gap: 12px; }
   .letter-pair { padding: 12px 10px 14px; }
-  .letter-svg { width: min(34vw, 128px); }
+  /* Chữ ghép (#31): hai hình chia bề ngang của ô theo --glyph-w để cùng chiều cao và không tràn ô. */
+  .letter-pair { width: 100%; min-width: 0; }
+  .letter-pair-glyphs { width: 100%; justify-content: center; }
+  .letter-pair-glyphs figure { flex: var(--glyph-w, 1) 1 0; min-width: 0; max-width: calc(128px * var(--glyph-w, 1)); }
+  .letter-svg { width: 100%; }
   .letter-pairs--compact { display: grid; grid-template-columns: repeat(2, 1fr); }
-  .letter-pairs--compact .letter-pair:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; }
-  .letter-pairs--compact .letter-svg { width: min(18vw, 72px); }
+  .letter-pairs--compact .letter-pair:last-child:nth-child(odd) { grid-column: 1 / -1; justify-self: center; width: calc(50% - 6px); }
+  .letter-pairs--compact .letter-pair-glyphs figure { max-width: calc(72px * var(--glyph-w, 1)); }
+  .letter-pairs--compact .letter-svg { width: 100%; }
   .letter-pairs--compact .letter-pair { padding: 8px 6px 10px; }
   .letter-pairs--compact .letter-pair figcaption { font-size: 22px; }
   .picture-word-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }

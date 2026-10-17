@@ -15,12 +15,12 @@ const GROUPS: Array<{
   id: string; title: string; subtitle: string; icon: IconName;
   from: number; to: number; tone: "blue" | "pink" | "purple" | "yellow" | "green" | "orange";
 }> = [
-  { id: "hoc-van-lop-1", title: "Học vần lớp 1", subtitle: "Bài 1–5 · a, b, c, e, ê, dấu huyền, dấu sắc", icon: "star",     from: 1,  to: 5,  tone: "blue" },
-  { id: "chu-cai",       title: "Làm quen chữ cái", subtitle: "Bài 6–11 · nguyên âm và nhóm chữ",            icon: "book",     from: 6,  to: 11, tone: "pink" },
-  { id: "phu-am",        title: "Học phụ âm",    subtitle: "Bài 12–17 · chữ đầu và chữ ghép",              icon: "pencil",   from: 12, to: 17, tone: "purple" },
-  { id: "van-chinh-ta",  title: "Dấu thanh và vần", subtitle: "Bài 18–22 · đọc đúng, ghép vần, viết đúng", icon: "music",    from: 18, to: 22, tone: "yellow" },
-  { id: "doc-tu-vung",   title: "Đọc hiểu và từ vựng", subtitle: "Bài 23–29 · đoạn ngắn, gọi tên thế giới", icon: "compass", from: 23, to: 29, tone: "green" },
-  { id: "noi-viet",      title: "Nói và viết",   subtitle: "Bài 30–36 · giao tiếp, đặt câu, viết đoạn",    icon: "chat",     from: 30, to: 36, tone: "orange" },
+  { id: "hoc-van-lop-1", title: "Học vần lớp 1", subtitle: "Bài 1–9 · a, b, c, e, ê, t, tr, th, ia, ua, ưa", icon: "star",     from: 1,  to: 9,  tone: "blue" },
+  { id: "chu-cai",       title: "Làm quen chữ cái", subtitle: "Bài 10–15 · nguyên âm và nhóm chữ",           icon: "book",     from: 10, to: 15, tone: "pink" },
+  { id: "phu-am",        title: "Học phụ âm",    subtitle: "Bài 16–21 · chữ đầu và chữ ghép",              icon: "pencil",   from: 16, to: 21, tone: "purple" },
+  { id: "van-chinh-ta",  title: "Dấu thanh và vần", subtitle: "Bài 22–26 · đọc đúng, ghép vần, viết đúng", icon: "music",    from: 22, to: 26, tone: "yellow" },
+  { id: "doc-tu-vung",   title: "Đọc hiểu và từ vựng", subtitle: "Bài 27–33 · đoạn ngắn, gọi tên thế giới", icon: "compass", from: 27, to: 33, tone: "green" },
+  { id: "noi-viet",      title: "Nói và viết",   subtitle: "Bài 34–40 · giao tiếp, đặt câu, viết đoạn",    icon: "chat",     from: 34, to: 40, tone: "orange" },
 ];
 
 const GRADE_META: Record<string, { label: string; tone: string }> = {

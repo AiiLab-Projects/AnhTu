@@ -7,7 +7,7 @@ export function LessonHero() {
       <div className="lesson-hero-copy">
         <span className="page-eyebrow"><Icon name="map" size={14} /> Học từng bước</span>
         <h1 id="lesson-hero-title">Khám phá bài học <span className="text-gradient-soft">tiếng Việt</span></h1>
-        <p>36 bài học từ chữ cái đến đọc hiểu, nói và viết. Chọn bài em muốn học nhé!</p>
+        <p>40 bài học từ chữ cái đến đọc hiểu, nói và viết. Chọn bài em muốn học nhé!</p>
       </div>
       <div className="lesson-hero-visual" aria-hidden="true">
         <img src="/img/03-alphabet-island-v2.webp" alt="" width={520} height={520} decoding="async" />
