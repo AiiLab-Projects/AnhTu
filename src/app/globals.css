@@ -1064,7 +1064,8 @@ p { margin: 0; line-height: 1.55; }
 /* === Lesson detail === */
 .lesson-detail-container { max-width: 1080px; }
 .breadcrumb { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; color: var(--ink-soft); font-weight: 700; font-size: 14px; }
-.breadcrumb a { color: var(--primary-strong); font-weight: 700; }
+.breadcrumb a { display: inline-flex; align-items: center; gap: 6px; color: var(--primary-strong); font-weight: 700; }
+.breadcrumb svg { flex: none; }
 .breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
 
 .lesson-detail-card { padding: 36px; }
