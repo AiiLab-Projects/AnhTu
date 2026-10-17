@@ -750,31 +750,36 @@ p { margin: 0; line-height: 1.55; }
 .lesson-browser { margin-top: 44px; }
 .lesson-filter-bar {
   display: flex; flex-direction: column; gap: 14px;
+  position: relative; overflow: hidden;
   padding: 20px 22px; margin-bottom: 28px;
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 22px;
-  box-shadow: var(--shadow-sm);
+  /* Nền màu cho thanh lọc: tím nhạt → hồng → kem, thêm hai bong bóng trang trí. */
+  background:
+    radial-gradient(circle at 96% -20%, rgba(255, 255, 255, .7) 0 70px, transparent 71px),
+    radial-gradient(circle at 78% 120%, rgba(255, 255, 255, .45) 0 46px, transparent 47px),
+    linear-gradient(135deg, #EAE2FF 0%, #FBE6F0 55%, #FFF0D6 100%);
+  border: 2px solid color-mix(in srgb, var(--primary) 18%, #fff);
+  border-radius: 24px;
+  box-shadow: 0 10px 24px rgba(124, 92, 250, 0.12);
 }
 .lesson-filter-row {
   display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
 }
 .lesson-filter-label {
-  color: var(--ink-soft); font-size: 12.5px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em;
+  color: var(--primary-strong); font-size: 12.5px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em;
   padding-right: 6px;
 }
 
 .lesson-filter-pill {
   display: inline-flex; align-items: center; gap: 8px;
   min-height: 40px; padding: 6px 16px;
-  border: 2px solid transparent; border-radius: var(--radius-pill);
-  background: var(--pill-soft, var(--primary-soft));
+  border: 2px solid color-mix(in srgb, var(--pill-color, var(--primary)) 25%, #fff); border-radius: var(--radius-pill);
+  background: #fff;
   color: var(--pill-color, var(--primary-strong));
   font: 800 14.5px var(--font-display), sans-serif;
   transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
 }
 .lesson-filter-pill:hover { transform: translateY(-2px); box-shadow: 0 6px 14px color-mix(in srgb, var(--pill-color) 22%, transparent); }
-.lesson-filter-pill.is-active { color: #fff; background: var(--pill-color); box-shadow: 0 6px 14px color-mix(in srgb, var(--pill-color) 32%, transparent); }
+.lesson-filter-pill.is-active { color: #fff; background: var(--pill-color); border-color: var(--pill-color); box-shadow: 0 6px 14px color-mix(in srgb, var(--pill-color) 32%, transparent); }
 .lesson-filter-pill--purple { --pill-color: var(--primary); --pill-soft: var(--primary-soft); }
 .lesson-filter-pill--blue   { --pill-color: var(--blue);    --pill-soft: var(--blue-soft); }
 .lesson-filter-pill--pink   { --pill-color: var(--accent);  --pill-soft: var(--accent-soft); }
@@ -784,7 +789,7 @@ p { margin: 0; line-height: 1.55; }
 .lesson-filter-count {
   display: inline-grid; place-items: center;
   min-width: 22px; height: 22px; padding: 0 6px;
-  border-radius: var(--radius-pill); background: rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-pill); background: var(--pill-soft, var(--primary-soft));
   color: inherit; font: 1000 11.5px/1 var(--font-body), sans-serif;
 }
 .lesson-filter-pill.is-active .lesson-filter-count { background: rgba(255, 255, 255, 0.3); color: #fff; }
@@ -810,7 +815,7 @@ p { margin: 0; line-height: 1.55; }
 
 .lesson-filter-summary {
   display: flex; align-items: center; flex-wrap: wrap; gap: 8px;
-  padding-top: 4px; color: var(--ink-soft); font-size: 13.5px; font-weight: 600;
+  padding-top: 10px; border-top: 2px dashed rgba(124, 92, 250, 0.18); color: var(--ink-soft); font-size: 13.5px; font-weight: 600;
 }
 .lesson-filter-summary strong { color: var(--ink); font: 800 15px var(--font-display), sans-serif; }
 .lesson-filter-reset {
