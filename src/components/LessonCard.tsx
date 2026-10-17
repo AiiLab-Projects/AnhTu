@@ -29,13 +29,16 @@ export function LessonCard({ lesson, lessonsBefore }: { lesson: Lesson; lessonsB
 
   return (
     <Link ref={tiltRef} href={`/bai-hoc/${lesson.slug}`} className={`lesson-card tilt-card lesson-card--${lesson.tone}`}>
-      <div className="lesson-card-top">
+      <div className="lesson-card-banner">
         <span className="lesson-card-icon" aria-hidden="true">{lesson.icon}</span>
-        <span className={`lesson-card-status lesson-card-status--${status}`}>
-          <Icon name={meta.icon} size={12} /> {meta.label}
-        </span>
+        <span className="lesson-card-num" aria-label={`Bài ${lesson.number}`}>{lesson.number}</span>
+        {status !== "todo" && (
+          <span className={`lesson-card-status lesson-card-status--${status}`}>
+            <Icon name={meta.icon} size={12} /> {meta.label}
+          </span>
+        )}
       </div>
-      <span className="lesson-card-category">Bài {lesson.number} · {lesson.category}</span>
+      <span className="lesson-card-category">{lesson.category}</span>
       <h3>{lesson.title}</h3>
       <p>{lesson.summary}</p>
       <span className="lesson-card-cta">
