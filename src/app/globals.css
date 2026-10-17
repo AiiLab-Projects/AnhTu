@@ -2962,3 +2962,72 @@ body:has(.exercise-page) .site-footer { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .word-game-dot--current { transform: none; }
 }
+
+/* === Tập viết: chế độ "Em tô theo" — tô bằng ngón tay/chuột lên chữ mẫu === */
+.letter-mode {
+  display: inline-flex; gap: 4px; margin-top: 16px; padding: 4px;
+  border-radius: var(--radius-pill); background: var(--lesson-soft);
+}
+.letter-mode-tab {
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 40px; padding: 8px 16px; border-radius: var(--radius-pill);
+  color: var(--lesson-ink); font: 800 14.5px/1 var(--font-display), sans-serif;
+  transition: background .15s ease, color .15s ease;
+}
+.letter-mode-tab svg { width: 16px; height: 16px; }
+.letter-mode-tab--active { background: #fff; color: var(--ink); box-shadow: 0 2px 6px rgba(31, 37, 71, .1); }
+
+.trace { display: flex; flex-direction: column; align-items: center; gap: 14px; margin-top: 18px; }
+.trace-picker { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.trace-chip {
+  min-width: 48px; min-height: 44px; padding: 6px 14px; border-radius: 14px;
+  background: #fff; border: 2px solid color-mix(in srgb, var(--lesson-color) 30%, #fff);
+  color: var(--lesson-ink); font: 800 22px/1 var(--font-display), sans-serif;
+  transition: transform .15s ease, background .15s ease;
+}
+.trace-chip:hover { transform: translateY(-2px); }
+.trace-chip--active { background: var(--lesson-ink); border-color: var(--lesson-ink); color: #fff; }
+.trace-stage { width: 100%; display: flex; justify-content: center; }
+.trace-svg {
+  display: block; width: calc(240px * var(--glyph-w, 1)); max-width: 100%; height: auto;
+  border-radius: 22px; background-color: #fff; border: 3px solid color-mix(in srgb, var(--lesson-color) 30%, #fff);
+  /* Dòng kẻ giống vở: đường giữa và đường đáy (y = 122 trên khung 150). */
+  background-image:
+    linear-gradient(to bottom, transparent 39.4%, color-mix(in srgb, var(--lesson-color) 24%, transparent) 40%, transparent 40.6%),
+    linear-gradient(to bottom, transparent 80.6%, color-mix(in srgb, var(--lesson-color) 50%, transparent) 81.3%, transparent 82%);
+  touch-action: none; cursor: crosshair; user-select: none; -webkit-user-select: none;
+}
+.trace-guide { fill: none; stroke: color-mix(in srgb, var(--lesson-color) 22%, #fff); stroke-width: 18; stroke-linecap: round; stroke-linejoin: round; }
+.trace-guide--current { stroke: color-mix(in srgb, var(--lesson-color) 55%, #fff); animation: trace-glow 1.4s ease-in-out infinite; }
+.trace-guide--done { stroke: color-mix(in srgb, var(--success) 45%, #fff); }
+.trace-ink { fill: none; stroke: var(--lesson-ink); stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; pointer-events: none; }
+.trace-start { pointer-events: none; }
+.trace-start circle { fill: var(--ink); animation: trace-pulse 1.2s ease-in-out infinite; transform-box: fill-box; transform-origin: center; }
+.trace-start text { fill: #fff; font: 800 11px var(--font-display), sans-serif; }
+@keyframes trace-glow { 50% { stroke: color-mix(in srgb, var(--lesson-color) 35%, #fff); } }
+@keyframes trace-pulse { 50% { transform: scale(1.25); } }
+.trace-status { min-height: 28px; text-align: center; }
+.trace-msg { display: inline-flex; align-items: center; gap: 8px; margin: 0; color: var(--ink-soft); font-weight: 700; line-height: 1.4; }
+.trace-msg svg { flex: none; color: var(--lesson-ink); }
+.trace-msg--good { padding: 8px 16px; border-radius: var(--radius-pill); background: var(--success-soft); color: var(--success-strong); }
+.trace-msg--good svg { color: var(--success-strong); }
+.trace-msg--retry { padding: 8px 16px; border-radius: 16px; background: var(--secondary-soft); color: #8a5a00; }
+.trace-actions { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 10px; }
+.trace-actions .speak-button { margin-top: 0; }
+.trace-button {
+  display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 10px 18px;
+  border-radius: var(--radius-pill); color: #fff; background: var(--lesson-ink);
+  font: 800 14.5px/1 var(--font-display), sans-serif;
+  box-shadow: 0 4px 0 color-mix(in srgb, var(--lesson-ink) 70%, #000);
+}
+.trace-button--ghost { color: var(--ink-soft); background: #fff; border: 2px solid var(--line); box-shadow: none; }
+.trace-button:disabled { opacity: .5; cursor: default; }
+@media (max-width: 760px) {
+  .letter-mode { display: flex; }
+  .letter-mode-tab { flex: 1; justify-content: center; padding: 8px 10px; }
+  .trace-svg { width: calc(min(62vw, 240px) * var(--glyph-w, 1)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .trace-guide--current, .trace-start circle { animation: none; }
+  .trace-chip:hover { transform: none; }
+}

@@ -1,54 +1,16 @@
 "use client";
 
 import { useState, type CSSProperties } from "react";
-import { glyphStrokes, markStrokes } from "@/content/letter-strokes";
+import { markStrokes } from "@/content/letter-strokes";
+import { GLYPH_W, layoutWord, startOf } from "@/lib/glyph-layout";
 import type { Lesson } from "@/content/lessons";
 import { SpeakButton } from "@/components/SpeakButton";
 import { Icon } from "@/components/Icon";
+import { LetterTrace } from "@/components/LetterTrace";
 
 type LetterCardData = NonNullable<Lesson["letterCard"]>;
 
-// Điểm đặt bút = toạ độ sau chữ M đầu tiên của nét.
-function startOf(path: string) {
-  const match = /M\s*([\d.]+)\s+([\d.]+)/.exec(path);
-  return { x: match ? Number(match[1]) : 0, y: match ? Number(match[2]) : 0 };
-}
-
 const STROKE_GAP = 1.1;
-const GLYPH_W = 120;
-const GLYPH_GAP = 14;
-
-// Bề ngang thật của một chữ trong khung 120: đọc toạ độ x của mọi điểm trong nét (V không có x).
-function xRange(strokes: string[]) {
-  let min = Infinity, max = -Infinity;
-  for (const d of strokes) {
-    for (const [, cmd, args] of d.matchAll(/([MLHVCQ])([^MLHVCQ]*)/g)) {
-      if (cmd === "V") continue;
-      const nums = args.trim().split(/[\s,]+/).map(Number);
-      const xs = cmd === "H" ? nums : nums.filter((_, i) => i % 2 === 0);
-      for (const x of xs) { min = Math.min(min, x); max = Math.max(max, x); }
-    }
-  }
-  return { min, max };
-}
-
-// Xếp các chữ đơn liền nhau cho chữ ghép (tr, th, ia…); một chữ thì giữ nguyên khung 120×150.
-function layoutWord(word: string) {
-  const chars = [...word];
-  if (chars.length === 1) return { width: GLYPH_W, parts: [{ dx: 0, strokes: glyphStrokes[word] }] };
-  let cursor = 0;
-  const parts = chars.map((char) => {
-    const strokes = glyphStrokes[char];
-    const { min, max } = xRange(strokes);
-    const part = { dx: cursor - min, strokes };
-    cursor += max - min + GLYPH_GAP;
-    return part;
-  });
-  const inner = cursor - GLYPH_GAP;
-  const width = Math.max(GLYPH_W, inner + 60);
-  const shift = (width - inner) / 2;
-  return { width, parts: parts.map((part) => ({ ...part, dx: part.dx + shift })) };
-}
 
 function Strokes({ strokes, run, viewBox, label, className }: { strokes: string[]; run: number; viewBox: string; label: string; className: string }) {
   return (
@@ -98,17 +60,23 @@ function WordGlyph({ word, run, label }: { word: string; run: number; label: str
 
 export function LetterCard({ data }: { data: LetterCardData }) {
   const [run, setRun] = useState(0);
+  const [mode, setMode] = useState<"watch" | "trace">("watch");
   const compact = data.letters.length > 2;
   return (
     <section className="letter-card" aria-labelledby="letter-card-title">
       <div className="letter-card-head">
         <div>
           <span className="eyebrow">Tập viết</span>
-          <h2 id="letter-card-title">Xem chữ được viết từng nét</h2>
-          <p>{data.tip}</p>
+          <h2 id="letter-card-title">{mode === "watch" ? "Xem chữ được viết từng nét" : "Em tô theo chữ mẫu"}</h2>
+          <p>{mode === "watch" ? data.tip : "Đặt ngón tay vào chấm số 1 rồi tô theo nét sáng màu. Tô xong một nét thì nét tiếp theo sẽ sáng lên."}</p>
         </div>
-        <button className="letter-replay" type="button" onClick={() => setRun((value) => value + 1)}><Icon name="play" size={16} /> Viết lại</button>
+        {mode === "watch" && <button className="letter-replay" type="button" onClick={() => setRun((value) => value + 1)}><Icon name="play" size={16} /> Viết lại</button>}
       </div>
+      <div className="letter-mode" role="tablist" aria-label="Cách tập viết">
+        <button type="button" role="tab" aria-selected={mode === "watch"} className={`letter-mode-tab${mode === "watch" ? " letter-mode-tab--active" : ""}`} onClick={() => setMode("watch")}><Icon name="play" size={16} /> Xem cô viết</button>
+        <button type="button" role="tab" aria-selected={mode === "trace"} className={`letter-mode-tab${mode === "trace" ? " letter-mode-tab--active" : ""}`} onClick={() => setMode("trace")}><Icon name="pencil" size={16} /> Em tô theo</button>
+      </div>
+      {mode === "trace" ? <LetterTrace letters={data.letters} /> : <>
       <div className={`letter-pairs${compact ? " letter-pairs--compact" : ""}`}>
         {data.letters.map((letter) => (
           <div className="letter-pair" key={letter.lower}>
@@ -135,6 +103,7 @@ export function LetterCard({ data }: { data: LetterCardData }) {
           ))}
         </div>
       )}
+      </>}
     </section>
   );
 }
