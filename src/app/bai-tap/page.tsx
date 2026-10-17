@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { WordGame } from "@/components/WordGame";
+import { ExerciseHub } from "@/components/ExerciseHub";
 import { Icon } from "@/components/Icon";
 
-export const metadata: Metadata = { title: "Bài tập | Cô Tú", description: "Luyện ghép chữ thành từ qua 10 hình ảnh đáng yêu." };
+export const metadata: Metadata = { title: "Bài tập | Cô Tú", description: "Phòng trò chơi luyện tiếng Việt: ghép chữ thành từ và nhiều trò vui khác cùng Cô Tú." };
 
 export default function ExercisePage() {
   return (
@@ -10,10 +10,10 @@ export default function ExercisePage() {
       <div className="page-container exercise-page-container">
         <header className="exercise-mini-hero">
           <span className="page-eyebrow"><Icon name="palette" size={14} /> Vừa học vừa chơi</span>
-          <h1>Ghép chữ thành từ</h1>
-          <p>Nhìn hình, chọn chữ và khám phá từ đúng nhé!</p>
+          <h1>Phòng trò chơi</h1>
+          <p>Chọn một trò, vừa chơi vừa luyện tiếng Việt nhé!</p>
         </header>
-        <WordGame />
+        <ExerciseHub />
       </div>
     </main>
   );
