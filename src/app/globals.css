@@ -4,7 +4,7 @@
 
 /* === Design tokens === */
 :root {
-  --bg: #FFF9ED;
+  --bg: #F3F0FA;
   --card: #FFFFFF;
   --ink: #253153;
   --ink-soft: #65728D;
@@ -66,10 +66,12 @@ body {
 body::before {
   content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
   background:
-    radial-gradient(60vmax 50vmax at 85% -5%, rgba(255, 203, 87, 0.18), transparent 65%),
-    radial-gradient(55vmax 50vmax at -10% 20%, rgba(124, 92, 250, 0.08), transparent 60%),
-    radial-gradient(45vmax 45vmax at 100% 90%, rgba(255, 142, 158, 0.10), transparent 60%),
-    radial-gradient(50vmax 50vmax at 20% 100%, rgba(98, 207, 168, 0.09), transparent 65%);
+    radial-gradient(60vmax 50vmax at 85% -5%, rgba(255, 203, 87, 0.22), transparent 65%),
+    radial-gradient(55vmax 50vmax at -10% 20%, rgba(124, 92, 250, 0.16), transparent 60%),
+    radial-gradient(45vmax 45vmax at 100% 90%, rgba(255, 142, 158, 0.16), transparent 60%),
+    radial-gradient(50vmax 50vmax at 20% 100%, rgba(98, 207, 168, 0.14), transparent 65%),
+    /* Nền tím nhạt → kem: dịu hơn nền kem gần trắng cũ, để thẻ trắng nổi lên. */
+    linear-gradient(180deg, #ECE8FB 0%, #F4F0F8 40%, #FBF1E6 100%);
 }
 button, a { -webkit-tap-highlight-color: transparent; }
 button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
