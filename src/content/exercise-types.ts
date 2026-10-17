@@ -19,21 +19,21 @@ export const exerciseTypes: ExerciseType[] = [
   {
     id: "ghep-chu", title: "Ghép chữ thành từ", skill: "Đọc · Viết",
     description: "Nhìn hình, nghe gợi ý rồi xếp các chữ cái thành từ đúng.",
-    emoji: "🧩", tone: "purple", status: "ready",
+    emoji: "🧩", image: "/img/bai-tap/ghep-chu.webp", tone: "purple", status: "ready",
   },
   {
     id: "nghe-chon-tranh", title: "Nghe và chọn tranh", skill: "Nghe",
     description: "Nghe Cô Tú đọc một từ, bấm vào bức tranh đúng.",
-    emoji: "🎧", tone: "blue", status: "soon",
+    emoji: "🎧", image: "/img/bai-tap/nghe-chon-tranh.webp", tone: "blue", status: "soon",
   },
   {
     id: "dien-dau-thanh", title: "Đặt dấu thanh", skill: "Dấu thanh",
     description: "Chọn dấu huyền, sắc, hỏi, ngã, nặng cho đúng tiếng.",
-    emoji: "🎵", tone: "pink", status: "soon",
+    emoji: "🎵", image: "/img/bai-tap/dat-dau-thanh.webp", tone: "pink", status: "soon",
   },
   {
     id: "noi-tu-tranh", title: "Nối từ với tranh", skill: "Từ vựng",
     description: "Kéo nối mỗi từ với bức tranh của nó.",
-    emoji: "🔗", tone: "green", status: "soon",
+    emoji: "🔗", image: "/img/bai-tap/noi-tu-tranh.webp", tone: "green", status: "soon",
   },
 ];

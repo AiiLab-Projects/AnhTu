@@ -3112,13 +3112,14 @@ body:has(.exercise-page) .site-footer { display: none; }
 }
 .exercise-tile:not(.exercise-tile--soon):hover { transform: translateY(-4px); border-color: var(--lesson-color); box-shadow: 0 16px 30px color-mix(in srgb, var(--lesson-color) 26%, transparent); }
 .exercise-art {
-  position: relative; display: grid; place-items: center; height: 130px;
+  position: relative; display: grid; place-items: center; height: 150px;
   background:
     radial-gradient(circle at 85% 0%, rgba(255, 255, 255, .45) 0 40px, transparent 41px),
     radial-gradient(circle at 20% 110%, rgba(255, 255, 255, .3) 0 36px, transparent 37px),
     linear-gradient(135deg, var(--lesson-color), color-mix(in srgb, var(--lesson-color) 50%, #fff));
 }
-.exercise-art img { width: 100%; height: 100%; object-fit: cover; }
+.exercise-art img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.exercise-tile:not(.exercise-tile--soon):hover .exercise-art img { transform: scale(1.06); }
 .exercise-art-emoji { font-size: 64px; line-height: 1; filter: drop-shadow(0 8px 10px rgba(31, 37, 71, .18)); transition: transform .2s ease; }
 .exercise-tile:not(.exercise-tile--soon):hover .exercise-art-emoji { transform: scale(1.1) rotate(-6deg); }
 .exercise-tile-body { display: flex; flex-direction: column; gap: 6px; flex: 1; padding: 14px 16px 16px; }
@@ -3132,14 +3133,15 @@ body:has(.exercise-page) .site-footer { display: none; }
 .exercise-tile-cta { color: #fff; background: var(--lesson-ink); box-shadow: 0 3px 0 color-mix(in srgb, var(--lesson-ink) 70%, #000); }
 .exercise-tile-soon { color: var(--muted); background: #F1EFF6; }
 .exercise-tile--soon { cursor: default; }
-.exercise-tile--soon .exercise-art { filter: grayscale(.55); opacity: .75; }
+.exercise-tile--soon .exercise-art { filter: grayscale(.3); opacity: .85; }
 
 .exercise-current {
   display: flex; align-items: center; gap: 12px; margin: 0 auto 16px; padding: 10px 12px 10px 10px;
   max-width: 1180px; border-radius: 22px; background: #fff;
   border: 2px solid color-mix(in srgb, var(--lesson-color) 25%, #fff); box-shadow: var(--shadow-sm);
 }
-.exercise-current-icon { width: 46px; height: 46px; flex: none; display: grid; place-items: center; border-radius: 14px; background: var(--lesson-soft); font-size: 26px; }
+.exercise-current-icon { width: 46px; height: 46px; flex: none; display: grid; place-items: center; overflow: hidden; border-radius: 14px; background: var(--lesson-soft); font-size: 26px; }
+.exercise-current-icon img { width: 100%; height: 100%; object-fit: cover; }
 .exercise-current-text { display: flex; flex-direction: column; min-width: 0; }
 .exercise-current-text span { color: var(--lesson-ink); font-size: 11.5px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
 .exercise-current-text strong { color: var(--ink); font: 800 18px/1.2 var(--font-display), sans-serif; }
@@ -3158,7 +3160,7 @@ body:has(.exercise-page) .site-footer { display: none; }
   .exercise-picker-head { gap: 12px; margin-bottom: 16px; }
   .exercise-picker-head img { width: 60px; height: 60px; }
   .exercise-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
-  .exercise-art { height: 96px; }
+  .exercise-art { height: 110px; }
   .exercise-art-emoji { font-size: 46px; }
   .exercise-tile-body { padding: 12px; }
   .exercise-tile-body strong { font-size: 16.5px; }
@@ -3167,5 +3169,5 @@ body:has(.exercise-page) .site-footer { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .exercise-picker, .exercise-picker-head img { animation: none; }
-  .exercise-tile:hover, .exercise-switch:hover, .exercise-tile:hover .exercise-art-emoji { transform: none; }
+  .exercise-tile:hover, .exercise-switch:hover, .exercise-tile:hover .exercise-art-emoji, .exercise-tile:hover .exercise-art img { transform: none; }
 }

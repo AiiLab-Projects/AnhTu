@@ -118,7 +118,7 @@ export function ExerciseHub() {
       {current && Game ? (
         <>
           <div className={`exercise-current lesson-card--${current.tone}`}>
-            <span className="exercise-current-icon" aria-hidden="true">{current.emoji}</span>
+            <span className="exercise-current-icon" aria-hidden="true">{current.image ? <img src={current.image} alt="" width={46} height={46} decoding="async" /> : current.emoji}</span>
             <div className="exercise-current-text">
               <span>Đang chơi</span>
               <strong>{current.title}</strong>
