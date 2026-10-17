@@ -283,7 +283,7 @@ export function QuizExperience() {
               className={`quiz-option ${selected === optionIndex ? "quiz-option--selected" : ""} ${submitted && optionIndex === question.answer ? "quiz-option--correct" : ""} ${submitted && selected === optionIndex && !correct ? "quiz-option--wrong" : ""}`}
               onClick={() => setSelected(optionIndex)}
             >
-              <span>{String.fromCharCode(65 + optionIndex)}</span>
+              <span className={`quiz-option-letter quiz-option-letter--${optionIndex % 4}`}>{String.fromCharCode(65 + optionIndex)}</span>
               <span className="quiz-option-text">{option}</span>
               {submitted && optionIndex === question.answer && <Icon name="check-circle" size={20} />}
             </button>
@@ -303,7 +303,7 @@ export function QuizExperience() {
           </div>
         )}
         <div className="quiz-controls">
-          <span>{score} câu đúng · {submitted ? "Bấm 'Câu tiếp theo' để qua câu khác." : "Chọn đáp án rồi kiểm tra nhé."}</span>
+          <span className="quiz-controls-hint"><span className="quiz-score-chip"><Icon name="check-circle" size={16} /> {score} câu đúng</span> {submitted ? "Bấm 'Câu tiếp theo' để qua câu khác." : "Chọn đáp án rồi kiểm tra nhé."}</span>
           {submitted ? (
             <button type="button" className="pill-button" onClick={next} onPointerDown={applyRipple}>
               {index === QUIZ_LENGTH - 1 ? "Xem kết quả" : "Câu tiếp theo"} <Icon name="arrow-right" size={16} />
