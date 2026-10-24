@@ -11,6 +11,7 @@ import {
 } from "@/lib/speech";
 import { TeacherAvatar } from "./TeacherAvatar";
 import { Icon, type IconName } from "./Icon";
+import { HeaderAuth } from "./HeaderAuth";
 
 const navIcons: Record<string, IconName> = { home: "home", book: "book", pencil: "pencil", trophy: "trophy", star: "star", mail: "mail" };
 
@@ -83,6 +84,7 @@ export function Header() {
           </nav>
 
           <div className="header-tools">
+            <HeaderAuth />
             <button
               className={`tool-button${muted ? " tool-button--muted" : ""}`}
               type="button"
