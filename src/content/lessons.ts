@@ -26,6 +26,10 @@ export type Lesson = {
   story?: { title: string; note: string; frames: { scene: string; text: string; image?: string; alt?: string }[]; retell: string[] };
   /** Trò chơi nhỏ: bấm vào tranh đúng với yêu cầu. */
   game?: { prompt: string; options: { word: string; emoji: string }[]; answer: number; explanation: string };
+  /** Trò chơi "Tìm trứng": chọn mọi tiếng có chứa chữ cần tìm (`has` = tiếng đó có chữ ấy). */
+  findLetter?: { title: string; note: string; letter: string; image?: string; imageAlt?: string; words: { word: string; has: boolean }[] };
+  /** Hướng dẫn viết vào vở: ảnh nét chữ, vở mẫu và các bước. */
+  writing?: { title: string; note: string; images: { src: string; alt: string; caption: string }[]; steps: string[] };
 };
 
 // Lộ trình bổ trợ theo các kĩ năng đọc, viết, nói, nghe của môn Tiếng Việt tiểu học.
@@ -64,7 +68,27 @@ export const lessons: Lesson[] = [
       { title: "Nhìn chữ a", body: "Chữ A in hoa có hai nét xiên và một nét ngang. Chữ a viết thường có vòng tròn và một nét sổ ngắn.", example: "A · a" },
       { title: "Nghe âm a", body: "Em mở miệng rộng và đọc: a. Chữ a ghi âm a.", example: "a · a · a" },
       { title: "Tìm a trong tiếng", body: "Nghe cô đọc rồi chỉ vào chữ a nằm cuối mỗi tiếng.", example: "ba · ca · na" },
+      { title: "Viết chữ a", body: "Viết nét cong kín trước, rồi kéo nét móc ngược bên phải. Chữ a cao 2 ô li.", example: "a · a · a" },
+      { title: "Nói lời chào", body: "Gặp người thân, thầy cô, em chào thật lễ phép, cuối câu có tiếng ạ.", example: "Con chào bố ạ!" },
     ],
+    findLetter: {
+      title: "Tìm trứng cho ngỗng",
+      note: "Ngỗng chỉ nhận trứng ghi tiếng có chứa chữ a. Em bấm chọn các trứng đó rồi bấm Kiểm tra nhé.",
+      letter: "a", image: "/img/bai-1/tim-tieng-a.webp", imageAlt: "Chữ a ở giữa, quanh có gà, cá, cà, nhà, lá, thỏ",
+      words: [
+        { word: "a", has: true }, { word: "thỏ", has: false }, { word: "cà", has: true }, { word: "bà", has: true },
+        { word: "na", has: true }, { word: "bi", has: false }, { word: "vịt", has: false }, { word: "có", has: false }, { word: "hát", has: true },
+      ],
+    },
+    writing: {
+      title: "Tập viết chữ a vào vở",
+      note: "Em xem nét chữ, rồi viết vào vở ô li theo hàng mẫu.",
+      images: [
+        { src: "/img/bai-1/net-viet-a.webp", alt: "Chữ a viết thường với nét 1 là nét cong kín, nét 2 là nét móc ngược", caption: "Nét 1: cong kín. Nét 2: móc ngược." },
+        { src: "/img/bai-1/vo-tap-viet.webp", alt: "Vở ô li có các hàng chữ a, ca và c để viết theo", caption: "Hàng mẫu trong vở: a, ca, c." },
+      ],
+      steps: ["Nét 1: viết nét cong kín, cao 2 ô li, rộng khoảng 1,5 ô li.", "Nét 2: từ điểm đầu nét cong, kéo thẳng xuống rồi hất nhẹ nét móc ngược.", "Viết đủ một hàng chữ a, rồi viết tiếng ca."],
+    },
     game: { prompt: "Bấm vào tranh quả na.", options: [{ word: "ba", emoji: "👨" }, { word: "na", emoji: "🍈" }, { word: "ca", emoji: "🥛" }], answer: 1, explanation: "Đúng rồi, đây là na." },
     check: { question: "Chữ a viết thường là chữ nào?", options: ["A", "a", "ba"], answer: 1, explanation: "Chữ a viết thường tròn và có nét sổ ngắn bên phải." },
   },
@@ -657,6 +681,7 @@ export function lessonSpeechLines(lesson: Lesson) {
   }
   if (lesson.pictureWords) lines.push(...lesson.pictureWords.words.map((item) => item.word));
   if (lesson.game) lines.push(...lesson.game.options.map((option) => option.word));
+  if (lesson.findLetter) lines.push(...lesson.findLetter.words.map((item) => item.word));
   if (lesson.story) lines.push(...lesson.story.frames.map((frame) => frame.text), storyFullText(lesson.story));
   return lines;
 }

@@ -8,6 +8,8 @@ import { LetterCard } from "@/components/LetterCard";
 import { PictureWords } from "@/components/PictureWords";
 import { StoryBoard } from "@/components/StoryBoard";
 import { PictureGame } from "@/components/PictureGame";
+import { FindLetterGame } from "@/components/FindLetterGame";
+import { WritingGuide } from "@/components/WritingGuide";
 import { Icon } from "@/components/Icon";
 
 // Mỗi thẻ ý chính lấy một màu, bắt đầu từ màu của bài rồi xoay vòng bảng tone.
@@ -34,7 +36,8 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     lesson.pictureWords && { id: "the-tranh", icon: "🖼️", label: "Thẻ tranh" },
     { id: "y-chinh", icon: "💡", label: "Ý chính" },
     lesson.story && { id: "truyen-tranh", icon: "📖", label: "Truyện tranh" },
-    lesson.game && { id: "tro-choi", icon: "🎮", label: "Trò chơi" },
+    lesson.writing && { id: "viet-vo", icon: "📝", label: "Viết vở" },
+    (lesson.game || lesson.findLetter) && { id: "tro-choi", icon: "🎮", label: "Trò chơi" },
     { id: "thu-tai", icon: "⭐", label: "Thử tài" },
   ].filter((step): step is { id: string; icon: string; label: string } => Boolean(step));
 
@@ -81,7 +84,13 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             ))}
           </div>
           {lesson.story && <div id="truyen-tranh"><StoryBoard data={lesson.story} /></div>}
-          {lesson.game && <div id="tro-choi"><PictureGame data={lesson.game} /></div>}
+          {lesson.writing && <div id="viet-vo"><WritingGuide data={lesson.writing} /></div>}
+          {(lesson.game || lesson.findLetter) && (
+            <div id="tro-choi">
+              {lesson.game && <PictureGame data={lesson.game} />}
+              {lesson.findLetter && <FindLetterGame data={lesson.findLetter} />}
+            </div>
+          )}
         </article>
         <div id="thu-tai" className={`lesson-card--${lesson.tone}`}><LessonCheck slug={lesson.slug} {...lesson.check} /></div>
         <nav className="lesson-nav lesson-nav--cards" aria-label="Chuyển bài">

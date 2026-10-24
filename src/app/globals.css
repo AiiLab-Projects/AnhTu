@@ -3239,3 +3239,38 @@ body:has(.exercise-page) .site-footer { display: none; }
 /* Tranh minh hoạ trong khung truyện (#32) */
 .story-scene--photo { min-height: 0; padding: 0; overflow: hidden; aspect-ratio: 1 / 1; background: #fff; }
 .story-scene--photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
+/* Bài 1 đầy đủ: trò chơi tìm trứng và hướng dẫn viết vở (#32) */
+.find-letter, .writing-guide { margin-top: 22px; padding: 24px; border-radius: var(--radius-xl); background: #fff; border: 3px solid var(--lesson-soft); }
+.find-letter .eyebrow, .writing-guide .eyebrow { color: var(--lesson-color); font-weight: 900; }
+.find-letter h2, .writing-guide h2 { margin: 4px 0 6px; color: var(--ink); font: 800 24px/1.2 var(--font-display), sans-serif; }
+.find-letter p, .writing-guide p { margin: 0; color: var(--ink-soft); font-weight: 500; line-height: 1.55; }
+.find-letter-head { display: flex; gap: 16px; align-items: center; justify-content: space-between; }
+.find-letter-image { flex: none; width: 190px; height: auto; border-radius: 16px; }
+.find-letter-eggs { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 10px; margin: 18px 0 0; padding: 0; list-style: none; }
+.find-egg { display: flex; flex-direction: column; align-items: center; gap: 2px; width: 100%; padding: 10px 6px; border: 3px solid var(--lesson-soft); border-radius: var(--radius-xl); background: #fff; cursor: pointer; transition: transform .18s ease, border-color .18s ease, background .18s ease; }
+.find-egg:hover { transform: translateY(-3px); border-color: var(--lesson-color); }
+.find-egg-shell { font-size: 44px; line-height: 1.1; }
+.find-egg-word { color: var(--ink); font: 800 26px/1.1 var(--font-display), sans-serif; }
+.find-egg--on { border-color: var(--lesson-color); background: var(--lesson-soft); }
+.find-egg--right { border-color: var(--success); background: var(--success-soft); }
+.find-egg--wrong { border-color: var(--accent); background: var(--accent-soft); }
+.find-egg--missed { border-style: dashed; border-color: var(--success); }
+.find-letter-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 16px; }
+.find-letter-check { padding: 10px 22px; border: 0; border-radius: var(--radius-pill); color: #fff; background: var(--lesson-color); font: 800 18px var(--font-display), sans-serif; cursor: pointer; }
+.find-letter-check:disabled { opacity: .5; cursor: default; }
+.find-letter-feedback { min-height: 26px; font-weight: 700; }
+.writing-guide-images { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin: 18px 0 0; }
+.writing-guide figure { margin: 0; text-align: center; }
+.writing-guide img { display: block; width: 100%; max-width: 420px; height: auto; margin: 0 auto; border-radius: 16px; border: 3px solid var(--lesson-soft); }
+.writing-guide figcaption { margin-top: 8px; color: var(--ink-soft); font-weight: 700; }
+.writing-guide-steps { margin: 18px 0 0; list-style: decimal; padding: 14px 20px 14px 38px; border-radius: var(--radius-lg); background: var(--lesson-soft); color: var(--ink); font-weight: 700; line-height: 1.6; }
+@media (max-width: 760px) {
+  .find-letter, .writing-guide { padding: 18px 14px; }
+  .find-letter h2, .writing-guide h2 { font-size: 22px; }
+  .find-letter-head { flex-direction: column; align-items: flex-start; }
+  .find-letter-image { width: 100%; max-width: 260px; }
+  .find-letter-eggs { grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .find-egg-shell { font-size: 36px; }
+  .find-egg-word { font-size: 22px; }
+}
+@media (prefers-reduced-motion: reduce) { .find-egg:hover { transform: none; } }
