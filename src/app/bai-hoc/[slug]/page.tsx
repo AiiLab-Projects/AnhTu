@@ -10,6 +10,7 @@ import { StoryBoard } from "@/components/StoryBoard";
 import { PictureGame } from "@/components/PictureGame";
 import { FindLetterGame } from "@/components/FindLetterGame";
 import { WritingGuide } from "@/components/WritingGuide";
+import { OpenOnHash } from "@/components/OpenOnHash";
 import { Icon } from "@/components/Icon";
 
 // Mỗi thẻ ý chính lấy một màu, bắt đầu từ màu của bài rồi xoay vòng bảng tone.
@@ -43,6 +44,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
 
   return (
     <main className="inner-page">
+      <OpenOnHash />
       <div className="page-container lesson-detail-container">
         <nav className="breadcrumb" aria-label="Đường dẫn">
           <Link href="/bai-hoc"><Icon name="arrow-left" size={14} /> Tất cả bài học</Link>
@@ -84,8 +86,18 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             ))}
           </div>
           {lesson.story && <div id="truyen-tranh"><StoryBoard data={lesson.story} /></div>}
-          {lesson.moreStories?.map((story, index) => <StoryBoard key={story.title} data={story} idSuffix={`-more-${index}`} />)}
-          {lesson.writing && <div id="viet-vo"><WritingGuide data={lesson.writing} /></div>}
+          {lesson.moreStories?.map((story, index) => (
+            <details className="lesson-fold" key={story.title}>
+              <summary><span aria-hidden="true">📖</span> Truyện thứ hai: {story.title}</summary>
+              <StoryBoard data={story} idSuffix={`-more-${index}`} />
+            </details>
+          ))}
+          {lesson.writing && (
+            <details className="lesson-fold" id="viet-vo">
+              <summary><span aria-hidden="true">📝</span> {lesson.writing.title}</summary>
+              <WritingGuide data={lesson.writing} />
+            </details>
+          )}
           {(lesson.game || lesson.findLetter) && (
             <div id="tro-choi">
               {lesson.game && <PictureGame data={lesson.game} />}

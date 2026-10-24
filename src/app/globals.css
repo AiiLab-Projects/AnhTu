@@ -3105,7 +3105,7 @@ body:has(.exercise-page) .site-footer { display: none; }
 .exercise-picker-head img { flex: none; width: 84px; height: 84px; object-fit: contain; animation: float 4.2s ease-in-out infinite; }
 .exercise-picker-head h2 { margin: 2px 0 4px; font: 800 clamp(24px, 3vw, 32px)/1.15 var(--font-display), sans-serif; color: var(--ink); }
 .exercise-picker-head p { color: var(--ink-soft); font-weight: 500; }
-.exercise-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+.exercise-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 240px)); justify-content: center; gap: 16px; }
 .exercise-tile {
   display: flex; flex-direction: column; overflow: hidden; text-align: left;
   border-radius: 24px; background: #fff;
@@ -3334,3 +3334,14 @@ body:has(.exercise-page) .site-footer { display: none; }
 @media (prefers-reduced-motion: reduce) { .find-egg:hover { transform: none; } }
 /* Nút "Nghe" của các khung truyện luôn nằm ở đáy, thẳng hàng dù chữ 1 hay 2 dòng (#32) */
 .story-frame .story-text { flex: 1; display: flex; align-items: center; justify-content: center; }
+/* Phần gập của trang bài học: bấm tiêu đề để mở hoặc gập */
+.lesson-fold { margin-top: 22px; border-radius: var(--radius-xl); background: var(--lesson-soft); border: 3px solid var(--lesson-soft); }
+.lesson-fold > summary { display: flex; gap: 10px; align-items: center; padding: 16px 20px; color: var(--ink); font: 800 20px/1.2 var(--font-display), sans-serif; cursor: pointer; list-style: none; }
+.lesson-fold > summary::-webkit-details-marker { display: none; }
+.lesson-fold > summary::after { content: "Mở"; margin-left: auto; padding: 4px 12px; border-radius: var(--radius-pill); color: var(--lesson-color); background: #fff; font: 800 14px var(--font-display), sans-serif; }
+.lesson-fold[open] > summary::after { content: "Gập lại"; }
+.lesson-fold > summary:focus-visible { outline: 3px solid var(--lesson-color); outline-offset: 2px; }
+.lesson-fold[open] > summary { padding-bottom: 4px; }
+.lesson-fold > .writing-guide, .lesson-fold > .story-board { margin-top: 0; border: 0; box-shadow: none; background: transparent; }
+.lesson-fold > .writing-guide > .eyebrow, .lesson-fold > .writing-guide > h2, .lesson-fold > .story-board .story-head .eyebrow, .lesson-fold > .story-board .story-head h2 { display: none; }
+@media (max-width: 760px) { .lesson-fold > summary { padding: 14px; font-size: 18px; } }
