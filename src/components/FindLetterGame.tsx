@@ -49,11 +49,11 @@ export function FindLetterGame({ data }: { data: FindData }) {
         <button type="button" className="find-letter-check" disabled={picked.length === 0 || solved} onClick={() => setChecked(true)}>Kiểm tra</button>
         <p className="find-letter-feedback" role="status">
           {solved
-            ? "Giỏi quá! Em đã tìm đủ các tiếng có chữ a."
+            ? `Giỏi quá! Em đã tìm đủ ${data.goal}.`
             : checked
               ? wrongPicks.length > 0
-                ? "Có trứng chưa đúng. Em nghe lại rồi tìm chữ a trong tiếng nhé."
-                : "Còn trứng có chữ a em chưa chọn. Em tìm thêm nhé!"
+                ? `Có trứng chưa đúng. Em nghe lại rồi tìm ${data.goal} nhé.`
+                : "Còn trứng đúng em chưa chọn. Em tìm thêm nhé!"
               : "Bấm vào trứng để nghe cô đọc và chọn."}
         </p>
       </div>

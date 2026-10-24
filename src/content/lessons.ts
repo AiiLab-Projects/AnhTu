@@ -27,7 +27,7 @@ export type Lesson = {
   /** Trò chơi nhỏ: bấm vào tranh đúng với yêu cầu. */
   game?: { prompt: string; options: { word: string; emoji: string }[]; answer: number; explanation: string };
   /** Trò chơi "Tìm trứng": chọn mọi tiếng có chứa chữ cần tìm (`has` = tiếng đó có chữ ấy). */
-  findLetter?: { title: string; note: string; letter: string; image?: string; imageAlt?: string; words: { word: string; has: boolean }[] };
+  findLetter?: { title: string; note: string; letter: string; goal: string; image?: string; imageAlt?: string; words: { word: string; has: boolean }[] };
   /** Hướng dẫn viết vào vở: ảnh nét chữ, vở mẫu và các bước. */
   writing?: { title: string; note: string; images: { src: string; alt: string; caption: string }[]; steps: string[] };
 };
@@ -74,7 +74,7 @@ export const lessons: Lesson[] = [
     findLetter: {
       title: "Tìm trứng cho ngỗng",
       note: "Ngỗng chỉ nhận trứng ghi tiếng có chứa chữ a. Em bấm chọn các trứng đó rồi bấm Kiểm tra nhé.",
-      letter: "a", image: "/img/bai-1/tim-tieng-a.webp", imageAlt: "Chữ a ở giữa, quanh có gà, cá, cà, nhà, lá, thỏ",
+      letter: "a", goal: "các tiếng có chữ a", image: "/img/bai-1/tim-tieng-a.webp", imageAlt: "Chữ a ở giữa, quanh có gà, cá, cà, nhà, lá, thỏ",
       words: [
         { word: "a", has: true }, { word: "thỏ", has: false }, { word: "cà", has: true }, { word: "bà", has: true },
         { word: "na", has: true }, { word: "bi", has: false }, { word: "vịt", has: false }, { word: "có", has: false }, { word: "hát", has: true },
@@ -111,7 +111,30 @@ export const lessons: Lesson[] = [
       { title: "Chữ b", body: "Chữ b có một nét sổ cao và một vòng tròn bên phải. Chữ b đọc là bờ.", example: "b · ba · ba ba" },
       { title: "Dấu huyền", body: "Dấu huyền là nét nghiêng xuống, đặt phía trên chữ a. Đọc tiếng có dấu huyền thì hạ giọng.", example: "a · à · bà" },
       { title: "Ghép tiếng", body: "Chữ b ghép với chữ a được tiếng ba. Thêm dấu huyền được tiếng bà.", example: "b + a = ba · ba + dấu huyền = bà" },
+      { title: "Nói về gia đình", body: "Nhìn tranh, em kể trong nhà có những ai. Em dùng các tiếng ba, bà để giới thiệu người thân.", example: "ba · bà" },
     ],
+    story: {
+      title: "Bà và bé",
+      note: "Em nhìn tranh, nghe cô đọc rồi tìm tiếng có dấu huyền trong từng câu.",
+      frames: [
+        { scene: "🎎", image: "/img/bai-2/ba-cho-be.webp", alt: "Bà đưa búp bê cho bé ở bàn", text: "Bà cho bé búp bê." },
+        { scene: "👵", image: "/img/bai-2/a-ba.webp", alt: "Bé chạy ra đón bà đi chợ về", text: "A, bà!" },
+        { scene: "🏠", image: "/img/bai-2/gia-dinh.webp", alt: "Cả nhà quây quần trong phòng khách", text: "Cả nhà vui vẻ bên ba, bà." },
+      ],
+      retell: ["Bà cho bé món đồ chơi gì?", "Thấy bà về, bé nói gì?", "Trong nhà em có những ai?"],
+    },
+    findLetter: {
+      title: "Tìm tiếng có dấu huyền",
+      note: "Ngỗng chỉ nhận trứng ghi tiếng có dấu huyền. Em bấm chọn các trứng đó rồi bấm Kiểm tra nhé.",
+      letter: "huyền", goal: "các tiếng có dấu huyền",
+      words: [{ word: "bà", has: true }, { word: "bi", has: false }, { word: "bè", has: true }, { word: "bờ", has: true }, { word: "bự", has: false }],
+    },
+    writing: {
+      title: "Tập viết chữ b vào vở",
+      note: "Em xem hàng chữ mẫu rồi viết chữ b và tiếng bà vào vở ô li.",
+      images: [{ src: "/img/bai-2/vo-tap-viet-b.webp", alt: "Vở ô li có các hàng chữ b và tiếng bà để viết theo", caption: "Hàng mẫu trong vở: b, bà." }],
+      steps: ["Viết nét khuyết cao, rồi nối sang nét cong tròn bên phải.", "Viết đủ một hàng chữ b trong vở.", "Viết tiếng bà: chữ b, chữ a, rồi đặt dấu huyền nghiêng xuống phía trên chữ a."],
+    },
     game: { prompt: "Bấm vào tranh có dấu huyền.", options: [{ word: "ba", emoji: "👨" }, { word: "bà", emoji: "👵" }, { word: "ba ba", emoji: "🐢" }], answer: 1, explanation: "Đúng rồi, bà có dấu huyền trên chữ a." },
     check: { question: "Tiếng nào có dấu huyền?", options: ["ba", "bà", "ba ba"], answer: 1, explanation: "Tiếng bà có dấu huyền trên chữ a." },
   },
