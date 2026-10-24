@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { useAuth, type Profile, type Role } from "@/components/AuthProvider";
 import { getSupabase } from "@/lib/supabase";
+import { computeStats, type XpEvent } from "@/lib/xp";
 
 const roleLabel: Record<Role, string> = { admin: "Giáo viên (admin)", student: "Học viên" };
 
@@ -13,6 +14,7 @@ export function AdminUsers() {
   const [query, setQuery] = useState("");
   const [status, setStatus] = useState("");
   const [busyId, setBusyId] = useState("");
+  const [stats, setStats] = useState<Record<string, { xp: number; streak: number }>>({});
 
   const load = useCallback(async () => {
     const supabase = getSupabase();
@@ -20,6 +22,13 @@ export function AdminUsers() {
     const { data, error } = await supabase.from("profiles").select("*").order("created_at", { ascending: false });
     if (error) setStatus("Không tải được danh sách. Em kiểm tra lại quyền admin nhé.");
     else setUsers((data ?? []) as Profile[]);
+    // Điểm XP và chuỗi của từng học viên (bảng learner_events chưa tạo thì bỏ qua).
+    const events = await supabase.from("learner_events").select("user_id, day, xp");
+    if (!events.error) {
+      const byUser = new Map<string, XpEvent[]>();
+      for (const row of events.data ?? []) byUser.set(row.user_id, [...(byUser.get(row.user_id) ?? []), { id: "", kind: "exercise", key: "", day: row.day, xp: row.xp }]);
+      setStats(Object.fromEntries([...byUser].map(([id, list]) => { const s = computeStats(list); return [id, { xp: s.xp, streak: s.streak }]; })));
+    }
   }, []);
 
   useEffect(() => { if (profile?.role === "admin") void load(); }, [profile, load]);
@@ -71,7 +80,7 @@ export function AdminUsers() {
       <p className="admin-status" role="status">{status}</p>
       <div className="admin-table-wrap">
         <table className="admin-table">
-          <thead><tr><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>Ngày đăng ký</th><th /></tr></thead>
+          <thead><tr><th>Họ tên</th><th>Email</th><th>Vai trò</th><th>Trạng thái</th><th>XP</th><th>Chuỗi</th><th>Ngày đăng ký</th><th /></tr></thead>
           <tbody>
             {shown.map((user) => {
               const self = user.id === profile.id;
@@ -89,12 +98,14 @@ export function AdminUsers() {
                       {user.active ? "Đang hoạt động" : "Đã khoá"}
                     </button>
                   </td>
+                  <td data-label="XP">{stats[user.id]?.xp ?? 0}</td>
+                  <td data-label="Chuỗi">{stats[user.id]?.streak ?? 0} ngày</td>
                   <td data-label="Ngày đăng ký">{new Date(user.created_at).toLocaleDateString("vi-VN")}</td>
                   <td><button type="button" className="admin-link" disabled={busyId === user.id} onClick={() => void sendReset(user)}>Gửi thư đặt lại mật khẩu</button></td>
                 </tr>
               );
             })}
-            {shown.length === 0 && <tr><td colSpan={6} className="admin-empty">Chưa có học viên nào.</td></tr>}
+            {shown.length === 0 && <tr><td colSpan={8} className="admin-empty">Chưa có học viên nào.</td></tr>}
           </tbody>
         </table>
       </div>

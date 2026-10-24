@@ -11,6 +11,7 @@ import { PictureGame } from "@/components/PictureGame";
 import { FindLetterGame } from "@/components/FindLetterGame";
 import { WritingGuide } from "@/components/WritingGuide";
 import { OpenOnHash } from "@/components/OpenOnHash";
+import { LessonTimer } from "@/components/LessonTimer";
 import { Icon } from "@/components/Icon";
 
 // Mỗi thẻ ý chính lấy một màu, bắt đầu từ màu của bài rồi xoay vòng bảng tone.
@@ -45,6 +46,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
   return (
     <main className="inner-page">
       <OpenOnHash />
+      <LessonTimer slug={lesson.slug} title={lesson.title} />
       <div className="page-container lesson-detail-container">
         <nav className="breadcrumb" aria-label="Đường dẫn">
           <Link href="/bai-hoc"><Icon name="arrow-left" size={14} /> Tất cả bài học</Link>

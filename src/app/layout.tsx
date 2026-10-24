@@ -5,6 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { ToastHost } from "@/components/ToastHost";
 import { CatPeek } from "@/components/CatPeek";
 import { AuthProvider } from "@/components/AuthProvider";
+import { XpSync } from "@/components/XpSync";
 import "./globals.css";
 
 const baloo = Baloo_2({ subsets: ["latin", "vietnamese"], weight: ["600", "700", "800"], variable: "--font-display", display: "swap" });
@@ -25,6 +26,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       </head>
       <body className={`${baloo.variable} ${nunito.variable}`}>
         <AuthProvider>
+          <XpSync />
           <Header />
           {children}
           <SiteFooter />

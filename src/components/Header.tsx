@@ -12,6 +12,7 @@ import {
 import { TeacherAvatar } from "./TeacherAvatar";
 import { Icon, type IconName } from "./Icon";
 import { HeaderAuth } from "./HeaderAuth";
+import { XpBadge } from "./XpBadge";
 
 const navIcons: Record<string, IconName> = { home: "home", book: "book", pencil: "pencil", trophy: "trophy", star: "star", mail: "mail" };
 
@@ -84,6 +85,7 @@ export function Header() {
           </nav>
 
           <div className="header-tools">
+            <XpBadge />
             <HeaderAuth />
             <button
               className={`tool-button${muted ? " tool-button--muted" : ""}`}

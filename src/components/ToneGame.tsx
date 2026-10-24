@@ -8,6 +8,7 @@ import { hasRecordedClip, speakVietnamese } from "@/lib/speech";
 import { celebrate } from "@/lib/confetti";
 import { Icon } from "@/components/Icon";
 import { RewardModal } from "@/components/RewardModal";
+import { awardExercise } from "@/lib/xp";
 import { TeacherAvatar } from "@/components/TeacherAvatar";
 import { GameProgress } from "@/components/GameProgress";
 import { applyRipple } from "@/components/effects";
@@ -68,6 +69,7 @@ export function ToneGame() {
       setDone(true);
       setShowFinish(true);
       void celebrate("exercise");
+      awardExercise("tone");
       return;
     }
     setRound(round + 1);

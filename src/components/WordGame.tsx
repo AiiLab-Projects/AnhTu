@@ -8,6 +8,7 @@ import { SpeakButton } from "@/components/SpeakButton";
 import { Icon } from "@/components/Icon";
 import { TeacherAvatar } from "@/components/TeacherAvatar";
 import { RewardModal } from "@/components/RewardModal";
+import { awardExercise } from "@/lib/xp";
 import { celebrate } from "@/lib/confetti";
 import { applyRipple } from "@/components/effects";
 
@@ -73,6 +74,7 @@ export function WordGame() {
       setShowFinish(true);
       saveProgress({ exerciseBest: Math.max(readProgress().exerciseBest, nextScore) });
       void celebrate("exercise");
+      awardExercise("word");
     } else {
       setRound(round + 1);
       setSelected([]);

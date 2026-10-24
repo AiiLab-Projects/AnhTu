@@ -74,3 +74,28 @@ create policy "profiles_update" on public.profiles
 
 -- Đặt cô Tú làm admin (sửa email rồi chạy sau khi cô đã đăng ký tài khoản):
 -- update public.profiles set role = 'admin' where email = 'EMAIL_CUA_CO_TU@gmail.com';
+
+-- ===== Điểm XP và chuỗi ngày học =====
+-- Mỗi dòng là một sự kiện cộng điểm (id cố định nên không bao giờ tính trùng).
+create table if not exists public.learner_events (
+  user_id uuid not null references auth.users (id) on delete cascade,
+  id text not null,
+  kind text not null check (kind in ('lesson', 'exercise')),
+  key text not null,
+  day date not null,
+  xp integer not null check (xp between 0 and 20),
+  created_at timestamptz not null default now(),
+  primary key (user_id, id)
+);
+
+alter table public.learner_events enable row level security;
+
+drop policy if exists "events_select" on public.learner_events;
+create policy "events_select" on public.learner_events
+  for select using (user_id = auth.uid() or public.is_admin());
+
+drop policy if exists "events_insert" on public.learner_events;
+create policy "events_insert" on public.learner_events
+  for insert with check (user_id = auth.uid());
+
+-- Không có policy update/delete: điểm đã ghi thì không sửa được từ trình duyệt.
