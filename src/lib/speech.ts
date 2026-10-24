@@ -6,6 +6,7 @@ export type VoiceLogEntry = { at: number; text: string; source: string; ok: bool
 
 export const recordedVoices: RecordedVoice[] = voiceCatalog;
 const DEFAULT_VOICE = recordedVoices[0];
+const PIPER_VOICE = recordedVoices.find((voice) => voice.id === "piper-vais1000");
 const clips = voiceClips as Record<string, string>;
 
 const VOICE_KEY = "co-tu-voice";
@@ -168,6 +169,10 @@ async function playWithFallback(text: string, voice: RecordedVoice, request: num
   if (result !== "played" && voice !== DEFAULT_VOICE && request === speechRequest) {
     log({ text, source: `ghi âm: ${voice.id}`, ok: false, note: "chuyển sang giọng mặc định" });
     result = await playRecorded(text, DEFAULT_VOICE);
+  }
+  // Câu mới chưa kịp sinh giọng Vbee thì dùng giọng Piper, giọng này luôn đủ câu.
+  if (result !== "played" && PIPER_VOICE && voice !== PIPER_VOICE && request === speechRequest) {
+    result = await playRecorded(text, PIPER_VOICE);
   }
   if (result === "played" || request !== speechRequest) return null;
   return result === "failed" ? "Không phát được bản ghi âm. Vui lòng thử lại." : "none";

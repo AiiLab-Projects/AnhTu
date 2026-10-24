@@ -1,8 +1,17 @@
 [
   {
+    "id": "sg-thaotrinh",
+    "label": "Thảo Trinh · miền Nam",
+    "description": "Giọng nữ Sài Gòn, dễ nghe — giọng mặc định. Tạo bằng Vbee.",
+    "dir": "/audio/vi/sg-thaotrinh",
+    "ext": "mp3",
+    "engine": "vbee",
+    "model": "sg_female_thaotrinh_full_48k-fhg"
+  },
+  {
     "id": "hn-ngochuyen",
     "label": "Ngọc Huyền · miền Bắc",
-    "description": "Giọng nữ Hà Nội, tự nhiên — giọng mặc định. Tạo bằng Vbee.",
+    "description": "Giọng nữ Hà Nội, tự nhiên. Tạo bằng Vbee.",
     "dir": "/audio/vi/hn-ngochuyen",
     "ext": "mp3",
     "engine": "vbee",
@@ -25,15 +34,6 @@
     "ext": "mp3",
     "engine": "vbee",
     "model": "hue_female_huonggiang_full_48k-fhg"
-  },
-  {
-    "id": "sg-thaotrinh",
-    "label": "Thảo Trinh · miền Nam",
-    "description": "Giọng nữ Sài Gòn. Tạo bằng Vbee.",
-    "dir": "/audio/vi/sg-thaotrinh",
-    "ext": "mp3",
-    "engine": "vbee",
-    "model": "sg_female_thaotrinh_full_48k-fhg"
   },
   {
     "id": "sg-minhhoang",
