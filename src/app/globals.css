@@ -3236,3 +3236,6 @@ body:has(.exercise-page) .site-footer { display: none; }
   .listen-play--playing::after, .listen-option--correct, .listen-option--wrong { animation: none; }
   .listen-play:hover, .listen-option:not(:disabled):hover { transform: none; }
 }
+/* Tranh minh hoạ trong khung truyện (#32) */
+.story-scene--photo { min-height: 0; padding: 0; overflow: hidden; aspect-ratio: 1 / 1; background: #fff; }
+.story-scene--photo img { display: block; width: 100%; height: 100%; object-fit: contain; }

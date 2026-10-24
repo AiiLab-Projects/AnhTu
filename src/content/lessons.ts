@@ -23,7 +23,7 @@ export type Lesson = {
   /** Thẻ tranh từ vựng; chữ trong `focus` được tô màu nổi bật. */
   pictureWords?: { title: string; focus: string[]; note: string; words: { word: string; emoji: string }[] };
   /** Truyện tranh ngắn, mỗi khung có một câu; `retell` là câu hỏi gợi ý để em kể lại. */
-  story?: { title: string; note: string; frames: { scene: string; text: string }[]; retell: string[] };
+  story?: { title: string; note: string; frames: { scene: string; text: string; image?: string; alt?: string }[]; retell: string[] };
   /** Trò chơi nhỏ: bấm vào tranh đúng với yêu cầu. */
   game?: { prompt: string; options: { word: string; emoji: string }[]; answer: number; explanation: string };
 };
@@ -47,6 +47,18 @@ export const lessons: Lesson[] = [
       title: "Tìm chữ a trong tiếng", focus: ["a"],
       note: "Cô đọc mẫu cả tiếng. Em chỉ cần nhận ra chữ a màu nổi bật.",
       words: [{ word: "ba", emoji: "👨" }, { word: "ca", emoji: "🥛" }, { word: "na", emoji: "🍈" }],
+    },
+    story: {
+      title: "Chữ a quanh em",
+      note: "Em nhìn tranh, nghe cô đọc rồi tìm tiếng a trong từng câu.",
+      frames: [
+        { scene: "🎤", image: "/img/bai-1/ca-hat.webp", alt: "Nam và Hà đứng trên sân khấu ca hát", text: "Nam và Hà ca hát: a, a, a." },
+        { scene: "🪁", image: "/img/bai-1/dieu-bay.webp", alt: "Các bạn nhỏ thả diều trên bãi cỏ", text: "A, diều của Nam bay lên rồi kìa!" },
+        { scene: "🛝", image: "/img/bai-1/thich-qua.webp", alt: "Hai bạn nhỏ trượt cầu trượt nước", text: "A, thích quá!" },
+        { scene: "🛵", image: "/img/bai-1/chao-bo.webp", alt: "Bạn nhỏ chào bố trước cổng trường", text: "Con chào bố ạ!" },
+        { scene: "👩‍🏫", image: "/img/bai-1/chao-co.webp", alt: "Bạn nhỏ chào cô giáo ở cửa lớp", text: "Em chào cô ạ!" },
+      ],
+      retell: ["Nam và Hà đang làm gì?", "Khi thấy diều bay, bạn nhỏ nói gì?", "Em chào bố, chào cô thế nào?"],
     },
     points: [
       { title: "Nhìn chữ a", body: "Chữ A in hoa có hai nét xiên và một nét ngang. Chữ a viết thường có vòng tròn và một nét sổ ngắn.", example: "A · a" },

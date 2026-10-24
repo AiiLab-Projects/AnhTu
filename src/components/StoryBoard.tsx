@@ -19,7 +19,9 @@ export function StoryBoard({ data }: { data: StoryData }) {
         {data.frames.map((frame, index) => (
           <li className={`story-frame story-frame--${index % 4}`} key={frame.text}>
             <span className="story-frame-number">{index + 1}</span>
-            <div className="story-scene" aria-hidden="true">{frame.scene}</div>
+            {frame.image
+              ? <div className="story-scene story-scene--photo"><img src={frame.image} alt={frame.alt ?? ""} /></div>
+              : <div className="story-scene" aria-hidden="true">{frame.scene}</div>}
             <p className="story-text">{frame.text}</p>
             <SpeakButton text={frame.text} label="Nghe" />
           </li>
