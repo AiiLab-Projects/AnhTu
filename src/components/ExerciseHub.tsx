@@ -99,11 +99,10 @@ export function ExerciseHub() {
   const [gameId, setGameId] = useState<string | null>(null);
   const [pickerOpen, setPickerOpen] = useState(false);
 
-  // ?tro=<id> mở thẳng trò đó; không có thì mở popup chọn trò.
+  // ?tro=<id> mở thẳng trò đó; không có thì hiện sẵn danh sách trò trên trang (popup chỉ mở khi bấm "Đổi trò chơi").
   useEffect(() => {
     const id = new URLSearchParams(window.location.search).get("tro");
     if (id && readyTypes.some((type) => type.id === id)) setGameId(id);
-    else setPickerOpen(true);
   }, []);
 
   function pick(id: string) {

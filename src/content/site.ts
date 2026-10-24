@@ -11,7 +11,7 @@ export const siteContent = {
   ],
   hero: {
     badge: "Dành cho học sinh tiểu học",
-    greeting: "Chào em, Cô là Cô Tú 👋",
+    greeting: "Chào em, Cô là Cô Tú! 👋",
     description: "Cùng nhau học chữ, luyện đọc, viết đúng chính tả và làm bài kiểm tra thật vui mỗi ngày nhé!",
     primaryButton: "Bắt đầu học",
     secondaryButton: "Làm kiểm tra",

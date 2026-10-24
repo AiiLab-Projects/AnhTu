@@ -2535,7 +2535,7 @@ body:has(.exercise-page) .site-footer { display: none; }
   .hero-visual { order: -1; height: 220px; width: 100%; max-width: 340px; margin: 0 auto; }
   .avatar-frame { width: 150px; height: 150px; border-width: 6px; }
   .floating-chip { padding: 7px 10px; font-size: 12px; }
-  .hero--landscape .hero-grid { padding: calc(var(--header-h) + 20px) 0 24px; width: calc(100% - 32px); }
+  .hero--landscape .hero-grid { padding: 20px 0 24px; width: calc(100% - 32px); }
   .hero--landscape .hero-copy { max-width: 100%; }
   .hero--landscape .hero-stage { min-height: 320px; height: 320px; }
   .hero--landscape .hero-character { width: 220px; margin-inline-start: -110px; }
