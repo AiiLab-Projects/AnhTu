@@ -3332,3 +3332,5 @@ body:has(.exercise-page) .site-footer { display: none; }
   .find-egg-word { font-size: 22px; }
 }
 @media (prefers-reduced-motion: reduce) { .find-egg:hover { transform: none; } }
+/* Nút "Nghe" của các khung truyện luôn nằm ở đáy, thẳng hàng dù chữ 1 hay 2 dòng (#32) */
+.story-frame .story-text { flex: 1; display: flex; align-items: center; justify-content: center; }
