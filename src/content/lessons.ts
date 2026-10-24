@@ -26,6 +26,8 @@ export type Lesson = {
   story?: { title: string; note: string; frames: { scene: string; text: string; image?: string; alt?: string }[]; retell: string[] };
   /** Trò chơi nhỏ: bấm vào tranh đúng với yêu cầu. */
   game?: { prompt: string; options: { word: string; emoji: string }[]; answer: number; explanation: string };
+  /** Truyện tranh bổ sung, hiện sau `story`. */
+  moreStories?: NonNullable<Lesson["story"]>[];
   /** Trò chơi "Tìm trứng": chọn mọi tiếng có chứa chữ cần tìm (`has` = tiếng đó có chữ ấy). */
   findLetter?: { title: string; note: string; letter: string; goal: string; image?: string; imageAlt?: string; words: { word: string; has: boolean }[] };
   /** Hướng dẫn viết vào vở: ảnh nét chữ, vở mẫu và các bước. */
@@ -179,7 +181,29 @@ export const lessons: Lesson[] = [
       { title: "Chữ e", body: "Chữ e có một nét ngang ở giữa. Khi đọc, miệng mở vừa.", example: "e · bé · bè" },
       { title: "Chữ ê", body: "Chữ ê giống chữ e nhưng có dấu mũ. Khi đọc, miệng khép hơn.", example: "ê · bê · bế" },
       { title: "So sánh e và ê", body: "Nhìn dấu mũ trước khi đọc: không mũ là e, có mũ là ê.", example: "bé · bế · bê" },
+      { title: "Ghép b với e, ê", body: "Chữ b ghép với e được tiếng be, thêm dấu sắc được bé. Chữ b ghép với ê được tiếng bê, thêm dấu sắc được bế.", example: "be · bé · bê · bế" },
     ],
+    story: {
+      title: "Bà bế bé",
+      note: "Em nhìn tranh, nghe cô đọc rồi tìm chữ e, ê trong từng câu.",
+      frames: [
+        { scene: "🛶", image: "/img/bai-4/be-ke-me.webp", alt: "Chiếc bè, em bé ngồi chơi và người mẹ bế em bé", text: "Bé kể mẹ nghe về bạn bè." },
+        { scene: "👵", image: "/img/bai-4/ba-be-be.webp", alt: "Bà ngồi ghế bế em bé", text: "Bà bế bé." },
+      ],
+      retell: ["Bà đang làm gì?", "Em bé nằm trong tay ai?", "Em thấy những tiếng nào có chữ ê?"],
+    },
+    findLetter: {
+      title: "Tìm trứng cho ngỗng",
+      note: "Ngỗng chỉ nhận trứng ghi tiếng có chữ e, không có dấu mũ. Em bấm chọn các trứng đó rồi bấm Kiểm tra nhé.",
+      letter: "e", goal: "các tiếng có chữ e",
+      words: [{ word: "bé", has: true }, { word: "bà", has: false }, { word: "bế", has: false }, { word: "bè", has: true }, { word: "bê", has: false }],
+    },
+    writing: {
+      title: "Tập viết chữ e, ê vào vở",
+      note: "Em xem hàng chữ mẫu rồi viết chữ e, chữ ê và tiếng bè vào vở ô li.",
+      images: [{ src: "/img/bai-4/vo-tap-viet-e.webp", alt: "Vở ô li có các hàng chữ e, ê và tiếng bè để viết theo", caption: "Hàng mẫu trong vở: e, ê, bè." }],
+      steps: ["Viết đủ một hàng chữ e.", "Viết đủ một hàng chữ ê: giống chữ e, thêm dấu mũ nhỏ ở trên đầu.", "Viết tiếng bè: chữ b, chữ e, rồi dấu huyền ở trên chữ e."],
+    },
     game: { prompt: "Bấm vào tranh có chữ ê.", options: [{ word: "bé", emoji: "👶" }, { word: "bè", emoji: "🛶" }, { word: "bê", emoji: "🐄" }], answer: 2, explanation: "Đúng rồi, bê có chữ ê với dấu mũ." },
     check: { question: "Tiếng nào có chữ ê?", options: ["bế", "bé", "bè"], answer: 0, explanation: "Tiếng bế có chữ ê với dấu mũ." },
   },
@@ -213,7 +237,30 @@ export const lessons: Lesson[] = [
       { title: "Ôn chữ cái", body: "Em đọc lại năm chữ a, b, c, e, ê và chỉ ra chữ nào có dấu mũ.", example: "a · b · c · e · ê" },
       { title: "Ôn dấu thanh", body: "Dấu huyền hạ giọng, dấu sắc lên giọng. Em nghe cô đọc rồi đọc theo.", example: "ba · bà · ca · cá" },
       { title: "Đọc câu ngắn", body: "Đọc từng tiếng, rồi đọc liền cả câu. Dừng lại một chút ở dấu chấm.", example: "Bà bế bé." },
+      { title: "Bảng ghép tiếng", body: "Chữ b, chữ c ghép với a, e, ê tạo thành các tiếng em đã học. Em ghép rồi đọc to.", example: "ba · be · ca" },
     ],
+    moreStories: [{
+      title: "Búp bê và dế mèn",
+      note: "Em xem ba bức tranh theo thứ tự (1), (2), (3) rồi kể lại câu chuyện.",
+      frames: [
+        { scene: "🧹", image: "/img/bai-5/bup-be-quet-nha.webp", alt: "Búp bê quét nhà", text: "Búp bê quét nhà, rửa bát, nấu cơm." },
+        { scene: "🦗", image: "/img/bai-5/de-men-hat.webp", alt: "Dế mèn ngồi trên cành cây hát bên cửa sổ", text: "Dế mèn hát tặng búp bê." },
+        { scene: "😊", image: "/img/bai-5/bup-be-het-met.webp", alt: "Búp bê mỉm cười nghe dế mèn hát", text: "Búp bê hết mệt khi nghe dế mèn hát." },
+      ],
+      retell: ["Búp bê làm những việc gì?", "Vì sao dế mèn hát tặng búp bê?", "Búp bê thấy thế nào khi nghe dế mèn hát?", "Qua câu chuyện, em học được điều gì?"],
+    }],
+    findLetter: {
+      title: "Tìm trứng cho ngỗng",
+      note: "Ngỗng chỉ nhận trứng ghi tiếng có chữ ê. Em bấm chọn các trứng đó rồi bấm Kiểm tra nhé.",
+      letter: "ê", goal: "các tiếng có chữ ê",
+      words: [{ word: "bế", has: true }, { word: "bé", has: false }, { word: "bè", has: false }, { word: "bê", has: true }, { word: "ca", has: false }, { word: "cá", has: false }],
+    },
+    writing: {
+      title: "Tập viết vào vở",
+      note: "Em xem các dòng mẫu rồi viết vào vở ô li.",
+      images: [{ src: "/img/bai-5/vo-tap-viet-be.webp", alt: "Vở ô li có các dòng bế bé, bè cá, Ba bế bé để viết theo", caption: "Dòng mẫu trong vở: bế bé, bè cá, Ba bế bé." }],
+      steps: ["Viết hai tiếng: bế bé.", "Viết hai tiếng: bè cá.", "Viết cả câu: Ba bế bé. Nhớ viết hoa chữ cái đầu câu và chấm cuối câu."],
+    },
     game: { prompt: "Trong truyện, ai bế bé? Bấm vào tranh đó.", options: [{ word: "Ba", emoji: "👨" }, { word: "Bà", emoji: "👵" }, { word: "Bé", emoji: "👶" }], answer: 1, explanation: "Đúng rồi, bà bế bé." },
     check: { question: "Tiếng nào có chữ ê và dấu sắc?", options: ["bế", "bé", "bè"], answer: 0, explanation: "Tiếng bế có chữ ê và dấu sắc." },
   },
@@ -704,6 +751,7 @@ export function lessonSpeechLines(lesson: Lesson) {
   }
   if (lesson.pictureWords) lines.push(...lesson.pictureWords.words.map((item) => item.word));
   if (lesson.game) lines.push(...lesson.game.options.map((option) => option.word));
+  for (const extra of lesson.moreStories ?? []) lines.push(...extra.frames.map((frame) => frame.text), storyFullText(extra));
   if (lesson.findLetter) lines.push(...lesson.findLetter.words.map((item) => item.word));
   if (lesson.story) lines.push(...lesson.story.frames.map((frame) => frame.text), storyFullText(lesson.story));
   return lines;

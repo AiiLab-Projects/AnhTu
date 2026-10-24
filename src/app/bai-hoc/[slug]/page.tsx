@@ -35,7 +35,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
     lesson.letterCard && { id: "tap-viet", icon: "✏️", label: "Tập viết" },
     lesson.pictureWords && { id: "the-tranh", icon: "🖼️", label: "Thẻ tranh" },
     { id: "y-chinh", icon: "💡", label: "Ý chính" },
-    lesson.story && { id: "truyen-tranh", icon: "📖", label: "Truyện tranh" },
+    (lesson.story || lesson.moreStories) && { id: "truyen-tranh", icon: "📖", label: "Truyện tranh" },
     lesson.writing && { id: "viet-vo", icon: "📝", label: "Viết vở" },
     (lesson.game || lesson.findLetter) && { id: "tro-choi", icon: "🎮", label: "Trò chơi" },
     { id: "thu-tai", icon: "⭐", label: "Thử tài" },
@@ -84,6 +84,7 @@ export default async function LessonPage({ params }: { params: Promise<{ slug: s
             ))}
           </div>
           {lesson.story && <div id="truyen-tranh"><StoryBoard data={lesson.story} /></div>}
+          {lesson.moreStories?.map((story, index) => <StoryBoard key={story.title} data={story} idSuffix={`-more-${index}`} />)}
           {lesson.writing && <div id="viet-vo"><WritingGuide data={lesson.writing} /></div>}
           {(lesson.game || lesson.findLetter) && (
             <div id="tro-choi">

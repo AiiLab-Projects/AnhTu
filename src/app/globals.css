@@ -3295,7 +3295,7 @@ body:has(.exercise-page) .site-footer { display: none; }
   .tone-option:not(:disabled):hover { transform: none; }
 }
 /* Tranh minh hoạ trong khung truyện (#32) */
-.story-scene--photo { min-height: 0; padding: 0; overflow: hidden; aspect-ratio: 1 / 1; background: #fff; }
+.story-scene--photo { min-height: 0; padding: 0; overflow: hidden; aspect-ratio: 4 / 3; background: #fff; }
 .story-scene--photo img { display: block; width: 100%; height: 100%; object-fit: contain; }
 /* Bài 1 đầy đủ: trò chơi tìm trứng và hướng dẫn viết vở (#32) */
 .find-letter, .writing-guide { margin-top: 22px; padding: 24px; border-radius: var(--radius-xl); background: #fff; border: 3px solid var(--lesson-soft); }

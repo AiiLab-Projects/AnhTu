@@ -4,13 +4,13 @@ import { Icon } from "@/components/Icon";
 
 type StoryData = NonNullable<Lesson["story"]>;
 
-export function StoryBoard({ data }: { data: StoryData }) {
+export function StoryBoard({ data, idSuffix = "" }: { data: StoryData; idSuffix?: string }) {
   return (
-    <section className="story-board" aria-labelledby="story-title">
+    <section className="story-board" aria-labelledby={`story-title${idSuffix}`}>
       <div className="story-head">
         <div>
           <span className="eyebrow">Truyện tranh</span>
-          <h2 id="story-title">{data.title}</h2>
+          <h2 id={`story-title${idSuffix}`}>{data.title}</h2>
           <p>{data.note}</p>
         </div>
         <SpeakButton text={storyFullText(data)} label="Nghe cả truyện" />
