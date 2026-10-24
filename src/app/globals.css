@@ -3144,7 +3144,7 @@ body:has(.exercise-page) .site-footer { display: none; }
   border: 2px solid color-mix(in srgb, var(--lesson-color) 25%, #fff); box-shadow: var(--shadow-sm);
 }
 .exercise-current-icon { width: 46px; height: 46px; flex: none; display: grid; place-items: center; overflow: hidden; border-radius: 14px; background: var(--lesson-soft); font-size: 26px; }
-.exercise-current-icon img { width: 100%; height: 100%; object-fit: cover; }
+.exercise-current-icon img { width: 100%; height: 100%; object-fit: contain; }
 .exercise-current-text { display: flex; flex-direction: column; min-width: 0; }
 .exercise-current-text span { color: var(--lesson-ink); font-size: 11.5px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; }
 .exercise-current-text strong { color: var(--ink); font: 800 18px/1.2 var(--font-display), sans-serif; }
@@ -3235,6 +3235,64 @@ body:has(.exercise-page) .site-footer { display: none; }
 @media (prefers-reduced-motion: reduce) {
   .listen-play--playing::after, .listen-option--correct, .listen-option--wrong { animation: none; }
   .listen-play:hover, .listen-option:not(:disabled):hover { transform: none; }
+}
+
+/* === Trò "Đặt dấu thanh" — tranh + tiếng chưa dấu có ô "?", 6 nút dấu trên chữ a === */
+.tone-stage {
+  display: flex; align-items: center; justify-content: center; gap: 28px;
+  padding: 24px; border-radius: 24px;
+  background: linear-gradient(160deg, #FFE7EF 0%, #F1E8FF 100%);
+}
+.tone-picture {
+  width: 150px; height: 150px; flex: none; display: grid; place-items: center;
+  border-radius: 30px; background: #fff; font-size: 92px; line-height: 1;
+  box-shadow: 0 10px 24px rgba(37, 49, 83, 0.12);
+}
+.tone-question { margin: 0; color: var(--ink-soft); font: 800 18px/1.2 var(--font-display), sans-serif; }
+.tone-word {
+  display: flex; margin: 6px 0 0; color: var(--ink);
+  font: 800 clamp(64px, 9vw, 96px)/1.25 var(--font-display), sans-serif; letter-spacing: .02em;
+}
+.tone-word-slot { position: relative; color: var(--accent-strong); }
+.tone-word-q {
+  position: absolute; left: 50%; top: -.28em; transform: translateX(-50%);
+  width: .48em; height: .48em; display: grid; place-items: center;
+  border-radius: 12px; border: 3px dashed var(--accent); background: #fff;
+  color: var(--accent-strong); font-size: .3em; line-height: 1;
+  animation: trace-pulse 1.4s ease-in-out infinite;
+}
+.tone-word--good { color: var(--success-strong); }
+.tone-word--good .tone-word-slot { color: var(--success-strong); }
+.tone-word--retry .tone-word-slot { color: var(--accent-strong); }
+.tone-word--good, .tone-word--retry { animation: slot-bounce .4s ease; }
+.tone-options { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; margin-top: 20px; }
+.tone-option {
+  display: flex; flex-direction: column; align-items: center; gap: 4px;
+  padding: 12px 6px 14px; border-radius: 20px;
+  background: #fff; border: 3px solid var(--line); box-shadow: 0 5px 0 var(--line);
+  transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease, opacity .2s ease;
+}
+.tone-option:not(:disabled):hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 50%, #fff); box-shadow: 0 8px 0 color-mix(in srgb, var(--accent) 30%, #fff); }
+.tone-option:not(:disabled):active { transform: translateY(3px); box-shadow: 0 2px 0 var(--line); }
+.tone-option:disabled { cursor: default; }
+.tone-option-mark { color: var(--ink); font: 800 48px/1.1 var(--font-display), sans-serif; }
+.tone-option-name { color: var(--ink-soft); font: 800 15px/1 var(--font-display), sans-serif; }
+.tone-option--correct { border-color: var(--success); background: var(--success-soft); box-shadow: 0 5px 0 var(--success-strong); }
+.tone-option--correct .tone-option-mark, .tone-option--correct .tone-option-name { color: var(--success-strong); }
+.tone-option--wrong { border-color: var(--accent); background: var(--accent-soft); box-shadow: 0 5px 0 var(--accent-strong); animation: slot-shake .4s ease; }
+.tone-option--wrong .tone-option-mark, .tone-option--wrong .tone-option-name { color: var(--accent-strong); }
+.tone-option--dim { opacity: .45; }
+@media (max-width: 760px) {
+  .tone-stage { flex-direction: column; gap: 10px; padding: 18px 14px; }
+  .tone-picture { width: 110px; height: 110px; font-size: 66px; border-radius: 24px; }
+  .tone-word-wrap { text-align: center; }
+  .tone-word { justify-content: center; font-size: 64px; }
+  .tone-options { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+  .tone-option-mark { font-size: 40px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tone-word-q, .tone-word--good, .tone-word--retry, .tone-option--wrong { animation: none; }
+  .tone-option:not(:disabled):hover { transform: none; }
 }
 /* Tranh minh hoạ trong khung truyện (#32) */
 .story-scene--photo { min-height: 0; padding: 0; overflow: hidden; aspect-ratio: 1 / 1; background: #fff; }

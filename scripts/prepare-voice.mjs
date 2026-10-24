@@ -17,6 +17,7 @@ function loadContent(path) {
 const { lessons, lessonSpeechLines } = loadContent("src/content/lessons.ts");
 const { quizQuestions, wordExercises } = loadContent("src/content/questions.ts");
 const { listenWords } = loadContent("src/content/listen-words.ts");
+const { toneWords } = loadContent("src/content/tone-words.ts");
 const texts = new Set(["Chào em, cô là Cô Tú. Chúng mình cùng học tiếng Việt nhé!"]);
 
 for (const lesson of lessons) {
@@ -28,6 +29,8 @@ for (const question of quizQuestions) {
 for (const item of wordExercises) texts.add(item.hint);
 // Trò "Nghe và chọn tranh" đọc từng từ trong ngân hàng.
 for (const item of listenWords) texts.add(item.word);
+// Trò "Đặt dấu thanh" đọc tiếng đúng dấu sau khi em chọn.
+for (const item of toneWords) texts.add(item.word);
 
 // Mỗi câu có một mã băm cố định; mọi giọng dùng chung mã này làm tên file.
 const lines = [...texts].map((text) => ({

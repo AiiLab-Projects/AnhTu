@@ -28,8 +28,8 @@ export const exerciseTypes: ExerciseType[] = [
   },
   {
     id: "dien-dau-thanh", title: "Đặt dấu thanh", skill: "Dấu thanh",
-    description: "Chọn dấu huyền, sắc, hỏi, ngã, nặng cho đúng tiếng.",
-    emoji: "🎵", image: "/img/bai-tap/dat-dau-thanh.webp", tone: "pink", status: "soon",
+    description: "Nhìn tranh, chọn dấu huyền, sắc, hỏi, ngã, nặng cho đúng tiếng.",
+    emoji: "🎵", image: "/img/bai-tap/dat-dau-thanh.webp", tone: "pink", status: "ready",
   },
   {
     id: "noi-tu-tranh", title: "Nối từ với tranh", skill: "Từ vựng",

@@ -9,6 +9,7 @@ import { Icon } from "@/components/Icon";
 import { RewardModal } from "@/components/RewardModal";
 import { TeacherAvatar } from "@/components/TeacherAvatar";
 import { applyRipple } from "@/components/effects";
+import { GameProgress } from "@/components/GameProgress";
 
 const ROUNDS = 10;
 const OPTIONS = 4;
@@ -117,22 +118,7 @@ export function ListenGame() {
 
   return (
     <section className="word-game word-game--v3 listen-game" aria-labelledby="listen-title">
-      <header className="word-game-progress">
-        <div className="word-game-progress-label">
-          <strong>Câu {round + 1}/{rounds.length}</strong>
-          <span>Nghe và chọn tranh</span>
-        </div>
-        <ol className="word-game-dots" role="progressbar" aria-label={`Tiến trình ${rounds.length} câu`} aria-valuenow={round + 1} aria-valuemin={1} aria-valuemax={rounds.length}>
-          {rounds.map((_, index) => {
-            const state = results[index] ?? (index === round ? "current" : "todo");
-            return <li key={index} className={`word-game-dot word-game-dot--${state}`}>{state === "good" ? <Icon name="check" size={14} /> : index + 1}</li>;
-          })}
-        </ol>
-        <div className="word-game-progress-score" aria-label={`${score} câu đúng`}>
-          <Icon name="star" size={16} fill="currentColor" />
-          <strong>{score}</strong>
-        </div>
-      </header>
+      <GameProgress round={round} total={rounds.length} results={results} title="Nghe và chọn tranh" />
 
       <div className="listen-stage">
         <button type="button" className={`listen-play${playing ? " listen-play--playing" : ""}`} onClick={play} aria-label="Nghe Cô Tú đọc từ">
