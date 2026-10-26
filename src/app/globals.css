@@ -3348,7 +3348,8 @@ body:has(.exercise-page) .site-footer { display: none; }
 /* Tài khoản: đăng nhập, đăng ký, quản lý học viên */
 .auth-container { max-width: 520px; }
 .auth-card { margin: 24px auto; padding: 28px; border-radius: var(--radius-xl); background: #fff; box-shadow: var(--shadow-md); }
-.auth-card h1 { margin: 6px 0 16px; color: var(--ink); font: 800 30px/1.15 var(--font-display), sans-serif; }
+.auth-card .page-eyebrow { display: flex; width: fit-content; margin: 0 auto; }
+.auth-card h1 { text-align: center; margin: 10px 0 16px; color: var(--ink); font: 800 30px/1.15 var(--font-display), sans-serif; }
 .auth-card form { display: grid; gap: 14px; }
 .auth-card label { display: grid; gap: 6px; color: var(--ink); font-weight: 800; font-size: 14px; }
 .auth-card input { padding: 12px 14px; border: 2px solid var(--lesson-soft, #E4E0F5); border-radius: 14px; font: 600 16px var(--font-body), sans-serif; background: #fff; }
